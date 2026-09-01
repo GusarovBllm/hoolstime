@@ -195,7 +195,7 @@ footer a:hover{color:var(--gold)}
   </div>
   <div class="hdr-r" id="hdrRight">
     <span id="hdrLogged" style="display:none">
-      <span class="user" id="hdrUserWrap"><span class="ava" id="hdrAva">?</span><span id="hdrUname"></span></span>
+      <span class="user" id="hdrUserWrap"><span class="ava" id="hdrAva">?</span><span id="hdrUname"></span> <span class="role-tag" id="hdrRoleTag" style="font-size:9px;padding:1px 6px"></span></span>
       <button class="btn-ghost" style="padding:6px 12px;font-size:12px" onclick="showProfile()">Профиль</button>
       <button class="btn-ghost" style="padding:6px 12px;font-size:12px" onclick="logoutUser()">Выйти</button>
     </span>
@@ -216,7 +216,7 @@ footer a:hover{color:var(--gold)}
   <!-- User bar -->
   <div class="ubar" id="userBar" style="display:none">
     <div class="ava" id="ubAva"><span id="ubAvaLetter">?</span></div>
-    <div class="info"><b id="ubName">—</b> <span class="rl" id="ubRoleLabel"></span><br><span class="sub" id="ubRoleSub">—</span></div>
+    <div class="info"><b id="ubName">—</b> <span class="role-tag" id="ubRoleTag"></span><br><span class="sub" id="ubRoleSub">—</span></div>
     <div class="actions">
       <button class="btn btn-sm btn-ghost" onclick="showProfile()">👤 Профиль</button>
       <button class="btn btn-sm btn-ghost" onclick="createTicket()">✉️ Тикет</button>
@@ -364,13 +364,16 @@ function updateUI(){
     const u=getUser(curUser.login);
     $('hdrLogged').style.display='inline-flex';$('hdrGuest').style.display='none';
     $('hdrUname').textContent=curUser.login;
+    $('hdrRoleTag').textContent=ROLES_RU[curUser.role]||'';
+    $('hdrRoleTag').className='role-tag '+(curUser.role||'player');
     const ha=$('hdrAva');if(u&&u.avatar){ha.style.backgroundImage='url('+u.avatar+')';ha.textContent=''}else{ha.style.backgroundImage='';ha.textContent=curUser.login.charAt(0).toUpperCase()}
     $('userBar').style.display='flex';
     const ba=$('ubAva');if(u&&u.avatar){ba.style.backgroundImage='url('+u.avatar+')';ba.innerHTML=''}else{ba.style.backgroundImage='';ba.innerHTML=curUser.login.charAt(0).toUpperCase()}
     $('ubName').textContent=curUser.login;
-    $('ubRoleLabel').textContent=ROLES_RU[curUser.role]||'Игрок';
-    $('ubRoleLabel').className='rl '+(curUser.role||'player');
+    $('ubRoleTag').textContent=ROLES_RU[curUser.role]||'Игрок';
+    $('ubRoleTag').className='role-tag '+(curUser.role||'player');
     $('ubRoleSub').textContent=ROLES_RU[curUser.role]||'Игрок';
+    $('ubRoleSub').className='sub rl '+(curUser.role||'player');
   } else {
     $('hdrLogged').style.display='none';$('hdrGuest').style.display='';$('userBar').style.display='none';
   }
@@ -405,7 +408,7 @@ function renderTopics(sId){
   t.forEach(tp=>{
     const d=document.createElement('div');d.className='topic-row';
     const p=tp.template?'<span class="prefix">['+tp.template+']</span> ':'';
-    d.innerHTML=`<div><div class="tr-title">${p}${esc(tp.title)}</div><div class="tr-meta"><span class="auth">${esc(tp.author)}</span> <span class="rl ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span> · ${new Date(tp.date).toLocaleDateString('ru-RU')}</div></div><div class="tr-right">💬 ${tp.replies||0}</div>`;
+    d.innerHTML=`<div><div class="tr-title">${p}${esc(tp.title)}</div><div class="tr-meta"><span class="auth">${esc(tp.author)}</span> <span class="role-tag ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span> · ${new Date(tp.date).toLocaleDateString('ru-RU')}</div></div><div class="tr-right">💬 ${tp.replies||0}</div>`;
     l.appendChild(d);
   });
 }
