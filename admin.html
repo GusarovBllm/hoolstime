@@ -258,9 +258,9 @@ function logout(){sessionStorage.removeItem('ht_admin');$('loginScreen').style.d
 function isAuthed(){return sessionStorage.getItem('ht_admin')==='1'}
 
 function logAction(who, act, details){
-  const logs=JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
+  const logs=JSON.parse(localStorage.getItem('ht_logs')||'[]');
   logs.push({date:now(), who, act, details:details||''});
-  localStorage.setItem('ht_admin_logs', JSON.stringify(logs));
+  localStorage.setItem('ht_logs', JSON.stringify(logs));
 }
 
 // ═══════════════ Tabs ═══════════════
@@ -281,9 +281,9 @@ function switchTab(tab){
 // ═══════════════ Stats ═══════════════
 function renderStats(){
   const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  const topics=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
+  const topics=JSON.parse(localStorage.getItem('ht_topics')||'[]');
   const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const logs=JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
+  const logs=JSON.parse(localStorage.getItem('ht_logs')||'[]');
   const reports=JSON.parse(localStorage.getItem('ht_reports')||'[]');
   const orders=JSON.parse(localStorage.getItem('ht_orders')||'[]');
   $('stUsers').textContent=users.length;
@@ -457,7 +457,7 @@ function renderOrders(){
 // ═══════════════ Logs ═══════════════
 function renderLogs(){
   const l=$('logsList'); const q=($('logSearch').value||'').toLowerCase();
-  const logs=(JSON.parse(localStorage.getItem('ht_admin_logs')||'[]')).filter(x=>!q||(x.act||'').toLowerCase().includes(q)||(x.who||'').toLowerCase().includes(q)||(x.details||'').toLowerCase().includes(q));
+  const logs=(JSON.parse(localStorage.getItem('ht_logs')||'[]')).filter(x=>!q||(x.act||'').toLowerCase().includes(q)||(x.who||'').toLowerCase().includes(q)||(x.details||'').toLowerCase().includes(q));
   if(!logs.length){l.innerHTML='<div class="empty">Логов нет</div>';return}
   logs.slice().reverse().forEach(x=>{
     const d=document.createElement('div');d.className='log-line';
