@@ -254,6 +254,34 @@ footer a:hover{color:var(--gold)}
   <div id="profileView" style="display:none"></div>
 </div>
 
+<!-- Security modal -->
+<div class="modal-ov" id="secModal">
+  <div class="modal">
+    <button class="m-close" onclick="closeSecurity()">✕</button>
+    <h3>🔐 Пароль и безопасность</h3>
+    <div class="sub" style="margin-bottom:16px">Управление паролем и защитой аккаунта</div>
+    <!-- 2FA -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div><div style="font-size:14px;font-weight:800;color:var(--title)">Двухфакторная аутентификация</div>
+          <div style="font-size:12px;color:var(--body50);margin-top:2px">Статус: <b id="sec2faStatus" style="color:var(--red)">Отключено</b></div></div>
+        <button class="btn btn-sm btn-ghost" onclick="toggle2FA()" id="sec2faBtn">Изменить</button>
+      </div>
+      <div id="sec2faCode" style="display:none;margin-top:12px">
+        <div class="fld"><label>Код из приложения</label><input id="sec2faCodeIn" placeholder="123456" maxlength="6"></div>
+        <button class="btn btn-sm btn-blue" onclick="save2FA()">Активировать</button>
+      </div>
+    </div>
+    <!-- Change password -->
+    <div class="fld"><label>Ваш текущий пароль:</label><input type="password" id="secCurPwd" placeholder="••••••••"></div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">По соображениям безопасности, вы должны указать текущий пароль перед его изменением.</div>
+    <div class="fld"><label>Новый пароль:</label><input type="password" id="secNewPwd" placeholder="••••••••"></div>
+    <div class="fld"><label>Подтвердить новый пароль:</label><input type="password" id="secNewPwd2" placeholder="••••••••"></div>
+    <button class="btn btn-full" style="background:linear-gradient(135deg,var(--red),var(--red2));color:#fff" onclick="savePassword()">🔒 Сохранить</button>
+    <div id="secMsg" style="margin-top:10px;font-size:13px;text-align:center"></div>
+  </div>
+</div>
+
 <!-- Auth modal -->
 <div class="modal-ov" id="authModal">
   <div class="modal">
@@ -511,7 +539,7 @@ function showProfile(login){
         <div class="pcard"><h4>💭 Заметки (24ч)</h4>${notes||'<div style="color:var(--muted);font-size:12px">Нет заметок</div>'}${isOwn?`<div style="display:flex;gap:6px;margin-top:8px"><input id="ni" placeholder="Что на душе?" style="flex:1;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:8px;font-size:13px"><button class="btn btn-sm" onclick="addNote()">+</button></div>`:''}</div>
         <div class="pcard"><h4>🏆 Достижения</h4><div class="ach-grid">${ach}</div></div>
         <div class="pcard"><h4>👥 Друзья</h4>${friends||'<div style="color:var(--muted);font-size:12px">Нет друзей</div>'}</div>
-        ${isOwn?`<div class="pcard"><h4>⚙️ Настройки</h4><div class="tc-row"><label>Аватар</label><input type="file" accept="image/*" onchange="upAvatar(this)"></div><div class="tc-row"><label>Баннер</label><input type="file" accept="image/*" onchange="upBanner(this)"></div><div class="tc-row"><label>О себе</label><textarea id="bio" style="min-height:50px">${esc(u.bio||'')}</textarea></div><button class="btn btn-sm" onclick="saveBio()">Сохранить</button></div>
+        ${isOwn?`<div class="pcard"><h4>⚙️ Настройки</h4><div class="tc-row"><label>Аватар</label><input type="file" accept="image/*" onchange="upAvatar(this)"></div><div class="tc-row"><label>Баннер</label><input type="file" accept="image/*" onchange="upBanner(this)"></div><div class="tc-row"><label>О себе</label><textarea id="bio" style="min-height:50px">${esc(u.bio||'')}</textarea></div><button class="btn btn-sm" onclick="saveBio()">Сохранить</button><div style="margin-top:10px"><button class="btn btn-sm btn-ghost" style="width:100%" onclick="showSecurity()">🔐 Пароль и безопасность</button></div></div>
         <div class="pcard"><h4>📝 Блог</h4><div class="tc-row"><label>Заголовок</label><input id="bt"></div><div class="tc-row"><label>Текст</label><textarea id="bb" style="min-height:50px"></textarea></div><div class="tc-row"><select id="bv" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px"><option value="public">Всем</option><option value="friends">Друзьям</option><option value="private">Только мне</option></select></div><button class="btn btn-sm" onclick="pubBlog()">✍️ Опубликовать</button></div>`:''}
       </div>
       <div class="profile-main">
@@ -532,6 +560,60 @@ function pubBlog(){if(!curUser)return;const t=$('bt').value.trim(),b=$('bb').val
 function sayHello(l){if(!curUser){notif('Войдите','err');return}notif('👋 Привет отправлен '+l,'gold')}
 function friendReq(l){if(!curUser){notif('Войдите','err');return}const u=getUser(curUser.login);const f=u.friends||[];if(f.find(x=>x.login===l)){notif('Уже в друзьях');return}const r=JSON.parse(localStorage.getItem('ht_fr')||'[]');if(r.find(x=>x.from===curUser.login&&x.to===l)){notif('Запрос уже отправлен');return}r.push({from:curUser.login,to:l,date:nowISO()});localStorage.setItem('ht_fr',JSON.stringify(r));notif('Запрос отправлен','gold')}
 function isFriend(a,b){const u=getUser(a);return u&&u.friends&&u.friends.find(f=>f.login===b)}
+
+// ═══════════ SECURITY ═══════════
+function showSecurity(){
+  if(!curUser){notif('Войдите','err');return}
+  const u=getUser(curUser.login);
+  $('sec2faStatus').textContent=u['2fa']?'Включено':'Отключено';
+  $('sec2faStatus').style.color=u['2fa']?'var(--ok)':'var(--red)';
+  $('sec2faBtn').textContent=u['2fa']?'Отключить':'Включить';
+  $('sec2faCode').style.display='none';
+  $('secCurPwd').value='';$('secNewPwd').value='';$('secNewPwd2').value='';
+  $('secMsg').textContent='';
+  $('secModal').classList.add('open');
+}
+function closeSecurity(){$('secModal').classList.remove('open')}
+$('secModal').addEventListener('click',e=>{if(e.target===$('secModal'))closeSecurity()});
+
+function toggle2FA(){
+  const u=getUser(curUser.login);
+  if(u['2fa']){
+    saveUserData(curUser.login,{'2fa':false,'2fa_code':''});
+    $('sec2faStatus').textContent='Отключено';
+    $('sec2faStatus').style.color='var(--red)';
+    $('sec2faBtn').textContent='Включить';
+    notif('2FA отключена');
+  } else {
+    $('sec2faCode').style.display='block';
+  }
+}
+
+function save2FA(){
+  const code=$('sec2faCodeIn').value.trim();
+  if(!code||code.length<6){notif('Введите 6-значный код','err');return}
+  saveUserData(curUser.login,{'2fa':true,'2fa_code':code});
+  $('sec2faStatus').textContent='Включено';
+  $('sec2faStatus').style.color='var(--ok)';
+  $('sec2faBtn').textContent='Отключить';
+  $('sec2faCode').style.display='none';
+  notif('2FA активирована! Сохраните код: '+code,'gold');
+}
+
+function savePassword(){
+  const cur=$('secCurPwd').value, np=$('secNewPwd').value, np2=$('secNewPwd2').value, msg=$('secMsg');
+  if(!cur||!np||!np2){msg.textContent='Заполните все поля';msg.style.color='var(--red)';return}
+  const u=getUser(curUser.login);
+  if(u.pwd!==cur){msg.textContent='Неверный текущий пароль';msg.style.color='var(--red)';return}
+  if(np.length<6){msg.textContent='Новый пароль минимум 6 символов';msg.style.color='var(--red)';return}
+  if(np!==np2){msg.textContent='Новые пароли не совпадают';msg.style.color='var(--red)';return}
+  saveUserData(curUser.login,{pwd:np});
+  msg.textContent='Пароль изменён!';msg.style.color='var(--ok)';
+  $('secCurPwd').value='';$('secNewPwd').value='';$('secNewPwd2').value='';
+  logAct(curUser.login,'Смена пароля');
+  notif('Пароль успешно изменён','gold');
+  closeSecurity();
+}
 
 // ═══════════ INIT ═══════════
 const saved=localStorage.getItem('ht_curUser');
