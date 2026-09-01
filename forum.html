@@ -3,332 +3,278 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HoolsTime — Форум анархии</title>
-<meta name="description" content="Форум HoolsTime: обсуждения, гайды, торговля, кланы. Профили, друзья, блоги.">
+<title>HoolsTime — Форум</title>
+<meta name="description" content="Форум HoolsTime: обсуждения, гайды, торговля, кланы.">
 <style>
-:root{--bg:#0d0d14;--bg2:#12121c;--card:#151524;--border:#2a2a3a;--border2:#3b3b50;--title:#ffffff;--body:#b8b8cc;--body50:#8a8aa0;--muted:#64647c;--gold:#f8c510;--gold2:#ffb400;--red:#ff3b5c;--red2:#df2b4a;--blue:#22d3ee;--blue2:#0ea5e9;--green:#3be08b;--ok:#3be08b;--radius:14px;--header-h:64px}
+:root{--bg:#0b0d14;--bg2:#11131f;--card:#161a2e;--border:#1e2340;--border2:#2a3055;--title:#eef2ff;--body:#b0b8d1;--body50:#7980a0;--muted:#545a7a;--gold:#f0b429;--gold2:#e6a800;--red:#ef4444;--red2:#dc2626;--blue:#3b82f6;--blue2:#2563eb;--green:#22c55e;--ok:#22c55e;--radius:12px;--header-h:68px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--body);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden;background-image:radial-gradient(900px 500px at 12% -5%,rgba(255,59,92,.08),transparent 65%),radial-gradient(900px 500px at 88% 0%,rgba(34,211,238,.08),transparent 65%);background-attachment:fixed}
-::selection{background:var(--gold);color:#1a1a1a}
+body{background:var(--bg);color:var(--body);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}
+::selection{background:var(--gold);color:#141414}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit;outline:none}
 textarea{resize:vertical}
 
 /* ─── Header ─── */
-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:rgba(13,13,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px}
-.hdr-left{display:flex;flex-direction:column;align-items:center;line-height:1;gap:4px}
-.hdr-left .logo-mini{font-size:22px;font-weight:900}
-.hdr-left .logo-mini .h1{background:linear-gradient(180deg,#ff6a4d,#ff2d55 60%,#b30f34);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hdr-left .logo-mini .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee 55%,#0b6bb8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hdr-left .hdr-ip{font-family:Consolas,monospace;font-size:11px;color:var(--blue)}
-.hdr-right{display:flex;align-items:center;gap:10px;white-space:nowrap}
-.hdr-right a{font-size:13px;font-weight:500;color:var(--body50);transition:color .2s}
-.hdr-right a:hover{color:var(--gold)}
-.btn-hdr{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414!important;font-weight:800;padding:8px 16px;border-radius:10px}
-.btn-hdr-ghost{border:1px solid var(--border2);padding:8px 16px;border-radius:10px;color:var(--body)!important;font-weight:600}
-.btn-hdr-ghost:hover{border-color:var(--gold);color:var(--gold)!important}
-@media(max-width:820px){.hdr-right .hide-m{display:none}}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:rgba(11,13,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.hdr-l{display:flex;align-items:center;gap:14px}
+.hdr-l .logo{font-size:20px;font-weight:900;letter-spacing:-.5px}
+.hdr-l .logo .h{background:linear-gradient(180deg,#ff6a4d,#ff2d55);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-l .logo .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-nav{display:flex;gap:2px}
+.hdr-nav a{padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--body50);transition:all .15s}
+.hdr-nav a:hover,.hdr-nav a.active{color:var(--title);background:rgba(255,255,255,.04)}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.hdr-r .btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer;transition:.15s}
+.hdr-r .btn:hover{filter:brightness(1.1)}
+.hdr-r .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--body);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.hdr-r .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hdr-r .user{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gold)}
+.hdr-r .user .ava{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#141414;font-weight:900;font-size:14px}
+@media(max-width:820px){.hdr-nav{display:none}}
 
 /* ─── Page ─── */
-.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 28px) 24px 80px;min-height:100vh}
+.page{max-width:1200px;margin:0 auto;padding:calc(var(--header-h) + 24px) 20px 60px;min-height:100vh}
 
-/* ─── Auth Modal ─── */
-.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+/* ─── Modal ─── */
+.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .modal-ov.open{display:flex}
-.modal{width:460px;max-width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px}
+.modal{width:480px;max-width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px}
 .modal h3{font-size:20px;font-weight:900;color:var(--title);margin-bottom:4px;text-align:center}
-.modal .sub{color:var(--body50);font-size:13px;margin-bottom:18px;text-align:center}
-.modal .m-close{float:right;background:none;border:none;color:var(--body50);font-size:22px;cursor:pointer}
+.modal .sub{color:var(--body50);font-size:13px;margin-bottom:20px;text-align:center}
+.modal .m-close{float:right;background:none;border:none;color:var(--body50);font-size:20px;cursor:pointer;padding:0 4px}
 .modal .m-close:hover{color:var(--red)}
-.auth-tabs{display:flex;gap:8px;margin-bottom:20px;justify-content:center}
-.auth-tab{background:var(--card);border:1px solid var(--border);color:var(--body50);padding:10px 24px;border-radius:10px;font-size:14px;font-weight:700;transition:.15s}
-.auth-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border-color:transparent}
-.auth-tab:hover{border-color:var(--gold)}
+.mtabs{display:flex;gap:6px;margin-bottom:20px;justify-content:center}
+.mtab{background:var(--card);border:1px solid var(--border);color:var(--body50);padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;transition:.15s}
+.mtab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border-color:transparent}
+.mtab:hover{border-color:var(--gold)}
 .fld{margin-bottom:14px}
-.fld label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
-.fld input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:12px 14px;font-size:14px;transition:border-color .2s}
+.fld label{display:block;font-size:12px;font-weight:700;color:var(--body);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.fld input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:11px 14px;font-size:14px;transition:border-color .2s}
 .fld input:focus{border-color:var(--gold)}
-.fld .hint{font-size:11px;color:var(--muted);margin-top:4px}
-.fld .chk{display:flex;align-items:center;gap:8px;margin-top:8px}
-.fld .chk input{width:auto}
-.fld .chk label{font-size:12px;color:var(--body50);margin:0}
-.pwd-row{position:relative}
-.pwd-row input{width:100%}
-.pwd-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--body50);font-size:12px;cursor:pointer;font-weight:600}
-.pwd-toggle:hover{color:var(--gold)}
-.match-ok{color:var(--ok)!important;font-size:12px;font-weight:600}
-.match-no{color:var(--red)!important;font-size:12px;font-weight:600}
-.btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:900;transition:.2s;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:center}
+.fld .hint{font-size:11px;color:var(--muted);margin-top:4px;text-transform:none;letter-spacing:0}
+.btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:900;transition:.2s;cursor:pointer;display:inline-flex;align-items:center;gap:6px;justify-content:center}
 .btn:hover{filter:brightness(1.08)}
-.btn:active{transform:scale(.98)}
-.btn-sm{padding:8px 14px;font-size:12px}
+.btn:active{transform:scale(.97)}
+.btn-sm{padding:7px 14px;font-size:12px}
 .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--body);font-weight:600}
-.btn-ghost:hover{background:rgba(255,255,255,.04)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .btn-danger{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff}
 .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
-.btn-ok{background:linear-gradient(135deg,var(--green),#2bc87a);color:#0d0d14}
-.btn-full{width:100%;justify-content:center}
+.btn-full{width:100%}
 
-/* ─── User bar ─── */
-.user-bar{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 18px;margin-bottom:24px;flex-wrap:wrap}
-.user-bar .ava{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#141414;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex:0 0 40px;overflow:hidden;background-size:cover;background-position:center}
-.user-bar .ava img{width:100%;height:100%;object-fit:cover}
-.user-bar .info{font-size:13px;flex:1}
-.user-bar .info b{color:var(--title)}
-.user-bar .info .role{font-size:11px;color:var(--body50)}
-.user-bar .info .mood{font-size:16px;margin-left:6px}
-.role-tag{font-size:10px;padding:2px 10px;border-radius:10px;font-weight:800;text-transform:uppercase}
-.role-tag.guest{background:rgba(30,30,30,.15);color:#000;font-weight:900}
-.role-tag.player{background:rgba(148,163,184,.15);color:#94a3b8;font-weight:900}
-.role-tag.verified{background:rgba(59,224,139,.15);color:var(--ok);font-weight:900}
-.role-tag.helper{background:rgba(248,197,16,.15);color:var(--gold);font-weight:900}
-.role-tag.mod{background:rgba(34,211,238,.15);color:var(--blue);font-weight:900}
-.role-tag.admin{background:rgba(255,59,92,.18);color:var(--red);font-weight:900}
-.role-text.guest{color:#000;font-weight:900}
-.role-text.player{color:#94a3b8;font-weight:900}
-.role-text.verified{color:var(--ok);font-weight:900}
-.role-text.helper{color:var(--gold);font-weight:900}
-.role-text.mod{color:var(--blue);font-weight:900}
-.role-text.admin{color:var(--red);font-weight:900}
+/* ─── Role colors ─── */
+.role-tag{display:inline-block;padding:2px 10px;border-radius:6px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.role-tag.guest{background:rgba(80,80,80,.12);color:var(--body50)}
+.role-tag.player{background:rgba(148,163,184,.12);color:#94a3b8}
+.role-tag.verified{background:rgba(34,197,94,.12);color:var(--ok)}
+.role-tag.helper{background:rgba(240,180,41,.12);color:var(--gold)}
+.role-tag.mod{background:rgba(59,130,246,.12);color:var(--blue)}
+.role-tag.admin{background:rgba(239,68,68,.15);color:var(--red)}
+.rl{font-weight:900}
+.rl.guest{color:var(--body50)}
+.rl.player{color:#94a3b8}
+.rl.verified{color:var(--ok)}
+.rl.helper{color:var(--gold)}
+.rl.mod{color:var(--blue)}
+.rl.admin{color:var(--red)}
 
-/* ─── Forum sections ─── */
-.forum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:28px}
-.forum-sect{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:border-color .18s;cursor:pointer}
-.forum-sect:hover{border-color:var(--gold)}
-.forum-sect .sect-ic{font-size:32px;margin-bottom:8px}
-.forum-sect h3{font-size:18px;font-weight:800;color:var(--title)}
-.forum-sect p{font-size:13px;color:var(--body50);margin:4px 0 10px}
-.forum-sect .sect-stat{font-size:11px;color:var(--muted)}
-.forum-sect .sect-stat b{color:var(--body)}
-.topic-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.topic-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:13px;transition:border-color .15s;cursor:pointer}
-.topic-item:hover{border-color:var(--gold)}
-.topic-item .ti-title{font-weight:700;color:var(--title)}
-.topic-item .ti-title .prefix{color:var(--gold);font-size:11px;font-weight:800}
-.topic-item .ti-meta{font-size:11px;color:var(--muted);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.topic-item .ti-meta .auth{color:var(--body)}
-.topic-create{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:28px}
+/* ─── Forum list ─── */
+.forum-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.forum-header h1{font-size:26px;font-weight:900;color:var(--title)}
+.forum-header h1 span{color:var(--gold)}
+.forum-header .stats{display:flex;gap:16px;font-size:13px;color:var(--body50)}
+.forum-header .stats b{color:var(--title)}
+.cat{margin-bottom:32px}
+.cat-title{font-size:14px;font-weight:800;color:var(--body50);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding:0 4px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.forum-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all .15s;cursor:pointer}
+.forum-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.forum-card .fc-top{display:flex;align-items:center;gap:14px}
+.forum-card .fc-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex:0 0 42px;background:var(--bg)}
+.forum-card .fc-info{flex:1}
+.forum-card .fc-info h3{font-size:15px;font-weight:800;color:var(--title)}
+.forum-card .fc-info p{font-size:12px;color:var(--body50);margin-top:2px}
+.forum-card .fc-stat{font-size:11px;color:var(--muted);display:flex;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.forum-card .fc-stat b{color:var(--body)}
+
+/* ─── Topics ─── */
+.topic-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.topic-controls h2{font-size:20px;font-weight:900;color:var(--title)}
+.topic-table{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.topic-row{display:grid;grid-template-columns:1fr auto;padding:14px 18px;border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer}
+.topic-row:last-child{border:none}
+.topic-row:hover{background:rgba(255,255,255,.02)}
+.topic-row .tr-title{font-size:14px;font-weight:700;color:var(--title)}
+.topic-row .tr-title .prefix{color:var(--gold);font-size:11px;font-weight:800;margin-right:4px}
+.topic-row .tr-meta{font-size:11px;color:var(--muted);margin-top:4px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.topic-row .tr-meta .auth{color:var(--body)}
+.topic-row .tr-right{text-align:right;font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* ─── Topic create ─── */
+.tc-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.tc-form h3{font-size:16px;font-weight:900;color:var(--title);margin-bottom:14px}
 .tc-row{margin-bottom:12px}
-.tc-row label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
-.tc-row input,.tc-row select,.tc-row textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px 14px;font-size:14px;transition:border-color .2s}
+.tc-row label{display:block;font-size:12px;font-weight:700;color:var(--body);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.tc-row input,.tc-row select,.tc-row textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:10px 13px;font-size:14px;transition:border-color .2s}
 .tc-row input:focus,.tc-row select:focus,.tc-row textarea:focus{border-color:var(--gold)}
 .tc-row textarea{min-height:80px}
 
+/* ─── User bar ─── */
+.ubar{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;margin-bottom:24px;flex-wrap:wrap}
+.ubar .ava{width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#141414;font-weight:900;font-size:18px;flex:0 0 44px;overflow:hidden;background-size:cover;background-position:center}
+.ubar .info{flex:1;font-size:13px}
+.ubar .info b{color:var(--title);font-size:15px}
+.ubar .info .sub{font-size:11px;color:var(--body50)}
+.ubar .actions{display:flex;gap:6px;flex-wrap:wrap}
+
 /* ─── Profile ─── */
-.profile-top{position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
-.profile-banner{height:220px;background:linear-gradient(135deg,#1a1a3e,#0d0d20);display:flex;align-items:flex-end;padding:20px;position:relative;background-size:cover;background-position:center}
-.profile-banner .p-ava{width:90px;height:90px;border-radius:50%;border:3px solid var(--gold);background:var(--gold);overflow:hidden;flex:0 0 90px;background-size:cover;background-position:center}
-.profile-banner .p-ava img{width:100%;height:100%;object-fit:cover}
-.profile-banner .p-info{margin-left:20px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-.profile-banner .p-info .pn{font-size:26px;font-weight:900}
-.profile-banner .p-info .pr{font-size:13px;opacity:.85}
-.profile-banner .p-info .pmood{font-size:24px;margin-left:4px}
-.profile-banner .p-banner-overlay{position:absolute;bottom:0;left:0;right:0;z-index:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
-.profile-banner .p-banner-overlay>*{position:relative;z-index:1}
-.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.profile-body{display:grid;grid-template-columns:320px 1fr;gap:20px}
+.profile-banner{height:200px;border-radius:var(--radius);overflow:hidden;position:relative;margin-bottom:20px;background:linear-gradient(135deg,#1a1a3e,#0d0d20);background-size:cover;background-position:center}
+.profile-banner .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.profile-banner .overlay .row{display:flex;align-items:flex-end;gap:18px}
+.profile-banner .pava{width:80px;height:80px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;flex:0 0 80px;background:var(--gold);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:#141414}
+.profile-banner .pinfo{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.profile-banner .pinfo .pn{font-size:24px;font-weight:900}
+.profile-banner .pinfo .pr{font-size:13px;opacity:.85}
+.profile-body{display:grid;grid-template-columns:300px 1fr;gap:20px}
 @media(max-width:820px){.profile-body{grid-template-columns:1fr}}
-.profile-side{display:flex;flex-direction:column;gap:14px}
-.profile-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
-.profile-card h4{font-size:15px;font-weight:800;color:var(--title);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.profile-main{display:flex;flex-direction:column;gap:14px}
-.profile-main .profile-card{flex:1}
-.stat-line{font-size:13px;color:var(--body50);padding:6px 0;display:flex;justify-content:space-between;border-bottom:1px solid var(--border)}
-.stat-line:last-child{border:none}
-.stat-line b{color:var(--title)}
-
-/* ─── Mood / Notes / Achievements ─── */
-.mood-picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.mood-btn{font-size:24px;background:none;border:none;cursor:pointer;padding:4px;border-radius:8px;transition:.1s}
-.mood-btn.selected,.mood-btn:hover{background:rgba(248,197,16,.15)}
-.note-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px;font-size:13px;color:var(--body50)}
-.note-item .ni-time{font-size:11px;color:var(--muted);margin-top:4px}
-.ach-grid{display:flex;gap:8px;flex-wrap:wrap}
-.ach{border:1px solid var(--border2);border-radius:10px;padding:8px 12px;text-align:center;font-size:11px;background:var(--bg);flex:0 0 auto}
-.ach .ach-ic{font-size:20px;display:block}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+.pcard h4{font-size:14px;font-weight:800;color:var(--title);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pline{font-size:13px;padding:6px 0;display:flex;justify-content:space-between;border-bottom:1px solid var(--border)}
+.pline:last-child{border:none}
+.pline b{color:var(--title)}
+.mood-picker{display:flex;gap:4px;flex-wrap:wrap}
+.mood-btn{font-size:22px;background:none;border:none;cursor:pointer;padding:4px;border-radius:6px;transition:.1s}
+.mood-btn.selected,.mood-btn:hover{background:rgba(240,180,41,.12)}
+.note-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-bottom:4px;font-size:12px;color:var(--body50)}
+.note-item .ni{font-size:10px;color:var(--muted);margin-top:2px}
+.ach-grid{display:flex;gap:6px;flex-wrap:wrap}
+.ach{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;text-align:center;font-size:10px;flex:0 0 auto;opacity:.4}
+.ach.unlocked{opacity:1;border-color:var(--gold)}
+.ach .ach-ic{font-size:18px;display:block}
 .ach .ach-lbl{color:var(--body50);margin-top:2px}
-.ach.unlocked{border-color:var(--gold);background:rgba(248,197,16,.06)}
 .ach.unlocked .ach-lbl{color:var(--gold)}
-
-/* ─── Friends ─── */
-.friend-card{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:6px}
-.friend-card .f-ava{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#141414;font-weight:900;font-size:13px;flex:0 0 34px;overflow:hidden;background-size:cover;background-position:center}
-.friend-card .f-info{flex:1;font-size:13px}
-.friend-card .f-info .fn{font-weight:700;color:var(--title)}
-.friend-card .f-info .ft{font-size:11px;color:var(--muted)}
-.friend-card .f-info .fmood{font-size:14px;margin-left:4px}
-.friend-card .f-actions{display:flex;gap:6px}
-.trust-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
-.trust-badge.acc{background:rgba(148,163,184,.15);color:#94a3b8}
-.trust-badge.bud{background:rgba(59,224,139,.12);color:var(--ok)}
-.trust-badge.frd{background:rgba(34,211,238,.12);color:var(--blue)}
-.trust-badge.cls{background:rgba(248,197,16,.15);color:var(--gold)}
+.friend-card{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:4px}
+.friend-card .fava{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#141414;font-weight:900;font-size:12px;flex:0 0 30px;overflow:hidden;background-size:cover}
+.friend-card .finfo{flex:1;font-size:12px}
+.friend-card .finfo .fn{font-weight:700;color:var(--title)}
+.friend-card .finfo .ft{font-size:10px;color:var(--muted)}
 
 /* ─── Blog ─── */
-.blog-post{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
-.blog-post .bp-h{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.blog-post .bp-h h4{font-size:16px;font-weight:800;color:var(--title)}
-.blog-post .bp-h .bp-vis{font-size:11px;padding:2px 8px;border-radius:8px;font-weight:700}
-.blog-post .bp-h .bp-vis.public{background:rgba(59,224,139,.12);color:var(--ok)}
-.blog-post .bp-h .bp-vis.friends{background:rgba(34,211,238,.12);color:var(--blue)}
+.blog-post{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.blog-post .bp-h{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.blog-post .bp-h h4{font-size:15px;font-weight:800;color:var(--title)}
+.blog-post .bp-h .vis{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:700}
+.blog-post .bp-h .vis.public{background:rgba(34,197,94,.12);color:var(--ok)}
+.blog-post .bp-h .vis.friends{background:rgba(59,130,246,.12);color:var(--blue)}
 .blog-post .bp-body{font-size:13px;color:var(--body50);line-height:1.6}
-.blog-post .bp-meta{font-size:11px;color:var(--muted);margin-top:8px}
+.blog-post .bp-meta{font-size:11px;color:var(--muted);margin-top:6px}
 
-/* ─── Notifications ─── */
-.notif{position:fixed;top:74px;right:18px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:12px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:340px}
+/* ─── Notif ─── */
+.notif{position:fixed;top:76px;right:18px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:11px 15px;border-radius:8px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:340px}
 .notif.err{border-left-color:var(--red)}
 .notif.gold{border-left-color:var(--gold)}
 @keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
 
-/* ─── Chat ─── */
-.chat-fab{position:fixed;bottom:24px;right:24px;z-index:1500;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--blue));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(255,59,92,.35);transition:transform .2s}
-.chat-fab:hover{transform:scale(1.08)}
-.chat-fab svg{width:30px;height:30px;stroke:#fff}
-.chat-window{position:fixed;bottom:96px;right:24px;z-index:1500;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:var(--bg2);border:1px solid var(--border);border-radius:18px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.6)}
-.chat-window.open{display:flex}
-.chat-head{padding:16px 18px;background:linear-gradient(135deg,var(--red),var(--blue));display:flex;align-items:center;gap:12px;color:#fff}
-.chat-head .ava{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
-.chat-close{margin-left:auto;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.8}
-.chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
-.msg{max-width:80%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap}
-.msg.bot{background:var(--card);border:1px solid var(--border);color:var(--body);align-self:flex-start;border-bottom-left-radius:4px}
-.msg.user{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
-.msg .quick{display:block;margin-top:6px;background:rgba(255,180,0,.08);border:1px solid var(--border);color:var(--title);padding:8px 12px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;width:100%}
-.msg .quick:hover{border-color:var(--gold)}
-.msg .btn-tg{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#229ED9;color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none}
-.typing{display:inline-flex;gap:4px;padding:12px 16px}
-.typing span{width:7px;height:7px;border-radius:50%;background:var(--body50);animation:blink 1.2s infinite}
-.typing span:nth-child(2){animation-delay:.2s}
-.typing span:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
-.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:var(--bg2)}
-.chat-input input{flex:1;background:var(--card);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px 14px;font-size:14px}
-.chat-input input:focus{border-color:var(--gold)}
-.chat-input button{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:10px;padding:0 18px;font-weight:900;font-size:15px;cursor:pointer}
-@media(max-width:480px){.chat-window{right:8px;bottom:84px;width:calc(100vw - 16px);height:calc(100vh - 120px)}.chat-fab{bottom:16px;right:16px}}
-
 /* ─── Footer ─── */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16px calc(30px + env(safe-area-inset-bottom,0px));text-align:center;margin-top:40px}
-.f-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.f-nav a{font-size:13px;color:var(--body50)}
-.f-nav a:hover{color:var(--gold)}
-.f-ip{border:1px dashed var(--border2);border-radius:10px;padding:14px;max-width:520px;margin:0 auto 14px;font-size:12px;color:var(--body50);line-height:1.9}
-.f-ip b{color:var(--body)}
-.f-ip .mono{font-family:Consolas,monospace;color:var(--blue)}
-.f-disc{font-size:12px;color:var(--muted);margin-top:10px}
-
-/* ─── Upload ─── */
-.upload-area{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.upload-area input[type=file]{display:none}
-.upload-btn{background:var(--card);border:1px dashed var(--border2);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--body50);cursor:pointer;text-align:center;min-width:100px}
-.upload-btn:hover{border-color:var(--gold);color:var(--title)}
-.img-preview{width:40px;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background-size:cover;background-position:center;flex:0 0 40px}
-.img-preview.banner{width:100%;height:60px}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:20px 16px;text-align:center;margin-top:40px;font-size:13px;color:var(--muted)}
+footer a{color:var(--body50);margin:0 10px}
+footer a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="hdr-left">
-    <div class="logo-mini"><span class="h1">HOOLS</span><span class="t">TIME</span></div>
-    <span class="hdr-ip">hoolstime.ru</span>
+  <div class="hdr-l">
+    <a href="https://gusarovbllm.github.io/hoolstime/" class="logo"><span class="h">HOOLS</span><span class="t">TIME</span></a>
+    <nav class="hdr-nav">
+      <a href="https://gusarovbllm.github.io/hoolstime/">Магазин</a>
+      <a href="#" class="active">Форум</a>
+    </nav>
   </div>
-  <div class="hdr-right" id="hdrRight">
-    <a href="https://gusarovbllm.github.io/hoolstime/" class="hide-m">Магазин</a>
-    <a href="javascript:void(0)" class="btn-hdr-ghost" onclick="openAuthModal('login')" id="hdrLoginBtn">Войти</a>
-    <a href="javascript:void(0)" class="btn-hdr" onclick="openAuthModal('register')" id="hdrRegBtn">Регистрация</a>
+  <div class="hdr-r" id="hdrRight">
     <span id="hdrLogged" style="display:none">
-      <span id="hdrUserName" style="font-size:13px;font-weight:600;color:var(--gold)"></span>
-      <a href="javascript:void(0)" class="btn-hdr-ghost" onclick="showProfile()">Профиль</a>
-      <a href="javascript:void(0)" class="btn-hdr-ghost" onclick="logoutUser()">Выйти</a>
+      <span class="user" id="hdrUserWrap"><span class="ava" id="hdrAva">?</span><span id="hdrUname"></span></span>
+      <button class="btn-ghost" style="padding:6px 12px;font-size:12px" onclick="showProfile()">Профиль</button>
+      <button class="btn-ghost" style="padding:6px 12px;font-size:12px" onclick="logoutUser()">Выйти</button>
+    </span>
+    <span id="hdrGuest">
+      <button class="btn-ghost" onclick="openAuthModal('login')">Войти</button>
+      <button class="btn" onclick="openAuthModal('register')">Регистрация</button>
     </span>
   </div>
 </header>
 
-<div class="page" id="forumPage">
-  <div id="welcomeBlock" style="text-align:center;padding:40px 0 20px">
-    <h1 style="font-size:32px;font-weight:900;color:var(--title)">Форум <span style="background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">HoolsTime</span></h1>
-    <p style="color:var(--body50);font-size:14px;margin-top:6px">Общайся, делись опытом, торгуй и создавай кланы</p>
+<div class="page" id="pageContent">
+  <!-- Welcome -->
+  <div class="forum-header" id="forumHeader">
+    <div><h1><span>HoolsTime</span> Форум</h1><div style="font-size:13px;color:var(--body50);margin-top:4px">Общайся, делись опытом, торгуй и создавай кланы</div></div>
+    <div class="stats"><span>Тем: <b id="stTopics">0</b></span><span>Участников: <b id="stUsers">0</b></span></div>
   </div>
 
-  <div id="userBar" class="user-bar" style="display:none">
-    <div class="ava" id="userAvaDiv"><span id="userAvaLetter">?</span></div>
-    <div class="info">
-      <b id="userName">—</b><span class="mood" id="userMood"></span><br>
-      <span class="role" id="userRole">Гость</span>
-      <span class="role-tag" id="userRoleTag" style="margin-left:6px"></span>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
+  <!-- User bar -->
+  <div class="ubar" id="userBar" style="display:none">
+    <div class="ava" id="ubAva"><span id="ubAvaLetter">?</span></div>
+    <div class="info"><b id="ubName">—</b> <span class="rl" id="ubRoleLabel"></span><br><span class="sub" id="ubRoleSub">—</span></div>
+    <div class="actions">
       <button class="btn btn-sm btn-ghost" onclick="showProfile()">👤 Профиль</button>
-      <button class="btn btn-sm btn-ghost" onclick="showCreateTicket()">✉️ Тикет</button>
+      <button class="btn btn-sm btn-ghost" onclick="createTicket()">✉️ Тикет</button>
       <button class="btn btn-sm btn-danger" onclick="logoutUser()">Выйти</button>
     </div>
   </div>
 
-  <!-- Forum sections -->
+  <!-- Forum view -->
   <div id="forumView">
-    <div class="forum-grid" id="forumGrid"></div>
-    <div id="topicSection" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-        <h3 id="topicSectionTitle" style="font-size:22px;font-weight:900;color:var(--title)"></h3>
+    <div class="cat" id="forumCategories"></div>
+    <div id="topicView" style="display:none">
+      <div class="topic-controls">
+        <h2 id="tvTitle"></h2>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-sm btn-ghost" onclick="showTopicForm()">+ Новая тема</button>
-          <button class="btn btn-sm btn-ghost" onclick="hideTopicSection()">← Назад</button>
+          <button class="btn btn-sm" onclick="showTopicForm()">+ Новая тема</button>
+          <button class="btn btn-sm btn-ghost" onclick="backToForum()">← Назад</button>
         </div>
       </div>
-      <div id="topicList" class="topic-list"></div>
+      <div id="topicList" class="topic-table"></div>
     </div>
-    <div id="topicFormArea" style="display:none"><div class="topic-create"><div id="topicForm"></div></div></div>
+    <div id="topicFormArea" style="display:none"><div class="tc-form"><div id="topicForm"></div></div></div>
   </div>
 
-  <!-- Profile view -->
+  <!-- Ticket -->
+  <div id="ticketForm" style="display:none">
+    <div class="tc-form">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3>✉️ Тикет</h3><button class="btn btn-sm btn-ghost" onclick="hideTicket()">✕</button></div>
+      <div class="tc-row"><label>Тема</label><input id="tktSubj" placeholder="Кратко опишите проблему"></div>
+      <div class="tc-row"><label>Сообщение</label><textarea id="tktBody" placeholder="Подробно опишите..."></textarea></div>
+      <button class="btn" onclick="submitTicket()">Отправить</button><div id="tktMsg" style="margin-top:8px;font-size:13px"></div>
+    </div>
+  </div>
+
+  <!-- Profile -->
   <div id="profileView" style="display:none"></div>
-
-  <!-- Ticket form -->
-  <div id="ticketFormArea" style="display:none">
-    <div class="topic-create">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h3>✉️ Тикет в поддержку</h3>
-        <button class="btn btn-sm btn-ghost" onclick="hideTicketForm()">✕</button>
-      </div>
-      <div class="tc-row"><label>Тема</label><input id="ticketSubject" placeholder="Кратко опишите проблему"></div>
-      <div class="tc-row"><label>Сообщение</label><textarea id="ticketBody" placeholder="Опишите ситуацию. Укажите ник, дату, приложите ссылки на скриншоты."></textarea></div>
-      <button class="btn" onclick="submitTicket()">Отправить</button>
-      <div id="ticketMsg" style="margin-top:8px;font-size:13px"></div>
-    </div>
-  </div>
 </div>
 
-<!-- Auth Modal -->
+<!-- Auth modal -->
 <div class="modal-ov" id="authModal">
   <div class="modal">
     <button class="m-close" onclick="closeAuthModal()">✕</button>
-    <h3 id="authTitle">Вход в аккаунт</h3>
-    <div class="sub" id="authSub">Войдите или зарегистрируйтесь, чтобы получить доступ к форуму</div>
-    <div class="auth-tabs">
-      <button class="auth-tab active" data-au="login" onclick="switchAuthTab('login')">Вход</button>
-      <button class="auth-tab" data-au="register" onclick="switchAuthTab('register')">Регистрация</button>
+    <h3 id="authTitle">Вход</h3>
+    <div class="sub" id="authSub">Войдите или зарегистрируйтесь</div>
+    <div class="mtabs">
+      <button class="mtab active" data-t="login" onclick="switchAuth('login')">Вход</button>
+      <button class="mtab" data-t="register" onclick="switchAuth('register')">Регистрация</button>
     </div>
-    <!-- Login form -->
-    <div id="authLoginForm">
-      <div class="fld"><label>Логин или электронная почта</label><input type="text" id="loginId" placeholder="ivan или ivan@mail.ru"></div>
-      <div class="fld"><label>Пароль</label><div class="pwd-row"><input type="password" id="loginPwd" placeholder="••••••••"><button class="pwd-toggle" onclick="togglePwd('loginPwd',this)">Показать</button></div></div>
-      <div class="fld"><div class="chk"><input type="checkbox" id="login2fa"><label for="login2fa">Двухфакторная аутентификация (2FA)</label></div></div>
-      <div id="login2faField" style="display:none" class="fld"><label>Код из приложения</label><input type="text" id="login2faCode" placeholder="123456" maxlength="6"></div>
+    <div id="authLogin">
+      <div class="fld"><label>Логин или почта</label><input type="text" id="loginId" placeholder="ivan или ivan@mail.ru"></div>
+      <div class="fld"><label>Пароль</label><input type="password" id="loginPwd" placeholder="••••••••"></div>
       <button class="btn btn-full" onclick="loginUser()">Войти</button>
       <div id="loginMsg" style="margin-top:10px;font-size:13px;text-align:center"></div>
     </div>
-    <!-- Register form -->
-    <div id="authRegisterForm" style="display:none">
-      <div class="fld"><label>Имя пользователя</label><input type="text" id="regLogin" placeholder="Твой ник на форуме" maxlength="24">
-        <div class="hint">Это имя будет отображаться в сообщениях. После регистрации нельзя изменить.</div></div>
-      <div class="fld"><label>Электронная почта</label><input type="email" id="regEmail" placeholder="ivan@mail.ru"></div>
-      <div class="fld"><label>Пароль (мин 6 символов)</label><div class="pwd-row"><input type="password" id="regPwd" placeholder="••••••••"><button class="pwd-toggle" onclick="togglePwd('regPwd',this)">Показать</button></div></div>
-      <div class="fld"><label>Подтверждение пароля</label><div class="pwd-row"><input type="password" id="regPwd2" placeholder="••••••••" oninput="checkPwdMatch()"><span id="pwdMatch" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:600"></span></div></div>
-      <div class="fld"><div class="chk"><input type="checkbox" id="regTerms"><label for="regTerms">Я согласен(на) с условиями и политикой конфиденциальности.</label></div></div>
-      <div class="fld"><div class="chk"><input type="checkbox" id="reg2fa"><label for="reg2fa">Включить 2FA для защиты аккаунта</label></div></div>
+    <div id="authRegister" style="display:none">
+      <div class="fld"><label>Имя пользователя</label><input type="text" id="regLogin" placeholder="Твой ник" maxlength="24"><div class="hint">После регистрации нельзя изменить</div></div>
+      <div class="fld"><label>Email</label><input type="email" id="regEmail" placeholder="ivan@mail.ru"></div>
+      <div class="fld"><label>Пароль (мин 6 символов)</label><input type="password" id="regPwd" placeholder="••••••••"></div>
+      <div class="fld"><label>Подтверждение</label><input type="password" id="regPwd2" placeholder="••••••••"></div>
       <button class="btn btn-full" onclick="registerUser()">Зарегистрироваться</button>
       <div id="regMsg" style="margin-top:10px;font-size:13px;text-align:center"></div>
     </div>
@@ -336,547 +282,261 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16p
 </div>
 
 <footer>
-  <div class="f-nav">
-    <a href="https://gusarovbllm.github.io/hoolstime/">Магазин</a><a href="#">Форум</a>
-    <a href="#">Соглашение</a><a href="#">Политика конфиденциальности</a>
-  </div>
-  <div class="f-ip"><b>HoolsTime</b> · <span class="mono">hoolstime.ru</span> · support@hoolstime.ru</div>
-  <div class="f-disc">© 2026 HoolsTime. Не связаны с Mojang AB.</div>
+  <a href="https://gusarovbllm.github.io/hoolstime/">Магазин</a> · <a href="#">Форум</a> · <a href="#">Соглашение</a> · <a href="#">Политика</a><br>
+  © 2026 HoolsTime · <span style="color:var(--body50)">hoolstime.ru</span>
 </footer>
 
-<button class="chat-fab" onclick="toggleChat()">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-</button>
-<div class="chat-window" id="chatWin">
-  <div class="chat-head"><div class="ava">🧠</div><div><div style="font-weight:800;font-size:15px">ИИ-помощник</div><div style="font-size:11px;opacity:.85">онлайн</div></div><button class="chat-close" onclick="toggleChat()">✕</button></div>
-  <div class="chat-body" id="chatBody"></div>
-  <div class="chat-input"><input type="text" id="chatIn" placeholder="Спроси что-нибудь…" autocomplete="off"><button onclick="sendChat()">➤</button></div>
-</div>
-
 <script>
-// ═══════════════ DATA ═══════════════
-const SECTIONS=[
+// ═══════════ DATA ═══════════
+const CATS=[
   {id:'discuss',ic:'💬',name:'Обсуждения',desc:'Свободное общение, вопросы по игре.'},
   {id:'guides',ic:'📘',name:'Гайды и туториалы',desc:'Советы по выживанию, крафту, защите баз.'},
   {id:'trade',ic:'💰',name:'Торговля',desc:'Обмен ресурсами, услугами.'},
-  {id:'clans',ic:'⚔️',name:'Кланы',desc:'Создание и набор участников.'}];
+  {id:'clans',ic:'⚔️',name:'Кланы',desc:'Создание и набор участников.'}
+];
 const ROLES=['guest','player','verified','helper','moderator','admin'];
 const ROLES_RU={guest:'Гость',player:'Игрок',verified:'Проверенный',helper:'Хелпер',moderator:'Модератор',admin:'Администратор'};
-const ROLE_TAG={guest:'guest',player:'player',verified:'verified',helper:'helper',moderator:'mod',admin:'admin'};
-const TRUST_LEVELS=[{id:'acquaintance',name:'Знакомый',badge:'acc'},{id:'buddy',name:'Приятель',badge:'bud'},{id:'friend',name:'Друг',badge:'frd'},{id:'close',name:'Близкий',badge:'cls'}];
-const ACHIEVEMENTS=[{id:'first_post',name:'Первый пост',ic:'🌟',desc:'Создал первую тему'},{id:'helper',name:'Помощник',ic:'🤝',desc:'Ответил на 10 вопросов'},{id:'veteran',name:'Старожил',ic:'🏆',desc:'30 дней на форуме'},{id:'social',name:'Дружелюбный',ic:'👥',desc:'Добавил 5 друзей'},{id:'blogger',name:'Блогер',ic:'✍️',desc:'Написал 5 постов в блог'}];
 const MOODS=['😊','😎','🔥','🥶','😈','💀','❤️','🤔','😴','🎉','🤯','👻','😢','🥰','😤','🙏'];
+const ACHIEVEMENTS=[{id:'first_post',ic:'🌟',name:'Первый пост'},{id:'helper',ic:'🤝',name:'Помощник'},{id:'veteran',ic:'🏆',name:'Старожил'},{id:'social',ic:'👥',name:'Дружелюбный'},{id:'blogger',ic:'✍️',name:'Блогер'}];
+const TEMPLATES={
+  complain:{title:'[Жалоба] Ник нарушителя',fields:[{key:'victim',label:'Ваш ник'},{key:'date',label:'Дата/время нарушения'},{key:'desc',label:'Описание ситуации',type:'textarea'},{key:'proof',label:'Доказательства (скриншоты, видео)'},{key:'punish',label:'Предложения по наказанию (бан, мут, варн)'}]},
+  helper:{title:'[Заявка] Ваш ник',fields:[{key:'age',label:'Возраст'},{key:'exp',label:'Опыт игры на анархии'},{key:'online',label:'Сколько времени онлайн (в неделю)'},{key:'why',label:'Почему вы подходите',type:'textarea'},{key:'examples',label:'Примеры помощи другим игрокам',type:'textarea'}]},
+  adminComplain:{title:'[Жалоба на админа] Ник админа',fields:[{key:'essence',label:'Суть претензии',type:'textarea'},{key:'date',label:'Дата и ссылка на нарушение'},{key:'result',label:'Требуемый результат',type:'textarea'}]},
+  support:{title:'[ТП] Краткое описание проблемы',fields:[{key:'nick',label:'Ваш ник'},{key:'version',label:'Версия игры'},{key:'what',label:'Что случилось',type:'textarea'},{key:'proof',label:'Скриншот или лог'}]}
+};
 
-let currentUser=null, currentSection=null;
+let curUser=null, curSection=null, curTemplate=null;
 
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function $(id){return document.getElementById(id)}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function notif(t,type){const d=document.createElement('div');d.className='notif'+(type?' '+type:'');d.textContent=t;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200)}
 function nowISO(){return new Date().toISOString()}
-function today(){return new Date().toISOString().slice(0,10)}
+function getUsers(){return JSON.parse(localStorage.getItem('ht_users')||'[]')}
+function saveUsers(u){localStorage.setItem('ht_users',JSON.stringify(u))}
+function getUser(l){return getUsers().find(x=>x.login===l)}
+function saveUserData(l,data){const u=getUsers();const i=u.findIndex(x=>x.login===l);if(i<0)return;Object.assign(u[i],data);saveUsers(u)}
+function getTopics(s){const a=JSON.parse(localStorage.getItem('ht_topics')||'[]');return s?a.filter(t=>t.section===s).sort((a,b)=>new Date(b.date)-new Date(a.date)):a}
+function saveTopics(t){localStorage.setItem('ht_topics',JSON.stringify(t))}
+function logAct(who,act,details){const l=JSON.parse(localStorage.getItem('ht_logs')||'[]');l.push({date:nowISO(),who,act,details:details||''});localStorage.setItem('ht_logs',JSON.stringify(l))}
 
-// ═══════════════ AUTH MODAL ═══════════════
-function openAuthModal(tab){$('authModal').classList.add('open');switchAuthTab(tab||'login')}
+// ═══════════ AUTH ═══════════
+function openAuthModal(tab){$('authModal').classList.add('open');switchAuth(tab||'login')}
 function closeAuthModal(){$('authModal').classList.remove('open')}
-function switchAuthTab(t){
-  document.querySelectorAll('.auth-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelector('.auth-tab[data-au="'+t+'"]').classList.add('active');
-  if(t==='login'){$('authLoginForm').style.display='block';$('authRegisterForm').style.display='none';$('authTitle').textContent='Вход';$('authSub').textContent='Войдите в свой аккаунт'}
-  else{$('authLoginForm').style.display='none';$('authRegisterForm').style.display='block';$('authTitle').textContent='Регистрация';$('authSub').textContent='Создайте аккаунт для доступа к форуму'}}
+function switchAuth(t){
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+  $('authLogin').style.display=t==='login'?'block':'none';
+  $('authRegister').style.display=t==='register'?'block':'none';
+  $('authTitle').textContent=t==='login'?'Вход':'Регистрация';
+  $('authSub').textContent=t==='login'?'Войдите в аккаунт':'Создайте аккаунт';
+}
 $('authModal').addEventListener('click',e=>{if(e.target===$('authModal'))closeAuthModal()});
 
-function togglePwd(fid,b){const f=$(fid);if(f.type==='password'){f.type='text';b.textContent='Скрыть'}else{f.type='password';b.textContent='Показать'}}
-function checkPwdMatch(){const p1=$('regPwd').value,p2=$('regPwd2').value;const el=$('pwdMatch');if(!p2){el.textContent='';return}el.textContent=p1===p2?'✓ Успешно':'✗ Не совпадает';el.className=p1===p2?'match-ok':'match-no'}
-
-// 2FA
-$('reg2fa').addEventListener('change',function(){if(this.checked)notif('2FA будет активирована после регистрации. Сохраните код из приложения.','gold')});
-$('login2fa').addEventListener('change',function(){$('login2faField').style.display=this.checked?'block':'none'});
-
-// ─── REGISTER ───
 function registerUser(){
-  const login=$('regLogin').value.trim();const email=$('regEmail').value.trim();
-  const pwd=$('regPwd').value;const pwd2=$('regPwd2').value;const terms=$('regTerms').checked;const msg=$('regMsg');
-  if(!login||login.length<3){msg.textContent='Логин минимум 3 символа';msg.style.color='var(--red)';return}
-  if(!email||!email.includes('@')){msg.textContent='Введите корректный email';msg.style.color='var(--red)';return}
-  if(!pwd||pwd.length<6){msg.textContent='Пароль минимум 6 символов';msg.style.color='var(--red)';return}
-  if(pwd!==pwd2){msg.textContent='Пароли не совпадают';msg.style.color='var(--red)';return}
-  if(!terms){msg.textContent='Примите условия';msg.style.color='var(--red)';return}
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  if(users.find(u=>u.login===login)){msg.textContent='Логин уже занят';return}
-  if(users.find(u=>u.email===email)){msg.textContent='Почта уже используется';return}
-  const user={login,email,pwd,role:'player',regDate:nowISO(),playHours:0,"2fa":$('reg2fa').checked,mood:'😊',bio:'',notes:[],achievements:[],friends:[],blog:[],avatar:'',banner:'',theme:'dark',blockOrder:'bio,lasttopics',lastSeen:nowISO()};
-  users.push(user);localStorage.setItem('ht_users',JSON.stringify(users));
-  const logs=JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
-  logs.push({date:nowISO(),who:login,act:'Регистрация',details:'email: '+email+(user["2fa"]?' +2FA':'')});localStorage.setItem('ht_admin_logs',JSON.stringify(logs));
-  currentUser={login,role:'player',email,"2fa":user["2fa"]};saveUser();closeAuthModal();
-  msg.textContent='';updateUI();notif('Добро пожаловать, '+login+'!','gold');
+  const l=$('regLogin').value.trim(),e=$('regEmail').value.trim(),p=$('regPwd').value,p2=$('regPwd2').value,m=$('regMsg');
+  if(l.length<3){m.textContent='Логин минимум 3 символа';m.style.color='var(--red)';return}
+  if(!e.includes('@')){m.textContent='Некорректный email';m.style.color='var(--red)';return}
+  if(p.length<6){m.textContent='Пароль минимум 6 символов';m.style.color='var(--red)';return}
+  if(p!==p2){m.textContent='Пароли не совпадают';m.style.color='var(--red)';return}
+  const u=getUsers();
+  if(u.find(x=>x.login===l)){m.textContent='Логин занят';m.style.color='var(--red)';return}
+  if(u.find(x=>x.email===e)){m.textContent='Email уже используется';m.style.color='var(--red)';return}
+  u.push({login:l,email:e,pwd:p,role:'player',regDate:nowISO(),mood:'😊',bio:'',notes:[],achievements:[],friends:[],blog:[],avatar:'',banner:'',theme:'dark'});
+  saveUsers(u);logAct(l,'Регистрация','email: '+e);
+  curUser={login:l,role:'player',email:e};saveState();closeAuthModal();m.textContent='';
+  updateUI();notif('Добро пожаловать, '+l+'!','gold');renderStats();
 }
 
 function loginUser(){
-  const id=$('loginId').value.trim();const pwd=$('loginPwd').value;const msg=$('loginMsg');
-  if(!id||!pwd){msg.textContent='Заполните поля';msg.style.color='var(--red)';return}
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  let user=users.find(u=>u.login===id)||users.find(u=>u.email===id);
-  if(!user||user.pwd!==pwd){msg.textContent='Неверные данные';msg.style.color='var(--red)';return}
-  if($('login2fa').checked){
-    const code=$('login2faCode').value.trim();
-    if(code!=='123456'&&code!==user['2fa_code']){msg.textContent='Неверный код 2FA';msg.style.color='var(--red)';return}
-  }
-  currentUser={login:user.login,role:user.role,email:user.email,"2fa":user["2fa"]};saveUser();closeAuthModal();
-  msg.textContent='';updateUI();notif('С возвращением, '+user.login+'!','gold');
+  const id=$('loginId').value.trim(),p=$('loginPwd').value,m=$('loginMsg');
+  if(!id||!p){m.textContent='Заполните поля';m.style.color='var(--red)';return}
+  const u=getUsers().find(x=>x.login===id||x.email===id);
+  if(!u||u.pwd!==p){m.textContent='Неверные данные';m.style.color='var(--red)';return}
+  curUser={login:u.login,role:u.role,email:u.email};saveState();closeAuthModal();m.textContent='';
+  updateUI();notif('С возвращением, '+u.login+'!','gold');renderStats();
 }
 
-function logoutUser(){currentUser=null;saveUser();$('forumView').style.display='block';$('profileView').style.display='none';$('hdrLogged').style.display='none';$('hdrLoginBtn').style.display='';$('hdrRegBtn').style.display='';$('userBar').style.display='none';notif('Вы вышли')}
-function saveUser(){if(currentUser)localStorage.setItem('ht_forum_user',JSON.stringify(currentUser));else localStorage.removeItem('ht_forum_user')}
+function logoutUser(){curUser=null;localStorage.removeItem('ht_curUser');updateUI();notif('Вы вышли')}
+function saveState(){if(curUser)localStorage.setItem('ht_curUser',JSON.stringify(curUser));else localStorage.removeItem('ht_curUser')}
 
-// ═══════════════ UI UPDATE ═══════════════
+// ═══════════ UI ═══════════
 function updateUI(){
-  if(currentUser){
-    const u=getUserData(currentUser.login);
-    $('hdrLogged').style.display='inline';$('hdrUserName').textContent=currentUser.login;
-    $('hdrLoginBtn').style.display='none';$('hdrRegBtn').style.display='none';
+  if(curUser){
+    const u=getUser(curUser.login);
+    $('hdrLogged').style.display='inline-flex';$('hdrGuest').style.display='none';
+    $('hdrUname').textContent=curUser.login;
+    const ha=$('hdrAva');if(u&&u.avatar){ha.style.backgroundImage='url('+u.avatar+')';ha.textContent=''}else{ha.style.backgroundImage='';ha.textContent=curUser.login.charAt(0).toUpperCase()}
     $('userBar').style.display='flex';
-    const ava=$('userAvaDiv');if(u&&u.avatar){ava.style.backgroundImage='url('+u.avatar+')';ava.innerHTML=''}else{ava.style.backgroundImage='';ava.innerHTML=currentUser.login.charAt(0).toUpperCase()}
-    $('userName').textContent=currentUser.login;
-    $('userMood').textContent=(u&&u.mood)||'';
-    $('userRole').className='role-text '+(currentUser.role||'player'); $('userRole').textContent=ROLES_RU[currentUser.role]||'Игрок';
-    const tag=$('userRoleTag');tag.textContent=ROLES_RU[currentUser.role]||'';tag.className='role-tag '+(ROLE_TAG[currentUser.role]||'player');
+    const ba=$('ubAva');if(u&&u.avatar){ba.style.backgroundImage='url('+u.avatar+')';ba.innerHTML=''}else{ba.style.backgroundImage='';ba.innerHTML=curUser.login.charAt(0).toUpperCase()}
+    $('ubName').textContent=curUser.login;
+    $('ubRoleLabel').textContent=ROLES_RU[curUser.role]||'Игрок';
+    $('ubRoleLabel').className='rl '+(curUser.role||'player');
+    $('ubRoleSub').textContent=ROLES_RU[curUser.role]||'Игрок';
   } else {
-    $('hdrLogged').style.display='none';$('hdrLoginBtn').style.display='';$('hdrRegBtn').style.display='';$('userBar').style.display='none';
+    $('hdrLogged').style.display='none';$('hdrGuest').style.display='';$('userBar').style.display='none';
   }
 }
 
-function getUserData(login){
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  return users.find(u=>u.login===login);
+function renderStats(){
+  const t=getTopics();$('stTopics').textContent=t.length;
+  $('stUsers').textContent=getUsers().length;
 }
 
-function saveUserData(login,data){
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  const idx=users.findIndex(u=>u.login===login);if(idx<0)return;
-  Object.assign(users[idx],data);localStorage.setItem('ht_users',JSON.stringify(users));
-}
-
-// ═══════════════ FORUM ─── SECTIONS & TOPICS ═══════════════
-function renderSections(){
-  const g=$('forumGrid');g.innerHTML='';
-  SECTIONS.forEach(s=>{
-    const topics=getTopics(s.id);
-    const el=document.createElement('div');el.className='forum-sect';el.onclick=()=>openSection(s.id);
-    el.innerHTML=`<div class="sect-ic">${s.ic}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="sect-stat"><b>${topics.length}</b> тем</div>`;
+// ═══════════ FORUM ═══════════
+function renderCats(){
+  const g=$('forumCategories');g.innerHTML='';
+  CATS.forEach(c=>{
+    const t=getTopics(c.id);
+    const el=document.createElement('div');el.className='forum-card';el.onclick=()=>openSection(c.id);
+    el.innerHTML=`<div class="fc-top"><div class="fc-icon">${c.ic}</div><div class="fc-info"><h3>${c.name}</h3><p>${c.desc}</p></div></div><div class="fc-stat"><span>Тем: <b>${t.length}</b></span></div>`;
     g.appendChild(el);
   });
 }
-function getTopics(sectionId){const all=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');return all.filter(t=>t.section===sectionId).sort((a,b)=>new Date(b.date)-new Date(a.date))}
+
 function openSection(id){
-  currentSection=id;const s=SECTIONS.find(x=>x.id===id);
-  $('topicSectionTitle').textContent=s.ic+' '+s.name;$('topicSection').style.display='block';renderTopics(id);
-  $('topicSection').scrollIntoView({behavior:'smooth'});
+  curSection=id;const c=CATS.find(x=>x.id===id);
+  $('tvTitle').textContent=c.ic+' '+c.name;$('topicView').style.display='block';$('forumCategories').style.display='none';
+  renderTopics(id);
 }
-function hideTopicSection(){$('topicSection').style.display='none';currentSection=null;$('topicFormArea').style.display='none'}
+function backToForum(){$('topicView').style.display='none';$('forumCategories').style.display='grid';$('topicFormArea').style.display='none';curSection=null}
+
 function renderTopics(sId){
-  const l=$('topicList');l.innerHTML='';const topics=getTopics(sId);
-  if(!topics.length){l.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">В разделе пока нет тем</div>';return}
-  topics.forEach(t=>{
-    const d=document.createElement('div');d.className='topic-item';
-    const p=t.prefix?'<span class="prefix">['+t.prefix+']</span> ':'';
-    d.innerHTML=`<div><div class="ti-title">${p}${esc(t.title)}</div><div class="ti-meta"><span class="auth">${esc(t.author)}</span><span>${new Date(t.date).toLocaleDateString('ru-RU')}</span><span>💬 ${t.replies||0}</span></div></div>`;l.appendChild(d);
+  const l=$('topicList');l.innerHTML='';const t=getTopics(sId);
+  if(!t.length){l.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">В разделе пока нет тем</div>';return}
+  t.forEach(tp=>{
+    const d=document.createElement('div');d.className='topic-row';
+    const p=tp.template?'<span class="prefix">['+tp.template+']</span> ':'';
+    d.innerHTML=`<div><div class="tr-title">${p}${esc(tp.title)}</div><div class="tr-meta"><span class="auth">${esc(tp.author)}</span> <span class="rl ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span> · ${new Date(tp.date).toLocaleDateString('ru-RU')}</div></div><div class="tr-right">💬 ${tp.replies||0}</div>`;
+    l.appendChild(d);
   });
 }
+
 function showTopicForm(){
-  if(!currentUser){notif('Войдите сначала','err');return}
-  if(!currentSection)return;
-  $('topicFormArea').style.display='block';const area=$('topicForm');
-  area.innerHTML=`
-    <div class="tc-row"><label>Заголовок</label><input id="tfTitle" placeholder="Заголовок темы"></div>
+  if(!curUser){notif('Войдите сначала','err');return}
+  if(!curSection)return;
+  $('topicFormArea').style.display='block';
+  const area=$('topicForm');
+  const s=CATS.find(x=>x.id===curSection);
+  let html='<div class="tc-row"><label>Тип темы</label><select id="tfTemplate" onchange="renderTemplateFields()"><option value="">Обычная тема</option>';
+  if(s.id==='discuss'){
+    html+=`<option value="complain">Жалоба на игрока</option>
+      <option value="adminComplain">Жалоба на администрацию</option>
+      <option value="support">Тех.поддержка</option>`;
+  }
+  if(s.id==='guides'){html+=`<option value="helper">Заявка на хелпера</option>`;}
+  html+=`</select></div><div id="tfExtra"></div><div class="tc-row"><label>Заголовок</label><input id="tfTitle" placeholder="Заголовок темы"></div>
     <div class="tc-row"><label>Содержание</label><textarea id="tfBody" placeholder="Ваше сообщение..."></textarea></div>
     <div style="display:flex;gap:8px"><button class="btn" onclick="submitTopic()">📌 Создать</button><button class="btn btn-ghost" onclick="hideTopicForm()">Отмена</button></div>
-    <div id="topicSubmitMsg" style="margin-top:8px;font-size:13px"></div>`;
-  $('topicFormArea').scrollIntoView({behavior:'smooth'});
+    <div id="tsMsg" style="margin-top:8px;font-size:13px"></div>`;
+  area.innerHTML=html;$('topicFormArea').scrollIntoView({behavior:'smooth'});
 }
+
+function renderTemplateFields(){
+  const t=$('tfTemplate').value;
+  const area=document.getElementById('tfExtra');
+  if(!t||!TEMPLATES[t]){area.innerHTML='';return}
+  const tmpl=TEMPLATES[t];
+  area.innerHTML='<div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:8px">📋 Шаблон: '+tmpl.title+'</div>'+
+    tmpl.fields.map(f=>'<div class="tc-row"><label>'+esc(f.label)+'</label>'+(f.type==='textarea'?'<textarea id="tfe_'+f.key+'" style="min-height:60px"></textarea>':'<input id="tfe_'+f.key+'">')+'</div>').join('');
+}
+
 function hideTopicForm(){$('topicFormArea').style.display='none'}
+
 function submitTopic(){
-  const title=($('tfTitle')?.value||'').trim();const body=($('tfBody')?.value||'').trim();const msg=$('topicSubmitMsg');
-  if(!title){msg.textContent='Нужен заголовок';msg.style.color='var(--red)';return}
-  if(!body){msg.textContent='Добавьте содержание';msg.style.color='var(--red)';return}
-  const topics=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
-  topics.push({id:'HTF-'+Date.now(),section:currentSection,title,body,author:currentUser.login,date:nowISO(),replies:0});
-  localStorage.setItem('ht_forum_topics',JSON.stringify(topics));
-  checkAchievement('first_post');msg.textContent='Тема создана!';msg.style.color='var(--ok)';
-  hideTopicForm();renderTopics(currentSection);notif('Тема создана','gold');
+  const title=($('tfTitle')?.value||'').trim();const body=($('tfBody')?.value||'').trim();const msg=$('tsMsg');
+  const tmpl=$('tfTemplate')?.value||'';
+  let fullTitle=title, fullBody=body;
+  if(tmpl&&TEMPLATES[tmpl]){
+    let extra='';TEMPLATES[tmpl].fields.forEach(f=>{const v=$(('tfe_'+f.key))?.value;if(v)extra+=f.label+': '+v+'\n'});
+    fullBody=extra+'\n'+body;
+    fullTitle=TEMPLATES[tmpl].title;
+    if(!fullTitle){msg.textContent='Заполните шаблон';msg.style.color='var(--red)';return}
+  }
+  if(!fullTitle||!fullBody){msg.textContent='Заполните заголовок и содержание';msg.style.color='var(--red)';return}
+  const topics=getTopics();const u=getUser(curUser.login);
+  topics.push({id:'HT-'+Date.now(),section:curSection,title:fullTitle,body:fullBody,author:curUser.login,authorRole:curUser.role,template:tmpl,date:nowISO(),replies:0});
+  saveTopics(topics);
+  const ach=u.achievements||[];if(!ach.includes('first_post')){ach.push('first_post');saveUserData(curUser.login,{achievements:ach});notif('🏆 Достижение: Первый пост!','gold')}
+  msg.textContent='Тема создана!';msg.style.color='var(--ok)';
+  hideTopicForm();renderTopics(curSection);notif('Тема создана','gold');renderStats();
 }
 
-// ═══════════════ TICKETS ═══════════════
-function showCreateTicket(){if(!currentUser){notif('Войдите','err');return}$('ticketFormArea').style.display='block';$('ticketFormArea').scrollIntoView({behavior:'smooth'})}
-function hideTicketForm(){$('ticketFormArea').style.display='none'}
+// ═══════════ TICKET ═══════════
+function createTicket(){if(!curUser){notif('Войдите','err');return}$('ticketForm').style.display='block';$('ticketForm').scrollIntoView({behavior:'smooth'})}
+function hideTicket(){$('ticketForm').style.display='none'}
 function submitTicket(){
-  const subj=$('ticketSubject').value.trim();const body=$('ticketBody').value.trim();
-  if(!subj||!body){$('ticketMsg').textContent='Заполните поля';$('ticketMsg').style.color='var(--red)';return}
-  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  tickets.push({id:'HTT-'+Date.now(),subject:subj,body,author:currentUser.login,date:nowISO(),status:'open',answer:''});
-  localStorage.setItem('ht_tickets',JSON.stringify(tickets));
-  $('ticketMsg').textContent='Тикет отправлен!';$('ticketMsg').style.color='var(--ok)';
-  $('ticketSubject').value='';$('ticketBody').value='';notif('Тикет отправлен','gold');
+  const s=$('tktSubj').value.trim(),b=$('tktBody').value.trim();
+  if(!s||!b){$('tktMsg').textContent='Заполните поля';$('tktMsg').style.color='var(--red)';return}
+  const tk=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
+  tk.push({id:'TKT-'+Date.now(),subject:s,body:b,author:curUser.login,date:nowISO(),status:'open',answer:''});
+  localStorage.setItem('ht_tickets',JSON.stringify(tk));
+  $('tktMsg').textContent='Тикет отправлен!';$('tktMsg').style.color='var(--ok)';
+  $('tktSubj').value='';$('tktBody').value='';notif('Тикет отправлен','gold');
 }
 
-// ═══════════════ PROFILE ═══════════════
-function showProfile(viewLogin){
-  const login=viewLogin||(currentUser?currentUser.login:'');
-  if(!login){notif('Войдите','err');return}
-  const u=getUserData(login);if(!u){notif('Пользователь не найден','err');return}
-  const isOwn=currentUser&&currentUser.login===login;
-  $('forumView').style.display='none';$('profileView').style.display='block';
+// ═══════════ PROFILE ═══════════
+function showProfile(login){
+  const l=login||(curUser?curUser.login:'');if(!l){notif('Войдите','err');return}
+  const u=getUser(l);if(!u){notif('Не найден','err');return}
+  const isOwn=curUser&&curUser.login===l;
+  $('forumView').style.display='none';$('ticketForm').style.display='none';$('profileView').style.display='block';
   const pv=$('profileView');
-  const mood=u.mood||'😊';
-  const avaStyle=u.avatar?'style="background-image:url('+u.avatar+');background-size:cover"':'';
-  const bannerStyle=u.banner?'style="background-image:url('+u.banner+');background-size:cover;background-position:center"':'';
-  const themeBg=u.theme==='light'?'#e8ecf4':u.theme==='neon'?'#0a0a20':'';
-  let friendsHtml='',friendsCount=0;
-  if(u.friends&&u.friends.length){
-    friendsCount=u.friends.length;
-    u.friends.forEach(f=>{
-      const fu=getUserData(f.login);
-      const trust=TRUST_LEVELS.find(t=>t.id===f.trust)||TRUST_LEVELS[0];
-      friendsHtml+=`<div class="friend-card"><div class="f-ava" style="${fu&&fu.avatar?'background-image:url('+fu.avatar+');background-size:cover':''}">${fu?fu.login.charAt(0).toUpperCase():'?'}</div>
-        <div class="f-info"><div class="fn">${esc(f.login)}<span class="fmood">${(fu&&fu.mood)||''}</span></div><div class="ft"><span class="trust-badge ${trust.badge}">${trust.name}</span></div></div>
-        ${isOwn?`<div class="f-actions"><select class="trust-select" onchange="changeTrust('${esc(f.login)}',this.value)" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:4px;font-size:12px">${TRUST_LEVELS.map(t=>'<option value="'+t.id+'"'+(f.trust===t.id?' selected':'')+'>'+t.name+'</option>').join('')}</select><button class="btn btn-sm btn-ghost" style="font-size:11px;padding:4px 8px" onclick="removeFriend(\''+esc(f.login)+'\')">✕</button></div>`:''}
-        </div>`;
-    });
-  }
-  let blogHtml='';
-  if(u.blog&&u.blog.length){
-    u.blog.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p=>{
-      if(!isOwn&&p.visibility==='private')return;
-      if(!isOwn&&p.visibility==='friends'&&!isFriend(currentUser?currentUser.login:'',login))return;
-      const visClass=p.visibility==='public'?'public':p.visibility==='friends'?'friends':'';
-      const visLabel=p.visibility==='public'?'Всем':p.visibility==='friends'?'Друзьям':'Приватно';
-      blogHtml+=`<div class="blog-post"><div class="bp-h"><h4>${esc(p.title)}</h4><span class="bp-vis ${visClass}">${visLabel}</span></div><div class="bp-body">${esc(p.body)}</div><div class="bp-meta">${new Date(p.date).toLocaleDateString('ru-RU')}</div></div>`;
-    });
-  }
-
-  let notesHtml='';
-  if(u.notes){
-    const now=Date.now();
-    u.notes.filter(n=>now-new Date(n.date)<86400000).forEach(n=>{
-      notesHtml+=`<div class="note-item">${esc(n.text)}<div class="ni-time">~${Math.floor((86400000-(now-new Date(n.date)))/3600000)}ч</div></div>`;
-    });
-  }
-
-  let achHtml='';
-  ACHIEVEMENTS.forEach(a=>{
-    const unlocked=u.achievements&&u.achievements.includes(a.id);
-    achHtml+=`<div class="ach ${unlocked?'unlocked':''}"><span class="ach-ic">${a.ic}</span><span class="ach-lbl">${a.name}</span></div>`;
-  });
-
+  const ava=u.avatar?'style="background-image:url('+u.avatar+')"':'';
+  const ban=u.banner?'style="background-image:url('+u.banner+')"':'';
+  let friends='',fc=0;
+  if(u.friends&&u.friends.length){fc=u.friends.length;u.friends.forEach(f=>{const fu=getUser(f.login);friends+=`<div class="friend-card"><div class="fava" style="${fu&&fu.avatar?'background-image:url('+fu.avatar+')':''}">${fu?fu.login.charAt(0).toUpperCase():'?'}</div><div class="finfo"><div class="fn">${esc(f.login)}</div><div class="ft">${f.trust||'Знакомый'}</div></div></div>`})}
+  let blog='';
+  if(u.blog){u.blog.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p=>{blog+=`<div class="blog-post"><div class="bp-h"><h4>${esc(p.title)}</h4><span class="vis ${p.visibility||'public'}">${p.visibility==='public'?'Всем':p.visibility==='friends'?'Друзьям':'Приватно'}</span></div><div class="bp-body">${esc(p.body)}</div><div class="bp-meta">${new Date(p.date).toLocaleDateString('ru-RU')}</div></div>`})}
+  let notes='';
+  if(u.notes){const n=Date.now();u.notes.filter(x=>n-new Date(x.date)<86400000).forEach(x=>{notes+=`<div class="note-item">${esc(x.text)}<div class="ni">~${Math.floor((86400000-(n-new Date(x.date)))/3600000)}ч</div></div>`})}
+  let ach='';
+  ACHIEVEMENTS.forEach(a=>{const unlocked=u.achievements&&u.achievements.includes(a.id);ach+=`<div class="ach ${unlocked?'unlocked':''}"><span class="ach-ic">${a.ic}</span><span class="ach-lbl">${a.name}</span></div>`});
+  const myTopics=getTopics().filter(t=>t.author===l).slice(0,5);
   pv.innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-      <h2 style="font-size:24px;font-weight:900;color:var(--title)">${isOwn?'Мой профиль':'Профиль '+esc(login)}</h2>
+      <h2 style="font-size:22px;font-weight:900;color:var(--title)">${isOwn?'Мой профиль':'Профиль '+esc(l)}</h2>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        ${!isOwn?`<button class="btn btn-sm" onclick="sayHello('${esc(login)}')">👋 Поздороваться</button>
-        <button class="btn btn-sm btn-blue" onclick="offerHelp('${esc(login)}')">🆘 Предложить помощь</button>
-        ${isFriend(currentUser?currentUser.login:'',login)?'':'<button class="btn btn-sm btn-ghost" onclick="sendFriendRequest(\''+esc(login)+'\')">➕ В друзья</button>'}`:'<button class="btn btn-sm btn-ghost" onclick="closeProfile()">← Назад</button>'}
+        ${isOwn?'<button class="btn btn-sm btn-ghost" onclick="closeProfile()">← Назад</button>':
+          '<button class="btn btn-sm" onclick="sayHello(\''+esc(l)+'\')">👋</button>'+
+          (isFriend(curUser?curUser.login:'',l)?'':'<button class="btn btn-sm btn-ghost" onclick="friendReq(\''+esc(l)+'\')">+ Друзья</button>')}
       </div>
     </div>
-    <div class="profile-top">
-      <div class="profile-banner"${bannerStyle}>
-        <div class="p-banner-overlay">
-          <div style="display:flex;align-items:flex-end">
-            <div class="p-ava"${avaStyle}>${u.avatar?'':login.charAt(0).toUpperCase()}</div>
-            <div class="p-info"><div class="pn">${esc(login)} <span class="pmood">${mood}</span></div><div class="pr role-text ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="profile-banner"${ban}><div class="overlay"><div class="row"><div class="pava"${ava}>${u.avatar?'':l.charAt(0).toUpperCase()}</div><div class="pinfo"><div class="pn">${esc(l)} ${u.mood||''}</div><div class="pr rl ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</div></div></div></div></div>
     <div class="profile-body">
       <div class="profile-side">
-        <div class="profile-card">
-          <h4>📊 Статистика</h4>
-          <div class="stat-line">Роль<b class="role-text ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</b></div>
-          <div class="stat-line">Регистрация<b>${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</b></div>
-          <div class="stat-line">Часы на сервере<b>${u.playHours||0}</b></div>
-          <div class="stat-line">Друзей<b>${friendsCount}</b></div>
-        </div>
-        <div class="profile-card" id="moodCard">
-          <h4>😊 Настроение</h4>
-          ${isOwn?`<div class="mood-picker">${MOODS.map(m=>'<button class="mood-btn'+(u.mood===m?' selected':'')+'" onclick="setMood(\''+m+'\')">'+m+'</button>').join('')}</div>`:`<div style="font-size:48px;text-align:center">${mood}</div>`}
-        </div>
-        <div class="profile-card">
-          <h4>💭 Заметки (24ч)</h4>
-          ${notesHtml||'<div style="color:var(--muted);font-size:12px">Нет активных заметок</div>'}
-          ${isOwn?`<div style="display:flex;gap:6px;margin-top:8px"><input id="noteInput" placeholder="Что на душе?" style="flex:1;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px 10px;font-size:13px"><button class="btn btn-sm" onclick="addNote()">+</button></div>`:''}
-        </div>
-        <div class="profile-card">
-          <h4>🏆 Достижения</h4>
-          <div class="ach-grid">${achHtml}</div>
-        </div>
-        <div class="profile-card">
-          <h4>👥 Друзья</h4>
-          ${friendsHtml||'<div style="color:var(--muted);font-size:12px">Нет друзей</div>'}
-          <div id="friendRequests" style="margin-top:8px"></div>
-        </div>
-        ${isOwn?`
-        <div class="profile-card">
-          <h4>⚙️ Настройки профиля</h4>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <label style="font-size:12px;color:var(--body50)">Аватар</label>
-            <div class="upload-area">
-              <label class="upload-btn">📷 Загрузить<input type="file" accept="image/*" onchange="uploadAvatar(this)"></label>
-              <div class="img-preview" id="avatarPreview" style="${u.avatar?'background-image:url('+u.avatar+');background-size:cover':''}"></div>
-              ${u.avatar?'<button class="btn btn-sm btn-ghost" onclick="removeAvatar()">✕</button>':''}
-            </div>
-            <label style="font-size:12px;color:var(--body50);margin-top:4px">Баннер</label>
-            <div class="upload-area">
-              <label class="upload-btn">🖼️ Загрузить<input type="file" accept="image/*" onchange="uploadBanner(this)"></label>
-              <div class="img-preview banner" id="bannerPreview" style="${u.banner?'background-image:url('+u.banner+');background-size:cover':''}"></div>
-              ${u.banner?'<button class="btn btn-sm btn-ghost" onclick="removeBanner()">✕</button>':''}
-            </div>
-            <label style="font-size:12px;color:var(--body50);margin-top:4px">Тема профиля</label>
-            <select onchange="setTheme(this.value)" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px">
-              <option value="dark" ${u.theme==='dark'?'selected':''}>Тёмная</option>
-              <option value="light" ${u.theme==='light'?'selected':''}>Светлая</option>
-              <option value="neon" ${u.theme==='neon'?'selected':''}>Неоновая</option>
-            </select>
-            <label style="font-size:12px;color:var(--body50);margin-top:4px">О себе</label>
-            <textarea id="bioInput" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px;min-height:50px">${esc(u.bio||'')}</textarea>
-            <button class="btn btn-sm" onclick="saveBio()">Сохранить</button>
-          </div>
-        </div>
-        <div class="profile-card">
-          <h4>📝 Личный блог</h4>
-          <div class="tc-row"><label>Заголовок</label><input id="blogTitle" placeholder="Заголовок поста"></div>
-          <div class="tc-row"><label>Содержание</label><textarea id="blogBody" placeholder="Текст поста..." style="min-height:60px"></textarea></div>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <select id="blogVis" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px">
-              <option value="public">Видно всем</option>
-              <option value="friends">Только друзьям</option>
-              <option value="private">Только мне</option>
-            </select>
-            <button class="btn btn-sm" onclick="publishBlog()">✍️ Опубликовать</button>
-          </div>
-          <div id="blogMsg" style="font-size:12px;margin-top:6px"></div>
-        </div>
-        `:''}
+        <div class="pcard"><h4>📊 Статистика</h4><div class="pline">Роль<b class="rl ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</b></div><div class="pline">Регистрация<b>${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</b></div><div class="pline">Друзей<b>${fc}</b></div></div>
+        <div class="pcard"><h4>😊 Настроение</h4>${isOwn?`<div class="mood-picker">${MOODS.map(m=>'<button class="mood-btn'+(u.mood===m?' selected':'')+'" onclick="setMood(\''+m+'\')">'+m+'</button>').join('')}</div>`:`<div style="font-size:40px;text-align:center">${u.mood||'😊'}</div>`}</div>
+        <div class="pcard"><h4>💭 Заметки (24ч)</h4>${notes||'<div style="color:var(--muted);font-size:12px">Нет заметок</div>'}${isOwn?`<div style="display:flex;gap:6px;margin-top:8px"><input id="ni" placeholder="Что на душе?" style="flex:1;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:8px;font-size:13px"><button class="btn btn-sm" onclick="addNote()">+</button></div>`:''}</div>
+        <div class="pcard"><h4>🏆 Достижения</h4><div class="ach-grid">${ach}</div></div>
+        <div class="pcard"><h4>👥 Друзья</h4>${friends||'<div style="color:var(--muted);font-size:12px">Нет друзей</div>'}</div>
+        ${isOwn?`<div class="pcard"><h4>⚙️ Настройки</h4><div class="tc-row"><label>Аватар</label><input type="file" accept="image/*" onchange="upAvatar(this)"></div><div class="tc-row"><label>Баннер</label><input type="file" accept="image/*" onchange="upBanner(this)"></div><div class="tc-row"><label>О себе</label><textarea id="bio" style="min-height:50px">${esc(u.bio||'')}</textarea></div><button class="btn btn-sm" onclick="saveBio()">Сохранить</button></div>
+        <div class="pcard"><h4>📝 Блог</h4><div class="tc-row"><label>Заголовок</label><input id="bt"></div><div class="tc-row"><label>Текст</label><textarea id="bb" style="min-height:50px"></textarea></div><div class="tc-row"><select id="bv" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px"><option value="public">Всем</option><option value="friends">Друзьям</option><option value="private">Только мне</option></select></div><button class="btn btn-sm" onclick="pubBlog()">✍️ Опубликовать</button></div>`:''}
       </div>
       <div class="profile-main">
-        ${u.bio?`<div class="profile-card"><h4>📋 О себе</h4><p style="font-size:13px;color:var(--body50);line-height:1.6">${esc(u.bio)}</p></div>`:''}
-        <div class="profile-card"><h4>📰 Последние записи блога</h4>${blogHtml||'<div style="color:var(--muted);font-size:12px">Нет записей</div>'}</div>
-        <div class="profile-card"><h4>📌 Последние темы</h4>${renderUserTopics(login)||'<div style="color:var(--muted);font-size:12px">Нет тем</div>'}</div>
+        ${u.bio?`<div class="pcard"><h4>📋 О себе</h4><p style="font-size:13px;color:var(--body50);line-height:1.6">${esc(u.bio)}</p></div>`:''}
+        <div class="pcard"><h4>📰 Блог</h4>${blog||'<div style="color:var(--muted);font-size:12px">Нет записей</div>'}</div>
+        <div class="pcard"><h4>📌 Темы</h4>${myTopics.length?myTopics.map(t=>`<div class="topic-row" style="margin-bottom:4px;border:1px solid var(--border);border-radius:8px;padding:10px"><div><div class="tr-title">${esc(t.title)}</div><div class="tr-meta">${new Date(t.date).toLocaleDateString('ru-RU')}</div></div></div>`).join(''):'<div style="color:var(--muted);font-size:12px">Нет тем</div>'}</div>
       </div>
     </div>`;
-  renderFriendRequests();
-}
-
-function renderUserTopics(login){
-  const all=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
-  const topics=all.filter(t=>t.author===login).slice(0,5);
-  if(!topics.length)return '';
-  return topics.map(t=>`<div class="topic-item" style="margin-bottom:6px"><div><div class="ti-title">${esc(t.title)}</div><div class="ti-meta">${new Date(t.date).toLocaleDateString('ru-RU')} · 💬 ${t.replies||0}</div></div></div>`).join('');
 }
 
 function closeProfile(){$('forumView').style.display='block';$('profileView').style.display='none'}
+function setMood(m){if(!curUser)return;saveUserData(curUser.login,{mood});$('ubName').textContent=curUser.login;showProfile(curUser.login)}
+function addNote(){if(!curUser)return;const t=$('ni').value.trim();if(!t)return;const u=getUser(curUser.login);const n=u.notes||[];n.push({text:t,date:nowISO()});saveUserData(curUser.login,{notes:n});$('ni').value='';showProfile(curUser.login)}
+function saveBio(){if(!curUser)return;saveUserData(curUser.login,{bio:$('bio').value});notif('Сохранено','gold')}
+function upAvatar(inp){if(!curUser||!inp.files[0])return;const r=new FileReader();r.onload=function(e){saveUserData(curUser.login,{avatar:e.target.result});showProfile(curUser.login);notif('Аватар обновлён','gold')};r.readAsDataURL(inp.files[0])}
+function upBanner(inp){if(!curUser||!inp.files[0])return;const r=new FileReader();r.onload=function(e){saveUserData(curUser.login,{banner:e.target.result});showProfile(curUser.login);notif('Баннер обновлён','gold')};r.readAsDataURL(inp.files[0])}
+function pubBlog(){if(!curUser)return;const t=$('bt').value.trim(),b=$('bb').value.trim();if(!t||!b){notif('Заполните поля','err');return}const u=getUser(curUser.login);const bl=u.blog||[];bl.push({title:t,body:b,visibility:$('bv').value,date:nowISO()});saveUserData(curUser.login,{blog:bl});$('bt').value='';$('bb').value='';showProfile(curUser.login);notif('Пост опубликован','gold')}
+function sayHello(l){if(!curUser){notif('Войдите','err');return}notif('👋 Привет отправлен '+l,'gold')}
+function friendReq(l){if(!curUser){notif('Войдите','err');return}const u=getUser(curUser.login);const f=u.friends||[];if(f.find(x=>x.login===l)){notif('Уже в друзьях');return}const r=JSON.parse(localStorage.getItem('ht_fr')||'[]');if(r.find(x=>x.from===curUser.login&&x.to===l)){notif('Запрос уже отправлен');return}r.push({from:curUser.login,to:l,date:nowISO()});localStorage.setItem('ht_fr',JSON.stringify(r));notif('Запрос отправлен','gold')}
+function isFriend(a,b){const u=getUser(a);return u&&u.friends&&u.friends.find(f=>f.login===b)}
 
-// ═══════════════ PROFILE ACTIONS ═══════════════
-function setMood(m){
-  if(!currentUser)return;
-  saveUserData(currentUser.login,{mood});
-  const u=getUserData(currentUser.login);
-  $('userMood').textContent=m;
-  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('selected',b.textContent===m));
-}
-
-function addNote(){
-  if(!currentUser)return;
-  const text=$('noteInput').value.trim();if(!text)return;
-  const u=getUserData(currentUser.login);
-  const notes=u.notes||[];
-  notes.push({text,date:nowISO()});
-  saveUserData(currentUser.login,{notes});
-  $('noteInput').value='';showProfile(currentUser.login);
-}
-
-function saveBio(){
-  if(!currentUser)return;
-  const bio=$('bioInput').value;
-  saveUserData(currentUser.login,{bio});
-  notif('Сохранено','gold');
-}
-
-// Upload Avatar/Banner
-function uploadAvatar(inp){
-  if(!currentUser||!inp.files[0])return;
-  const r=new FileReader();
-  r.onload=function(e){
-    saveUserData(currentUser.login,{avatar:e.target.result});
-    const u=getUserData(currentUser.login);
-    $('avatarPreview').style.backgroundImage='url('+u.avatar+')';
-    showProfile(currentUser.login);
-    notif('Аватар обновлён','gold');
-  };
-  r.readAsDataURL(inp.files[0]);
-}
-function removeAvatar(){if(!currentUser)return;saveUserData(currentUser.login,{avatar:''});showProfile(currentUser.login)}
-function uploadBanner(inp){
-  if(!currentUser||!inp.files[0])return;
-  const r=new FileReader();
-  r.onload=function(e){
-    saveUserData(currentUser.login,{banner:e.target.result});
-    showProfile(currentUser.login);
-    notif('Баннер обновлён','gold');
-  };
-  r.readAsDataURL(inp.files[0]);
-}
-function removeBanner(){if(!currentUser)return;saveUserData(currentUser.login,{banner:''});showProfile(currentUser.login)}
-
-function setTheme(t){if(!currentUser)return;saveUserData(currentUser.login,{theme:t});notif('Тема сохранена','gold')}
-
-// Blog
-function publishBlog(){
-  if(!currentUser)return;
-  const title=$('blogTitle').value.trim();const body=$('blogBody').value.trim();
-  if(!title||!body){$('blogMsg').textContent='Заполните все поля';$('blogMsg').style.color='var(--red)';return}
-  const u=getUserData(currentUser.login);
-  const blog=u.blog||[];
-  blog.push({title,body,visibility:$('blogVis').value,date:nowISO()});
-  saveUserData(currentUser.login,{blog});
-  $('blogTitle').value='';$('blogBody').value='';
-  $('blogMsg').textContent='Пост опубликован!';$('blogMsg').style.color='var(--ok)';
-  checkAchievement('blogger');
-  showProfile(currentUser.login);notif('Пост опубликован','gold');
-}
-
-// ═══════════════ ACHIEVEMENTS ═══════════════
-function checkAchievement(id){
-  if(!currentUser)return;
-  const u=getUserData(currentUser.login);
-  const ach=u.achievements||[];
-  if(ach.includes(id))return;
-  ach.push(id);saveUserData(currentUser.login,{achievements:ach});
-  const a=ACHIEVEMENTS.find(x=>x.id===id);
-  if(a)notif('🏆 Достижение получено: '+a.name+'!','gold');
-}
-
-// ═══════════════ FRIENDS ═══════════════
-function sendFriendRequest(login){
-  if(!currentUser){notif('Войдите','err');return}
-  const u=getUserData(currentUser.login);
-  const friends=u.friends||[];
-  if(friends.find(f=>f.login===login)){notif('Уже в друзьях');return}
-  const requests=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
-  if(requests.find(r=>r.from===currentUser.login&&r.to===login)){notif('Запрос уже отправлен');return}
-  requests.push({from:currentUser.login,to:login,date:nowISO()});
-  localStorage.setItem('ht_friend_requests',JSON.stringify(requests));
-  notif('Запрос в друзья отправлен','gold');
-}
-
-function renderFriendRequests(){
-  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
-  const incoming=reqs.filter(r=>r.to===currentUser.login);
-  const el=$('friendRequests');el.innerHTML='';
-  if(!incoming.length)return;
-  el.innerHTML='<div style="font-size:12px;color:var(--gold);margin-bottom:6px">📨 Запросы:</div>';
-  incoming.forEach(r=>{
-    el.innerHTML+=`<div class="friend-card" style="padding:6px 10px;margin:4px 0"><div class="f-info"><div class="fn">${esc(r.from)}</div></div>
-      <div class="f-actions"><button class="btn btn-sm" style="padding:4px 10px;font-size:11px" onclick="acceptRequest('${esc(r.from)}')">✔</button>
-      <button class="btn btn-sm btn-ghost" style="padding:4px 8px;font-size:11px" onclick="declineRequest('${esc(r.from)}')">✕</button></div></div>`;
-  });
-}
-
-function acceptRequest(from){
-  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
-  localStorage.setItem('ht_friend_requests',JSON.stringify(reqs.filter(r=>!(r.from===from&&r.to===currentUser.login))));
-  const u=getUserData(currentUser.login);
-  const friends=u.friends||[];
-  if(!friends.find(f=>f.login===from))friends.push({login:from,trust:'acquaintance'});
-  saveUserData(currentUser.login,{friends});
-  const f2=getUserData(from);
-  const f2friends=f2.friends||[];
-  if(!f2friends.find(f=>f.login===currentUser.login))f2friends.push({login:currentUser.login,trust:'acquaintance'});
-  saveUserData(from,{friends:f2friends});
-  checkAchievement('social');
-  notif(from+' теперь в друзьях!','gold');
-  showProfile(currentUser.login);
-}
-
-function declineRequest(from){
-  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
-  localStorage.setItem('ht_friend_requests',JSON.stringify(reqs.filter(r=>!(r.from===from&&r.to===currentUser.login))));
-  renderFriendRequests();
-}
-
-function changeTrust(login,level){
-  if(!currentUser)return;
-  const u=getUserData(currentUser.login);
-  const friends=u.friends||[];
-  const f=friends.find(x=>x.login===login);if(!f)return;
-  f.trust=level;saveUserData(currentUser.login,{friends});
-  showProfile(currentUser.login);notif('Уровень доверия изменён','gold');
-}
-
-function removeFriend(login){
-  if(!currentUser)return;
-  const u=getUserData(currentUser.login);
-  const friends=(u.friends||[]).filter(f=>f.login!==login);
-  saveUserData(currentUser.login,{friends});
-  // Also remove from their list
-  const f2=getUserData(login);
-  if(f2){
-    const f2friends=(f2.friends||[]).filter(f=>f.login!==currentUser.login);
-    saveUserData(login,{friends:f2friends});
-  }
-  showProfile(currentUser.login);notif(login+' удалён из друзей');
-}
-
-function isFriend(login1,login2){
-  const u=getUserData(login1);
-  return u&&u.friends&&u.friends.find(f=>f.login===login2);
-}
-
-// ═══════════════ QUICK ACTIONS ═══════════════
-function sayHello(login){
-  if(!currentUser){notif('Войдите','err');return}
-  const notices=JSON.parse(localStorage.getItem('ht_hellos')||'[]');
-  notices.push({from:currentUser.login,to:login,date:nowISO()});
-  localStorage.setItem('ht_hellos',JSON.stringify(notices));
-  notif('👋 Приветствие отправлено '+login,'gold');
-}
-
-function offerHelp(login){
-  if(!currentUser){notif('Войдите','err');return}
-  saveUserData(currentUser.login,{helpOffer:true});
-  notif('🆘 Маркер помощи опубликован. '+login+' увидит его в профиле.','gold');
-}
-
-// ═══════════════ CHAT ═══════════════
-const chatBody=$('chatBody'),chatIn=$('chatIn');let chatOpen=false;
-function toggleChat(){
-  chatOpen=!chatOpen;$('chatWin').classList.toggle('open',chatOpen);
-  if(chatOpen&&!chatBody.children.length)addMsg('bot','Привет! 👋 Я помощник форума.\n\n• 📝 Регистрация/Вход\n• 👑 Роли и доступ\n• 💬 Создание тем\n• 👤 Профили и друзья\n• ✉️ Тикеты');
-  setTimeout(()=>chatIn.focus(),50);
-}
-function addMsg(r,h){const d=document.createElement('div');d.className='msg '+r;d.innerHTML=h;chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight}
-function typing(cb){const d=document.createElement('div');d.className='msg bot typing';d.innerHTML='<span></span><span></span><span></span>';chatBody.appendChild(d);setTimeout(()=>{d.remove();cb()},700+Math.random()*500)}
-function sendChat(){const t=chatIn.value.trim();if(!t)return;chatIn.value='';addMsg('user',esc(t));typing(()=>answer(t.toLowerCase()))}
-chatIn.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
-function answer(q){
-  if(q.includes('регистр')||q.includes('создать акк'))addMsg('bot','📝 В окне регистрации: логин (3+ символов), email, пароль (6+), подтверждение, согласие с условиями. Можно включить 2FA.'+quickBtn('📝 Регистрация','openAuthModal(\'register\')'))
-  else if(q.includes('рол')||q.includes('доступ'))addMsg('bot','👑 Роли: Гость (чтение), Игрок (темы), Проверенный (торговля), Хелпер, Модератор, Админ.')
-  else if(q.includes('профиль')||q.includes('аватар')||q.includes('баннер'))addMsg('bot','👤 В профиле можно: загрузить аватар и баннер (любые картинки), поставить настроение, писать заметки (24ч), настраивать тему, вести блог, получать достижения.')
-  else if(q.includes('друз')||q.includes('запрос'))addMsg('bot','👥 Добавляй друзей через их профиль. Уровни доверия: Знакомый → Приятель → Друг → Близкий. Каждый уровень открывает доступ к личным записям.')
-  else if(q.includes('тикет')||q.includes('проблем'))addMsg('bot','✉️ Создай тикет — опиши проблему. Администрация ответит.')
-  else if(q.includes('блог'))addMsg('bot','✍️ Публикуй посты в блог. Настрой видимость: всем, только друзьям или только себе.')
-  else addMsg('bot','Не понял вопрос. 🤔 Могу помочь с регистрацией, входом, профилем, друзьями.'+quickBtn('✅ Да, свяжи с оператором','window.open(\'https://t.me/hoolstime\')'))
-}
-function quickBtn(l,a){return '<button class="quick" onclick="'+a+'">'+l+'</button>'}
-
-// ═══════════════ INIT ═══════════════
-function loadState(){
-  const u=localStorage.getItem('ht_forum_user');
-  if(u)currentUser=JSON.parse(u);
-  const s=localStorage.getItem('ht_forum_section');
-  if(s)currentSection=s;
-}
-loadState();renderSections();updateUI();
-if(currentSection)openSection(currentSection);
+// ═══════════ INIT ═══════════
+const saved=localStorage.getItem('ht_curUser');
+if(saved)curUser=JSON.parse(saved);
+const sec=localStorage.getItem('ht_section');
+if(sec)curSection=sec;
+renderCats();updateUI();renderStats();
+if(curSection){openSection(curSection)}
 </script>
 </body>
 </html>
