@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -80,12 +80,18 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);b
 .user-bar .info .role{font-size:11px;color:var(--body50)}
 .user-bar .info .mood{font-size:16px;margin-left:6px}
 .role-tag{font-size:10px;padding:2px 10px;border-radius:10px;font-weight:800;text-transform:uppercase}
-.role-tag.guest{background:rgba(100,100,124,.15);color:var(--muted)}
-.role-tag.player{background:rgba(59,224,139,.12);color:var(--ok)}
-.role-tag.verified{background:rgba(34,211,238,.12);color:var(--blue)}
-.role-tag.helper{background:rgba(248,197,16,.12);color:var(--gold)}
-.role-tag.mod{background:rgba(168,85,247,.12);color:#a855f7}
-.role-tag.admin{background:rgba(255,59,92,.18);color:var(--red)}
+.role-tag.guest{background:rgba(30,30,30,.15);color:#000;font-weight:900}
+.role-tag.player{background:rgba(148,163,184,.15);color:#94a3b8;font-weight:900}
+.role-tag.verified{background:rgba(59,224,139,.15);color:var(--ok);font-weight:900}
+.role-tag.helper{background:rgba(248,197,16,.15);color:var(--gold);font-weight:900}
+.role-tag.mod{background:rgba(34,211,238,.15);color:var(--blue);font-weight:900}
+.role-tag.admin{background:rgba(255,59,92,.18);color:var(--red);font-weight:900}
+.role-text.guest{color:#000;font-weight:900}
+.role-text.player{color:#94a3b8;font-weight:900}
+.role-text.verified{color:var(--ok);font-weight:900}
+.role-text.helper{color:var(--gold);font-weight:900}
+.role-text.mod{color:var(--blue);font-weight:900}
+.role-text.admin{color:var(--red);font-weight:900}
 
 /* ─── Forum sections ─── */
 .forum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:28px}
@@ -433,7 +439,7 @@ function updateUI(){
     const ava=$('userAvaDiv');if(u&&u.avatar){ava.style.backgroundImage='url('+u.avatar+')';ava.innerHTML=''}else{ava.style.backgroundImage='';ava.innerHTML=currentUser.login.charAt(0).toUpperCase()}
     $('userName').textContent=currentUser.login;
     $('userMood').textContent=(u&&u.mood)||'';
-    $('userRole').textContent=ROLES_RU[currentUser.role]||'Игрок';
+    $('userRole').className='role-text '+(currentUser.role||'player'); $('userRole').textContent=ROLES_RU[currentUser.role]||'Игрок';
     const tag=$('userRoleTag');tag.textContent=ROLES_RU[currentUser.role]||'';tag.className='role-tag '+(ROLE_TAG[currentUser.role]||'player');
   } else {
     $('hdrLogged').style.display='none';$('hdrLoginBtn').style.display='';$('hdrRegBtn').style.display='';$('userBar').style.display='none';
@@ -576,7 +582,7 @@ function showProfile(viewLogin){
         <div class="p-banner-overlay">
           <div style="display:flex;align-items:flex-end">
             <div class="p-ava"${avaStyle}>${u.avatar?'':login.charAt(0).toUpperCase()}</div>
-            <div class="p-info"><div class="pn">${esc(login)} <span class="pmood">${mood}</span></div><div class="pr">${ROLES_RU[u.role]||'Игрок'}</div></div>
+            <div class="p-info"><div class="pn">${esc(login)} <span class="pmood">${mood}</span></div><div class="pr role-text ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</div></div>
           </div>
         </div>
       </div>
@@ -585,7 +591,7 @@ function showProfile(viewLogin){
       <div class="profile-side">
         <div class="profile-card">
           <h4>📊 Статистика</h4>
-          <div class="stat-line">Роль<b>${ROLES_RU[u.role]||'Игрок'}</b></div>
+          <div class="stat-line">Роль<b class="role-text ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</b></div>
           <div class="stat-line">Регистрация<b>${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</b></div>
           <div class="stat-line">Часы на сервере<b>${u.playHours||0}</b></div>
           <div class="stat-line">Друзей<b>${friendsCount}</b></div>
