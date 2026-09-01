@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HoolsTime — магазин привилегий анархии</title>
+<meta name="description" content="HoolsTime.ru — анархия без границ. Донат-магазин: привилегии, Лёд, ключи от кейсов, разбан. Оплата картой, СБП.">
+<style>
+:root{
+  --bg:#0d0d14; --bg2:#12121c; --bg3:#171726; --card:#151524;
+  --border:#2a2a3a; --border2:#3b3b50;
+  --title:#ffffff; --body:#b8b8cc; --body50:#8a8aa0; --muted:#64647c;
+  --gold:#f8c510; --gold2:#ffb400; --primary:#ffb400;
+  --red:#ff3b5c; --red2:#df2b4a; --blue:#22d3ee; --blue2:#0ea5e9;
+  --green:#3be08b; --ok:#3be08b;
+  --radius:14px; --header-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--body);
+  font-family:"Segoe UI",system-ui,-apple-system,"Futura",Gilroy,sans-serif;
+  min-height:100vh; overflow-x:hidden;
+  background-image:
+    radial-gradient(900px 500px at 12% -5%,rgba(255,59,92,.10),transparent 65%),
+    radial-gradient(900px 500px at 88% 0%,rgba(34,211,238,.10),transparent 65%),
+    radial-gradient(1200px 800px at 50% 50%,rgba(255,180,0,.04),transparent 70%);
+  background-attachment:fixed;
+}
+::selection{background:var(--gold);color:#1a1a1a}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit}
+
+/* ───────── Header ───────── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--header-h); background:rgba(13,13,20,.88); backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 20px;
+}
+.hdr-left{display:flex;flex-direction:column;align-items:center;line-height:1;gap:4px}
+.hdr-left .logo-mini{font-size:22px;font-weight:900;letter-spacing:-.5px}
+.hdr-left .logo-mini .h1{background:linear-gradient(180deg,#ff6a4d,#ff2d55 60%,#b30f34);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.hdr-left .logo-mini .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee 55%,#0b6bb8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.hdr-left .hdr-ip{font-family:Consolas,monospace;font-size:11px;color:var(--blue);letter-spacing:.5px}
+.hdr-center{display:flex;align-items:center;gap:8px;justify-content:center}
+.hdr-ip-btn{font-family:Consolas,monospace;font-size:14px;color:var(--gold);background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);padding:8px 14px;border-radius:10px;cursor:pointer;transition:.2s;font-weight:600}
+.hdr-ip-btn:hover{background:rgba(255,180,0,.16)}
+.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;white-space:nowrap}
+.hdr-right a{font-size:13px;font-weight:500;color:var(--body50);transition:color .2s}
+.hdr-right a:hover{color:var(--gold)}
+.hdr-right .btn-shop{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414!important;font-weight:800;padding:8px 16px;border-radius:10px}
+@media(max-width:820px){
+  .hdr-right .hide-m{display:none}
+  .hdr-center{gap:4px}
+}
+
+/* ───────── Layout ───────── */
+.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 28px) 24px 80px}
+section{margin-bottom:56px}
+.sec-head{text-align:center;margin-bottom:28px}
+.sec-head h2{font-size:30px;font-weight:900;color:var(--title);letter-spacing:-.5px}
+.sec-head .grad{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-head p{color:var(--body50);font-size:14px;margin-top:6px}
+.grid{display:grid;gap:16px}
+.grid-priv{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.grid-item{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.grid-cap{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+
+/* ───────── Hero anarchy ───────── */
+.hero{
+  text-align:center;padding:70px 0 30px;
+  display:flex;flex-direction:column;align-items:center;gap:22px;
+}
+.logo-big{
+  user-select:none;line-height:.9;letter-spacing:-2px;
+}
+.logo-big .row1{display:block;font-size:clamp(58px,13vw,150px);font-weight:900}
+.logo-big .row2{display:block;font-size:clamp(40px,9vw,104px);font-weight:900;margin-top:4px}
+.hl{background:linear-gradient(180deg,#ff8a5c 0%,#ff2d55 45%,#ff2d55 55%,#b30f34 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 28px rgba(255,45,85,.35))}
+.tl{background:linear-gradient(180deg,#aef0ff 0%,#22d3ee 45%,#22d3ee 55%,#0b6bb8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 28px rgba(34,211,238,.35))}
+.slogan{font-size:clamp(15px,2.4vw,22px);color:var(--body);font-weight:600;letter-spacing:1px}
+.slogan .hot{color:var(--red)} .slogan .cold{color:var(--blue)}
+.hero-ip{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tag{font-size:13px;color:var(--body);background:rgba(255,255,255,.04);border:1px solid var(--border);padding:8px 14px;border-radius:20px;font-weight:600}
+.tag b{color:var(--gold)}
+
+/* ───────── Cards ───────── */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 10px 30px rgba(248,197,16,.08)}
+.card .thumb{
+  height:110px;display:flex;align-items:center;justify-content:center;
+  font-size:46px;font-weight:900;position:relative;overflow:hidden;
+}
+.card .thumb .name-in{font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);letter-spacing:.5px}
+.card .badge{
+  position:absolute;top:10px;right:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#141414;font-size:10px;font-weight:900;padding:4px 10px;border-radius:20px;letter-spacing:.5px;
+}
+.card .badge.hot{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff}
+.card .body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:18px;font-weight:900;color:var(--title);letter-spacing:.3px}
+.card .price{font-size:22px;font-weight:900;color:var(--gold)}
+.card .price small{font-size:12px;color:var(--body50);font-weight:500}
+.card .desc{font-size:13px;color:var(--body50);line-height:1.55}
+.card .more{font-size:12px;color:var(--blue);cursor:pointer}
+.card .benefits{display:none;font-size:12px;color:var(--body50);line-height:1.7;border-top:1px solid var(--border);padding-top:8px}
+.card .benefits.open{display:block}
+.card .benefits b{color:var(--body)}
+.card .buy{
+  margin-top:auto;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#141414;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:900;transition:.2s;
+  text-align:center;width:100%;
+}
+.card .buy:hover{filter:brightness(1.1)}
+.card .buy:active{transform:scale(.98)}
+
+/* promo bar */
+.promo-note{margin:24px auto 0;max-width:640px;text-align:center;font-size:13px;color:var(--body50)}
+.promo-note b{color:var(--gold)}
+
+/* ───────── Keys tabs ───────── */
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.tab{
+  background:var(--card);border:1px solid var(--border);color:var(--body50);
+  padding:9px 16px;border-radius:10px;font-size:14px;font-weight:700;transition:.2s;
+}
+.tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border-color:transparent}
+.tab:hover{border-color:var(--gold)}
+.rarity-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:14px}
+.rarity-title{font-size:14px;font-weight:800;color:var(--title);margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.rarity-title .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* ───────── Other ───────── */
+.other-flex{display:flex;gap:14px;flex-wrap:wrap}
+.other-flex .card{flex:1 1 220px}
+
+/* ───────── Modal ───────── */
+.modal-ov{
+  position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);
+  display:none;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(4px);
+}
+.modal-ov.open{display:flex}
+.modal{
+  width:520px;max-width:100%;max-height:92vh;overflow:auto;
+  background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px;
+}
+.modal h3{font-size:22px;font-weight:900;color:var(--title);margin-bottom:4px}
+.modal .m-sub{color:var(--body50);font-size:13px;margin-bottom:16px}
+.modal .m-item{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;
+}
+.modal .m-item .n{font-weight:800;color:var(--title);font-size:15px}
+.modal .m-item .p{color:var(--gold);font-weight:900;font-size:16px}
+.mfield{margin-bottom:14px}
+.mfield label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:6px}
+.mfield input,.mfield select{
+  width:100%;background:var(--card);border:1px solid var(--border2);color:var(--title);
+  border-radius:10px;padding:12px 14px;font-size:14px;outline:none;transition:border-color .2s;
+}
+.mfield input:focus,.mfield select:focus{border-color:var(--gold)}
+.mfield select option{background:var(--bg2);color:var(--title)}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.pay-m{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;
+  text-align:center;cursor:pointer;transition:.18s;font-size:13px;color:var(--body);font-weight:600;
+}
+.pay-m .ic{font-size:22px;display:block;margin-bottom:4px}
+.pay-m.active{border-color:var(--gold);background:rgba(255,180,0,.08);color:var(--title)}
+.pay-m:hover{border-color:var(--gold)}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--border);margin-top:4px}
+.total-row .lbl{color:var(--body50);font-size:14px}
+.total-row .val{font-size:26px;font-weight:900;color:var(--gold)}
+.btn-primary{
+  width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;
+  border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:900;transition:.2s;margin-top:6px;
+}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-primary:active{transform:scale(.98)}
+.m-close{float:right;background:none;border:none;color:var(--body50);font-size:22px;cursor:pointer;line-height:1}
+.m-close:hover{color:var(--red)}
+
+/* pay result */
+.pay-result{text-align:center;padding:10px 0}
+.pay-result .big-ic{font-size:56px;margin-bottom:8px}
+.pay-result h3{font-size:22px;margin-bottom:8px}
+.pay-result p{color:var(--body50);font-size:14px;line-height:1.6;margin-bottom:16px}
+.pay-result .sum{font-size:34px;font-weight:900;color:var(--gold);margin:6px 0 14px}
+.pay-result .qrinfo{font-family:Consolas,monospace;font-size:13px;background:var(--card);border:1px dashed var(--border2);border-radius:10px;padding:10px;color:var(--blue)}
+.pay-result a.btn-tg{
+  display:inline-flex;align-items:center;gap:8px;background:#229ED9;color:#fff;border-radius:10px;
+  padding:12px 22px;font-weight:800;font-size:14px;margin-top:14px;
+}
+.pay-result .small{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5}
+
+/* toast */
+#toastWrap{position:fixed;top:74px;right:18px;z-index:3000;display:flex;flex-direction:column;gap:8px}
+.toast{
+  background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);
+  color:var(--body);padding:12px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);
+  animation:tin .25s ease;max-width:320px;
+}
+.toast.err{border-left-color:var(--red)}
+.toast.gold{border-left-color:var(--gold)}
+@keyframes tin{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+
+/* ───────── Footer ───────── */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:22px 16px calc(30px + env(safe-area-inset-bottom,0px));
+  text-align:center;
+}
+.f-pay{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.f-pay .pip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;color:var(--body)}
+.f-pay .pip.v{color:#fff}.f-pay .pip.mc{color:#fff}.f-pay .pip.mir{color:var(--blue)}.f-pay .pip.sbp{color:var(--green)}
+.f-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.f-nav a{font-size:13px;color:var(--body50)}
+.f-nav a:hover{color:var(--gold)}
+.f-ip{border:1px dashed var(--border2);border-radius:10px;padding:14px;max-width:520px;margin:0 auto 14px;font-size:12px;color:var(--body50);line-height:1.9}
+.f-ip b{color:var(--body)}
+.f-ip .mono{font-family:Consolas,monospace;color:var(--blue)}
+.f-disc{font-size:12px;color:var(--muted);margin-top:10px}
+
+/* ───────── AI Chat Widget ───────── */
+.chat-fab{
+  position:fixed;bottom:24px;right:24px;z-index:1500;
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--red),var(--blue));
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 30px rgba(255,59,92,.35);transition:transform .2s,box-shadow .2s;
+}
+.chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 40px rgba(124,58,237,.5)}
+.chat-fab svg{width:30px;height:30px;stroke:#fff}
+.chat-badge{position:absolute;top:-2px;right:-2px;background:var(--gold);color:#141414;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.chat-window{
+  position:fixed;bottom:96px;right:24px;z-index:1500;
+  width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);
+  background:var(--bg2);border:1px solid var(--border);border-radius:18px;
+  display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.6);
+}
+.chat-window.open{display:flex}
+.chat-head{
+  padding:16px 18px;background:linear-gradient(135deg,var(--red),var(--blue));
+  display:flex;align-items:center;gap:12px;color:#fff;
+}
+.chat-head .ava{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.chat-head .ttl{font-weight:800;font-size:15px}
+.chat-head .stt{font-size:11px;opacity:.85}
+.chat-close{margin-left:auto;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.8}
+.chat-close:hover{opacity:1}
+.chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.msg{max-width:80%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap}
+.msg.bot{background:var(--card);border:1px solid var(--border);color:var(--body);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
+.msg.bot a{color:var(--blue);text-decoration:underline}
+.msg .btn-tg{
+  display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#229ED9;color:#fff;
+  padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;
+}
+.msg .quick{display:block;margin-top:6px;background:rgba(255,180,0,.08);border:1px solid var(--border);color:var(--title);padding:8px 12px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;width:100%}
+.msg .quick:hover{border-color:var(--gold)}
+.typing{display:inline-flex;gap:4px;padding:12px 16px}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--body50);animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:var(--bg2)}
+.chat-input input{
+  flex:1;background:var(--card);border:1px solid var(--border2);color:var(--title);
+  border-radius:10px;padding:11px 14px;font-size:14px;outline:none;
+}
+.chat-input input:focus{border-color:var(--gold)}
+.chat-input button{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;
+  border-radius:10px;padding:0 18px;font-weight:900;font-size:15px;cursor:pointer;
+}
+@media(max-width:480px){
+  .chat-window{right:8px;bottom:84px;width:calc(100vw - 16px);height:calc(100vh - 120px)}
+  .chat-fab{bottom:16px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ───────── Header ───────── -->
+<header>
+  <div class="hdr-left">
+    <div class="logo-mini"><span class="h1">HOOLS</span><span class="t">TIME</span></div>
+    <span class="hdr-ip">hoolstime.ru</span>
+  </div>
+  <div class="hdr-center">
+    <button class="hdr-ip-btn" id="hdrIp" onclick="copyIp(this)">hoolstime.ru ⧉</button>
+  </div>
+  <div class="hdr-right">
+    <a href="#" class="hide-m" onclick="scrollToId('howto')">Как зайти на сервер?</a>
+    <a href="https://vk.com/hoolstime" target="_blank" class="hide-m">Вконтакте</a>
+    <a href="https://t.me/hoolstime" target="_blank" class="hide-m">Телеграм</a>
+    <a href="#privileges" class="btn-shop">Магазин</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ───────── Hero anarchy ───────── -->
+  <section class="hero" id="top">
+    <div class="logo-big">
+      <span class="row1"><span class="hl">HOOLS</span></span>
+      <span class="row2"><span class="tl">TIME</span></span>
+    </div>
+    <div class="slogan"><span class="hot">Холодно — согреем!</span> <span class="cold">Жарко — охладим!</span></div>
+    <div class="hero-ip">
+      <button class="hdr-ip-btn" style="font-size:16px;padding:12px 22px" onclick="copyIp(this)">hoolstime.ru ⧉</button>
+      <a href="#privileges" class="hdr-ip-btn" style="font-size:16px;padding:12px 22px;color:#141414;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;font-weight:800" onclick="return true">Открыть магазин</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">Анархия <b>#1</b></span>
+      <span class="tag">Анархия <b>#2</b></span>
+      <span class="tag">Анархия <b>#3</b></span>
+      <span class="tag">Онлайн <b>24/7</b></span>
+    </div>
+  </section>
+
+  <!-- ───────── How to ───────── -->
+  <section id="howto" class="sec-head" style="text-align:left;max-width:760px;margin:0 auto 60px">
+    <h2 style="text-align:center">Как зайти на сервер?</h2>
+    <p style="color:var(--body50);font-size:14px;line-height:1.8;margin-top:10px">
+      1. Скачай Minecraft 1.16.5 (TLauncher или официальный лаунчер).<br>
+      2. В поле «Версия» выбери <b style="color:var(--gold)">1.16.5</b> (или через наш лаунчер UHools).<br>
+      3. Нажми «Сетевая игра» → «Добавить сервер» → введи адрес <b class="mono" style="color:var(--blue);font-family:Consolas,monospace">hoolstime.ru</b>.<br>
+      4. Заходи и выживай — на анархии нет правил!
+    </p>
+  </section>
+
+  <!-- ───────── Привилегии ───────── -->
+  <section id="privileges">
+    <div class="sec-head">
+      <h2>Привилегии <span class="grad">анархии</span></h2>
+      <p>От Гидры до Аристократа — у каждого статуса свой арсенал команд и возможностей</p>
+    </div>
+    <div class="grid grid-priv" id="privilegesGrid"></div>
+  </section>
+
+  <!-- ───────── Валюта ───────── -->
+  <section id="currency">
+    <div class="sec-head">
+      <h2>Игровая валюта — <span class="grad">ЛЁД</span></h2>
+      <p>Вы получаете игровую валюту на выбранный режим анархии</p>
+    </div>
+    <div class="grid grid-cap" id="currencyGrid"></div>
+  </section>
+
+  <!-- ───────── Ключи ───────── -->
+  <section id="keys">
+    <div class="sec-head">
+      <h2>Ключи <span class="grad">от кейсов</span></h2>
+      <p>Открывай кейсы на любом из режимов — ключи, наборы, предметы и косметика</p>
+    </div>
+    <div class="tabs" id="keyTabs"></div>
+    <div id="keyGrid"></div>
+  </section>
+
+  <!-- ───────── Прочее ───────── -->
+  <section id="other">
+    <div class="sec-head">
+      <h2>Прочее</h2>
+      <p>Полезные услуги для выживания на анархии</p>
+    </div>
+    <div class="other-flex" id="otherGrid"></div>
+  </section>
+
+  <p class="promo-note">Обратите внимание: часть товаров имеет бейдж <b>★ ВЫГОДА</b> — специальные цены этой недели.</p>
+</div>
+
+<!-- ───────── AI Chat Widget ───────── -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Чат с ИИ">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-badge" id="chatBadge" style="display:none">●</span>
+</button>
+
+<div class="chat-window" id="chatWin">
+  <div class="chat-head">
+    <div class="ava">🧠</div>
+    <div>
+      <div class="ttl">ИИ-помощник HoolsTime</div>
+      <div class="stt">онлайн · отвечает мгновенно</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input">
+    <input type="text" id="chatIn" placeholder="Спроси меня что-нибудь…" autocomplete="off">
+    <button onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<!-- ───────── Footer ───────── -->
+<footer>
+  <div class="f-pay">
+    <span class="pip v">VISA</span>
+    <span class="pip mc">Mastercard</span>
+    <span class="pip mir">МИР</span>
+    <span class="pip sbp">СБП</span>
+    <span class="pip sbp">ЮMoney</span>
+  </div>
+  <div class="f-nav">
+    <a href="#">Соглашение</a>
+    <a href="#">Политика конфиденциальности</a>
+    <a href="#">Правила оплаты</a>
+  </div>
+  <div class="f-ip">
+    <div>Реквизиты:<br>
+      <b>ИП</b> — Фамилия Имя Отчество (заполни своими данными)<br>
+      <b>ИНН</b> — 000000000000 &nbsp; <b>ОГРНИП</b> — 000000000000000<br>
+      <b>Город</b> — Твой город &nbsp; <b>Почта</b> — <span class="mono">support@hoolstime.ru</span>
+    </div>
+  </div>
+  <div class="f-disc">HoolsTime.ru не связан с Mojang AB. Все средства идут на развитие проекта.<br>© 2026 HoolsTime. Все права защищены.</div>
+</footer>
+
+<!-- ───────── Модалка покупки ───────── -->
+<div class="modal-ov" id="buyOv">
+  <div class="modal">
+    <button class="m-close" onclick="closeBuy()">✕</button>
+    <h3>Оформление заказа</h3>
+    <div class="m-sub">Заполни данные и выбери способ оплаты</div>
+    <div class="m-item" id="buyItem"></div>
+    <div class="mfield">
+      <label>Ник в Minecraft</label>
+      <input type="text" id="buyNick" placeholder="Например: Steve_Anarchy" maxlength="16">
+    </div>
+    <div class="mfield" id="buyServerField">
+      <label>Режим (сервер)</label>
+      <select id="buyServer">
+        <option value="an1">Анархия #1</option>
+        <option value="an3">Анархия #3</option>
+      </select>
+    </div>
+    <div class="mfield">
+      <label>Способ оплаты</label>
+      <div class="pay-methods">
+        <div class="pay-m active" data-m="card" onclick="pickPay(this)"><span class="ic">💳</span>Карта РФ</div>
+        <div class="pay-m" data-m="sbp" onclick="pickPay(this)"><span class="ic">📲</span>СБП</div>
+        <div class="pay-m" data-m="ym" onclick="pickPay(this)"><span class="ic">🪙</span>ЮMoney</div>
+        <div class="pay-m" data-m="tg" onclick="pickPay(this)"><span class="ic">✈️</span>Telegram</div>
+      </div>
+    </div>
+    <div class="total-row">
+      <span class="lbl">К оплате</span>
+      <span class="val" id="buyTotal">0 ₽</span>
+    </div>
+    <button class="btn-primary" onclick="submitOrder()">Оплатить</button>
+  </div>
+</div>
+
+<!-- ───────── Результат оплаты ───────── -->
+<div class="modal-ov" id="payOv">
+  <div class="modal">
+    <div class="pay-result">
+      <div class="big-ic">🧾</div>
+      <h3>Заказ сформирован</h3>
+      <p>Заказ <b id="payId" style="color:var(--gold)"></b> на сумму</p>
+      <div class="sum" id="paySum">0 ₽</div>
+      <p id="payMethodText"></p>
+      <div class="qrinfo" id="payRef"></div>
+      <a href="https://t.me/hoolstime" target="_blank" class="btn-tg">✈️ Написать в Telegram</a><br>
+      <div class="small">После оплаты напиши нам в Telegram с номером заказа — привилегия будет выдана автоматически при первом заходе на сервер.</div>
+      <button class="btn-primary" style="margin-top:16px" onclick="closePay()">Готово</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastWrap"></div>
+
+<script>
+// ═══════════════ Данные магазина ═══════════════
+const SERVERS = [
+  {id:'an1', name:'Анархия #1'},
+  {id:'an3', name:'Анархия #3'}
+];
+
+const RANKS = [
+  {id:101, name:'ГИДРА', price:39, color:'#58a6ff', thumb:'🐍', server:false,
+   desc:'Старт на анархии — верстак, время, свой набор.',
+   cmds:['Собственный набор — /kit','Текущее время — /time','Ручной верстак — /wb'],
+   abil:['2 точки дома','2 региона привата','5 предметов на рынок','5 заказов на биржу','Бонус к заработку +10%','Донатерская зарплата каждые 20 минут']},
+  {id:102, name:'ЦЕРБЕР', price:139, color:'#94a3b8', thumb:'🐕', server:false,
+   desc:'Псы анархии: меньше голода, головы врагов, эндер-сундук.',
+   cmds:['Команды прошлых статусов','Собственный набор — /kit','Накормить себя — /feed','Голова игрока — /skull','Игнор игрока — /ignore','Инфо о сервере — /gc','Ручной эндер-сундук — /ec','Виртуальный камнерез — /stonecutter'],
+   abil:['3 точки дома','3 региона привата','5 предметов на рынок','5 заказов на биржу','Бонус к заработку +10%','Донатерская зарплата каждые 20 минут']},
+  {id:103, name:'ТРИТОН', price:399, color:'#22d3ee', thumb:'🔱', server:false,
+   desc:'Покоритель глубин: погода в твоих руках, фейерверки и чат донатеров.',
+   cmds:['Команды прошлых статусов','Собственный набор — /kit','Чат донатеров — /d','Чужой инвентарь — /invsee','Игроки рядом — /near','Фейерверк — /firework','Картографический стол — /cartography','Дождь — /storm','Ясная погода — /sun','Онлайн сервера — /list','Темпбан 2ч — /tempban','Темпмут 2ч — /tempmute'],
+   abil:['7 точек дома','7 регионов привата','10 предметов на рынок','10 заказов на биржу','Бонус к заработку +30%','Донатерская зарплата каждые 20 минут']},
+  {id:104, name:'ФЕНИКС', price:669, color:'#ffb400', thumb:'🔥', server:false,
+   desc:'Возрождение из пепла. Чуть больше свободы каждый день.',
+   cmds:['Команды прошлых статусов','Собственный набор — /kit','Дальняя телепортация — /rtp far','Кости с 0 уровня — /warp casino','Чужой инвентарь с бронёй — /invsee armor','Реальный ник — /realname','День — /day','Ночь — /night','Точило — /grindstone','Объявление — /bc','Авто-сообщения — /adv','Инфо об игроке — /whois','Темпбан 12ч — /tempban','Темпмут 12ч — /tempmute'],
+   abil:['10 точек дома','10 регионов привата','15 предметов на рынок','15 заказов на биржу','Бонус к заработку +40%','Донатерская зарплата каждые 20 минут']},
+  {id:105, name:'ПАНДАР', price:1319, color:'#e879f9', thumb:'🐼', server:false,
+   desc:'Панда на анархии. Тот же арсенал, что у Феникса — и полная свобода.',
+   cmds:['Команды прошлых статусов','Собственный набор — /kit','Дальняя телепортация — /rtp far','Кости с 0 уровня — /warp casino','Чужой инвентарь с бронёй — /invsee armor','Реальный ник — /realname','День — /day','Ночь — /night','Точило — /grindstone','Объявление — /bc','Авто-сообщения — /adv','Инфо об игроке — /whois','Темпбан 12ч — /tempban','Темпмут 12ч — /tempmute'],
+   abil:['10 точек дома','10 регионов привата','15 предметов на рынок','15 заказов на биржу','Бонус к заработку +40%','Донатерская зарплата каждые 20 минут']},
+  {id:110, name:'ЖАРА', price:1379, color:'#ff8a5c', thumb:'🌋', server:false,
+   desc:'Жаркий статус анархии: ускоренная экономика и команды модерации.',
+   cmds:['Команды прошлых статусов','Собственный набор — /kit','Темпбан 12ч — /tempban','Темпмут 12ч — /tempmute','Варпы — /setwarp /delwarp'],
+   abil:['10 точек дома','10 регионов привата','15 предметов на рынок','15 заказов на биржу','Бонус к заработку +40%','2 варпа','Донатерская зарплата каждые 20 минут']},
+  {id:106, name:'КРОНОС', price:2649, color:'#e5c158', thumb:'⏳', server:false,
+   desc:'Владыка времени: скидка задержек ×2 и удалённая телепортация.',
+   cmds:['Команды прошлых статусов','Задержки на команды в 2 раза меньше','Собственный набор — /kit','Телепортация к игрокам — /rtp near','Слежка — /targetspy','Фейковый ник — /nick','Цвет префикса — /color','Починка руки — /fix hand','Снятие зачарований — /grind','Наковальня — /anvil','Ткацкий станок — /loom','Переименовать предмет — /rename','Запрет телепорта к себе — /tpoff','Покормить игрока — /feed','Темпбан 1д — /tempban','Темпмут 1д — /tempmute'],
+   abil:['15 точек дома','15 регионов привата','25 предметов на рынок','25 заказов на биржу','Бонус к заработку +60%','3 варпа','Доступ ко всем мини-играм с любого уровня','Донатерская зарплата каждые 20 минут']},
+  {id:111, name:'ЛЕТО', price:2699, color:'#7fe3ff', thumb:'☀️', server:false,
+   desc:'Вечное лето на анархии: те же возможности, что у Кроноса.',
+   cmds:['Команды прошлых статусов','Задержки на команды в 2 раза меньше','Собственный набор — /kit','Телепортация к игрокам — /rtp near','Слежка — /targetspy','Фейковый ник — /nick','Цвет префикса — /color','Починка руки — /fix hand','Снятие зачарований — /grind','Наковальня — /anvil','Ткацкий станок — /loom','Переименовать предмет — /rename','Запрет телепорта к себе — /tpoff','Покормить игрока — /feed','Темпбан 1д — /tempban','Темпмут 1д — /tempmute'],
+   abil:['15 точек дома','15 регионов привата','25 предметов на рынок','25 заказов на биржу','Бонус к заработку +60%','3 варпа','Доступ ко всем мини-играм с любого уровня','Донатерская зарплата каждые 20 минут']},
+  {id:107, name:'ФОБОС', price:4799, color:'#a855f7', thumb:'👹', server:false,
+   desc:'Бог страха на анархии: починка, лечение, телепорт возле баз.',
+   cmds:['Команды прошлых статусов','Задержки на команды в 3 раза меньше','Собственный набор — /kit','Донат другому — /grant','Владельцы региона — /rg addowner','Телепорт возле баз — /rtp base','Починка руки — /fix hand','Починка всего — /fix all','Виртуальный кузнец — /smith','Отключить сообщения — /msgoff','Лечение — /heal','Снять эффекты — /milk','Радужная броня — /rainbow','Поджечь игрока — /burn','Ночное зрение — /nv','Темпбан 3д — /tempban','Темпмут 3д — /tempmute'],
+   abil:['20 точек дома','20 регионов привата','25 предметов на рынок','25 заказов на биржу','Бонус к заработку +80%','5 варпов','Без задержки в чате','Иммунитет от анти-чита','Донатерская зарплата каждые 20 минут']},
+  {id:108, name:'АРЕС', price:11999, color:'#ff2d55', thumb:'⚔️', server:false,
+   desc:'Бог войны анархии. Скидка задержек ×4 и полный контроль режима.',
+   cmds:['Команды прошлых статусов','Задержки на команды в 4 раза меньше','Собственный набор — /kit','Донат другому — /grant','Регион — /rg redefine','Викторина — /question','Солнечный день — /sunday','Полёт — /fly','Режим бога — /god','Клон предмета — /clone','Починка всего — /fix all','Позы стойки — /posestand','Лечить игрока — /heal ник','Исключить — /kick ник','Сесть — /sit','Темпбан 7д — /tempban','Темпмут 7д — /tempmute'],
+   abil:['30 точек дома','30 регионов привата','40 предметов на рынок','40 заказов на биржу','Бонус к заработку +100%','10 варпов','Без задержки в чате','Выделение в чате','Иммунитет от анти-чита','Иммунитет от банов/киков/мутов','Донатерская зарплата каждые 20 минут']},
+  {id:109, name:'АРИСТОКРАТ', price:19499, color:'#f8c510', thumb:'👑', server:false, hot:true,
+   desc:'Вершина анархии. Скидка задержек ×5 — всё и сразу.',
+   cmds:['Команды прошлых статусов','Задержки на команды в 5 раз меньше','Собственный набор — /kit','Донат другому — /grant','Авто-подбор — /autopickup','Скорость — /speed','Невидимость — /vanish','Темпбан 7д — /tempban','Темпмут 7д — /tempmute','Свой варп — /setwarp /delwarp'],
+   abil:['50 точек дома','50 регионов привата','50 предметов на рынок','50 заказов на биржу','Бонус к заработку +100%','15 варпов','Без задержки в чате','Выделение в чате','Иммунитет от анти-чита','Иммунитет от банов/киков/мутов','Донатерская зарплата каждые 20 минут']}
+];
+
+const CURRENCY = [
+  {id:201, amount:'150 000', price:13199, promo:true,  thumb:'🧊'},
+  {id:202, amount:'100 000', price:10199, promo:true,  thumb:'🧊'},
+  {id:203, amount:'50 000',  price:5999,  promo:true,  thumb:'🧊'},
+  {id:204, amount:'20 000',  price:2999,  promo:false, thumb:'🧊'},
+  {id:205, amount:'10 000',  price:1799,  promo:false, thumb:'🧊'},
+  {id:206, amount:'5 000',   price:1079,  promo:false, thumb:'🧊'},
+  {id:207, amount:'2 000',   price:539,   promo:false, thumb:'🧊'},
+  {id:208, amount:'1 000',   price:299,   promo:false, thumb:'🧊'},
+  {id:209, amount:'500',     price:179,   promo:false, thumb:'🧊'},
+  {id:210, amount:'100',     price:49,    promo:false, thumb:'🧊'}
+];
+
+// Ключи: тип → [обычные, легендарные, уникальные] → пачки [3,5,10,20,30]
+const KEY_TYPES = {
+  donate: {name:'ДОНАТ', ic:'🎁',
+    rare:{name:'Обычные', price:[189,269,469,719,869], promo:[0,0,0,0,2], color:'#94a3b8'},
+    legend:{name:'Легендарные', price:[549,849,1549,2699,3499], promo:[0,0,0,0,2], color:'#ffb400'},
+    unique:{name:'Уникальные', price:[469,599,1069,1739,2399], promo:[0,0,0,0,2], color:'#ff2d55'}},
+  credit: {name:'ЛЁД', ic:'🧊',
+    rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
+    legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
+    unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}},
+  kit: {name:'НАБОРЫ', ic:'🎒',
+    rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
+    legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
+    unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}},
+  item: {name:'ПРЕДМЕТЫ', ic:'⚔️',
+    rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
+    legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
+    unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}},
+  cosmetic: {name:'КОСМЕТИКА', ic:'✨',
+    rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
+    legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
+    unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}}
+};
+const KEY_PACKS = [3,5,10,20,30];
+
+const OTHER = [
+  {id:301, name:'БОЕВОЙ ПРОПУСК', price:799, promo:true, server:true, ic:'🎖️',
+   desc:'Больше наград за уровни, больше призов за события, увеличенный заработок, ускоренная прокачка питомцев, бесплатная косметика, иммунитет от анти-чита.'},
+  {id:302, name:'РАЗБАН', price:669, promo:false, server:false, ic:'🕊️',
+   desc:'Вы получаете снятие бана на всех режимах анархии.'},
+  {id:303, name:'РАЗМУТ', price:369, promo:false, server:false, ic:'🔇',
+   desc:'Вы получаете снятие мута на всех режимах анархии.'},
+  {id:304, name:'ИММУНИТЕТ', price:369, promo:false, server:true, ic:'🛡️',
+   desc:'Иммунитет от наказаний привилегированных игроков: банов, киков и мутов.'}
+];
+
+// ═══════════════ Рендер ═══════════════
+const $ = id => document.getElementById(id);
+let selectedPay = 'card';
+let currentKeyTab = 'donate';
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function thumbBg(c){return 'background:linear-gradient(135deg,'+c+'33,'+c+'11),radial-gradient(circle at 70% 20%,'+c+'22,transparent 60%)'}
+
+function renderPrivileges(){
+  const g = $('privilegesGrid'); g.innerHTML='';
+  RANKS.forEach(r=>{
+    const el = document.createElement('div');
+    el.className='card';
+    el.innerHTML = `
+      <div class="thumb" style="${thumbBg(r.color)}">
+        <span style="font-size:40px">${r.ic}</span>
+        ${r.hot?'<span class="badge hot">★ TOP</span>':''}
+      </div>
+      <div class="body">
+        <h3 style="color:${r.color}">${r.name}</h3>
+        <div class="price">${r.price.toLocaleString('ru-RU')} ₽ <small>навсегда</small></div>
+        <div class="desc">${r.desc}</div>
+        <div class="more" onclick="toggleBenefits(this)">▾ Подробности</div>
+        <div class="benefits">
+          <b>Команды:</b><br>${r.cmds.map(c=>'• '+esc(c)).join('<br>')}<br><br>
+          <b>Возможности:</b><br>${r.abil.map(c=>'• '+esc(c)).join('<br>')}
+        </div>
+        <button class="buy" onclick="openBuy({type:'rank', id:${r.id}})">Купить</button>
+      </div>`;
+    g.appendChild(el);
+  });
+}
+
+function renderCurrency(){
+  const g = $('currencyGrid'); g.innerHTML='';
+  CURRENCY.forEach(c=>{
+    const el = document.createElement('div');
+    el.className='card';
+    el.innerHTML = `
+      <div class="thumb" style="${thumbBg('#22d3ee')}"><span style="font-size:46px">${c.thumb}</span>${c.promo?'<span class="badge">★ ВЫГОДА</span>':''}</div>
+      <div class="body">
+        <h3>${c.amount} ЛЬДА</h3>
+        <div class="price">${c.price.toLocaleString('ru-RU')} ₽</div>
+        <div class="desc">Игровая валюта на выбранный режим</div>
+        <button class="buy" onclick="openBuy({type:'cur', id:${c.id}})">Купить</button>
+      </div>`;
+    g.appendChild(el);
+  });
+}
+
+function renderKeyTabs(){
+  const t = $('keyTabs'); t.innerHTML='';
+  Object.entries(KEY_TYPES).forEach(([k,v])=>{
+    const b=document.createElement('button');
+    b.className='tab'+(k===currentKeyTab?' active':'');
+    b.textContent=v.ic+' '+v.name;
+    b.onclick=()=>{currentKeyTab=k;renderKeyTabs();renderKeys();};
+    t.appendChild(b);
+  });
+}
+
+function renderKeys(){
+  const g = $('keyGrid'); g.innerHTML='';
+  const type = KEY_TYPES[currentKeyTab];
+  ['rare','legend','unique'].forEach(rk=>{
+    const r = type[rk];
+    g.insertAdjacentHTML('beforeend', `<div class="rarity-title"><span class="dot" style="background:${r.color}"></span>${r.name} — ${type.name}</div>`);
+    const row=document.createElement('div'); row.className='rarity-row';
+    KEY_PACKS.forEach((n,i)=>{
+      const id = currentKeyTab+'_'+rk+'_'+n;
+      const el=document.createElement('div'); el.className='card';
+      el.innerHTML = `
+        <div class="thumb" style="${thumbBg(r.color)}"><span style="font-size:38px">${type.ic}</span>${r.promo[i]===2?'<span class="badge">★ ВЫГОДА</span>':''}</div>
+        <div class="body">
+          <h3>${n} ключ.</h3>
+          <div class="price">${r.price[i].toLocaleString('ru-RU')} ₽</div>
+          <div class="desc">Ключи от кейса «${type.name}» — открой на любом режиме</div>
+          <button class="buy" onclick="openBuy({type:'key', key:'${id}'})">Купить</button>
+        </div>`;
+      row.appendChild(el);
+    });
+    g.appendChild(row);
+  });
+}
+
+function renderOther(){
+  const g = $('otherGrid'); g.innerHTML='';
+  OTHER.forEach(o=>{
+    const el=document.createElement('div'); el.className='card';
+    el.innerHTML = `
+      <div class="thumb" style="${thumbBg('#22d3ee')}"><span style="font-size:42px">${o.ic}</span>${o.promo?'<span class="badge">★ ВЫГОДА</span>':''}</div>
+      <div class="body">
+        <h3>${o.name}</h3>
+        <div class="price">${o.price.toLocaleString('ru-RU')} ₽</div>
+        <div class="desc">${o.desc}</div>
+        <button class="buy" onclick="openBuy({type:'other', id:${o.id}})">Купить</button>
+      </div>`;
+    g.appendChild(el);
+  });
+}
+
+// ═══════════════ Покупка ═══════════════
+let currentItem=null;
+
+function resolveItem(item){
+  if(item.type==='rank'){const r=RANKS.find(x=>x.id===item.id);return {name:r.name, price:r.price, server:r.server, ic:r.ic, color:r.color}}
+  if(item.type==='cur'){const c=CURRENCY.find(x=>x.id===item.id);return {name:c.amount+' ЛЬДА', price:c.price, server:true, ic:c.thumb, color:'#22d3ee'}}
+  if(item.type==='key'){
+    const [tk,rk,n]=item.key.split('_');
+    const t=KEY_TYPES[tk], r=t[rk];
+    const nm = rk==='rare'?'Обычные':rk==='legend'?'Легендарные':'Уникальные';
+    return {name:n+' ключ. «'+t.name+'» ('+nm+')', price:r.price[KEY_PACKS.indexOf(+n)], server:true, ic:t.ic, color:r.color}
+  }
+  if(item.type==='other'){const o=OTHER.find(x=>x.id===item.id);return {name:o.name, price:o.price, server:o.server, ic:o.ic, color:'#22d3ee'}}
+}
+
+function openBuy(item){
+  const it=resolveItem(item);
+  currentItem={...item, name:it.name, price:it.price, server:it.server};
+  $('buyItem').innerHTML = `<div style="display:flex;align-items:center;gap:12px">
+    <span style="font-size:34px">${it.ic}</span>
+    <div><div class="n" style="color:${it.color}">${esc(it.name)}</div><div style="font-size:12px;color:var(--body50)">HoolsTime · ${it.server?'Анархия #1/#3':'все режимы'}</div></div>
+  </div><div class="p">${it.price.toLocaleString('ru-RU')} ₽</div>`;
+  $('buyServerField').style.display = it.server?'block':'none';
+  $('buyNick').value = localStorage.getItem('ht_nick')||'';
+  $('buyTotal').textContent = it.price.toLocaleString('ru-RU')+' ₽';
+  $('buyOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBuy(){$('buyOv').classList.remove('open');document.body.style.overflow=''}
+function pickPay(el){selectedPay=el.dataset.m;document.querySelectorAll('.pay-m').forEach(p=>p.classList.remove('active'));el.classList.add('active')}
+
+function submitOrder(){
+  const nick=$('buyNick').value.trim();
+  if(!nick){toast('Введи ник в Minecraft','err');return}
+  if(nick.length>16){toast('Ник не длиннее 16 символов','err');return}
+  const it=currentItem; if(!it)return;
+  const server=$('buyServer').value;
+  const id='HT-'+(Date.now().toString(36)).toUpperCase()+'-'+(Math.random().toString(36).slice(2,6)).toUpperCase();
+  const order={id, nick, server, item:it.name, price:it.price, pay:selectedPay, date:new Date().toISOString()};
+  const orders=JSON.parse(localStorage.getItem('ht_orders')||'[]');
+  orders.push(order); localStorage.setItem('ht_orders', JSON.stringify(orders));
+  localStorage.setItem('ht_nick', nick);
+
+  closeBuy();
+  $('payId').textContent=id;
+  $('paySum').textContent=it.price.toLocaleString('ru-RU')+' ₽';
+  const payNames={card:'💳 Оплата банковской картой РФ (Visa/Mastercard/МИР)',sbp:'📲 Оплата через СБП по QR-коду',ym:'🪙 Оплата через ЮMoney',tg:'✈️ Оплата переводом в Telegram'};
+  $('payMethodText').textContent=payNames[selectedPay];
+  $('payRef').textContent = selectedPay==='tg'
+    ? 'Переведи сумму @HoolsTime и пришли этот номер заказа'
+    : 'Перейди по ссылке оплаты на сумму '+it.price.toLocaleString('ru-RU')+' ₽ (ссылка придёт в Telegram после подтверждения)';
+  $('payOv').classList.add('open');
+  toast('Заказ '+id+' создан','gold');
+}
+function closePay(){$('payOv').classList.remove('open');document.body.style.overflow=''}
+
+// ═══════════════ Утилиты ═══════════════
+function toggleBenefits(el){el.parentElement.querySelector('.benefits').classList.toggle('open');el.textContent=el.textContent.startsWith('▾')?'▸ Свернуть':'▾ Подробности'}
+function copyIp(btn){
+  const t=btn.textContent.trim().replace(/⧉.*/,'');
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{
+    const old=btn.textContent;btn.textContent='✓ Скопировано';setTimeout(()=>btn.textContent=old,1600);
+  }).catch(()=>{});
+}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function toast(text,type){
+  const w=$('toastWrap');const d=document.createElement('div');
+  d.className='toast '+(type||'');d.textContent=text;w.appendChild(d);
+  setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200);
+}
+$('buyOv').addEventListener('click',e=>{if(e.target===$('buyOv'))closeBuy()});
+$('payOv').addEventListener('click',e=>{if(e.target===$('payOv'))closePay()});
+$('buyNick').addEventListener('keydown',e=>{if(e.key==='Enter')submitOrder()});
+
+// ═══════════════ Init ═══════════════
+renderPrivileges();
+renderCurrency();
+renderKeyTabs();
+renderKeys();
+renderOther();
+
+// ═══════════════ AI Chat ─ Умный помощник ═══════════════
+const chatBody = $('chatBody'), chatIn = $('chatIn');
+let chatOpen = false, chatStep = null;
+
+function toggleChat(){
+  chatOpen = !chatOpen;
+  $('chatWin').classList.toggle('open', chatOpen);
+  $('chatBadge').style.display = 'none';
+  if(chatOpen && !chatBody.children.length) addMsg('bot','Привет! 👋 Я ИИ-помощник HoolsTime.\n\nУмею отвечать про:<br>• 👑 привилегии и цены<br>• 🧊 игровую валюту ЛЁД<br>• 🎁 ключи и кейсы<br>• 💳 оплату и получение заказа<br>• 🎮 как зайти на сервер<br><br>Что тебя интересует?');
+  setTimeout(()=>chatIn.focus(), 50);
+}
+
+function addMsg(role, html){
+  const d = document.createElement('div');
+  d.className = 'msg ' + role;
+  d.innerHTML = html;
+  chatBody.appendChild(d);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function typing(cb){
+  const d = document.createElement('div');
+  d.className = 'msg bot typing';
+  d.innerHTML = '<span></span><span></span><span></span>';
+  chatBody.appendChild(d);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  setTimeout(()=>{ d.remove(); cb(); }, 700 + Math.random()*500);
+}
+
+function quickBtn(label, action){
+  return '<button class="quick" onclick="'+action+'">'+label+'</button>';
+}
+
+function sendChat(){
+  const text = chatIn.value.trim();
+  if(!text) return;
+  chatIn.value = '';
+  addMsg('user', esc(text));
+  typing(()=> answer(text.toLowerCase()));
+}
+
+chatIn.addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
+
+const HELP_INTENTS = {
+  priv: ['привилег','ранг','статус','донат','купить прив','паладин','аристократ','гидр','цен','сколько стоит','price','ранги'],
+  cur:  ['валюта','лёд','лед','арес','монет','деньг','баланс','валют'],
+  keys: ['ключ','кейс','лутбокс','открыт','сундук','сундук'],
+  howto:['как зайти','зайти на сервер','ip','адрес','версия','портал','скачать','лаунчер','подключит','войти','заход'],
+  pay:  ['оплат','карт','сбп','юmoney','ю мани','перевод','qr','способ','платёж','платеж','оплачивать'],
+  grant:['получ','выда','после оплат','когда','как получ','выдадут','придёт'],
+  unban:['разбан','размут','бан','мут','иммунитет','наказан'],
+  other:['пропуск','боевой','батлпасс'],
+  operator:['оператор','человек','поддержк','админ','свяж','живой','операт'],
+  hello:['привет','здравствуй','салют','ку','добрый','хай','хелло'],
+  thanks:['спасибо','благодар','спс','круто','топ','класс'],
+  bye:  ['пока','до свидания','удачи','до встречи']
+};
+
+const HELP_ANSWERS = {
+  priv: () => 'У нас есть привилегии для анархии: 💎\n\n• 🐍 ГИДРА — 39 ₽\n• 🐕 ЦЕРБЕР — 139 ₽\n• 🔱 ТРИТОН — 399 ₽\n• 🔥 ФЕНИКС — 669 ₽\n• 🐼 ПАНДАР — 1 319 ₽\n• 🌋 ЖАРА — 1 379 ₽\n• ⏳ КРОНОС — 2 649 ₽\n• ☀️ ЛЕТО — 2 699 ₽\n• 👹 ФОБОС — 4 799 ₽\n• ⚔️ АРЕС — 11 999 ₽\n• 👑 АРИСТОКРАТ — 19 499 ₽\n\nКаждый статус даёт команды и возможности. Купить можно прямо в магазине ниже.' + quickBtn('👑 Показать привилегии','scrollToId(\'privileges\')'),
+  cur: () => 'Игровая валюта сервера — 🧊 <b>ЛЁД</b>.\n\nПакеты:<br>• 100 ЛЬДА — 49 ₽<br>• 500 ЛЬДА — 179 ₽<br>• 1 000 — 299 ₽<br>• 5 000 — 1 079 ₽<br>• 50 000 — 5 999 ₽ (выгода!)\n\nВалюта зачисляется на выбранный режим анархии.' + quickBtn('🧊 Купить ЛЁД','scrollToId(\'currency\')'),
+  keys: () => 'Ключи нужны, чтобы открывать кейсы на любом из режимов. 🎁\n\nТипы кейсов: ДОНАТ, ЛЁД, НАБОРЫ, ПРЕДМЕТЫ, КОСМЕТИКА.<br>Редкость: обычные, легендарные, уникальные.<br>Пачки: 3 / 5 / 10 / 20 / 30 ключей.\n\nНапример, 3 обычных донат-ключа — 189 ₽, а 30 — 869 ₽ (выгоднее!).' + quickBtn('🎁 Открыть ключи','scrollToId(\'keys\')'),
+  howto: () => 'Как зайти на анархию HoolsTime: 🎮\n\n1️⃣ Скачай Minecraft 1.16.5 (TLauncher или наш лаунчер UHools).<br>2️⃣ Выбери версию 1.16.5.\n3️⃣ «Сетевая игра» → «Добавить сервер».\n4️⃣ Введи адрес <b style="color:var(--blue)">hoolstime.ru</b> и заходи!\n\nИ никаких правил — полная анархия. 🔥' + quickBtn('📋 Инструкция','scrollToId(\'howto\')'),
+  pay: () => 'Принимаем: 💳 Карты РФ (Visa / Mastercard / МИР), 📲 СБП по QR, 🪙 ЮMoney и ✈️ Telegram.\n\nОплата безопасная — после нажатия «Купить» ты выберешь способ и получишь ссылку на оплату.' + quickBtn('🛒 Перейти в магазин','scrollToId(\'privileges\')'),
+  grant: () => 'После оплаты заказ поступит к нам автоматически. 📦\n\nОбычно привилегия выдаётся <b>в течение 5–15 минут</b>.\nЕсли заходишь на сервер — просто напиши нам в Telegram, выдадим мгновенно.' + quickBtn('✈️ Написать в Telegram','window.open(\'https://t.me/hoolstime\')'),
+  unban: () => 'У нас есть в разделе «Прочее»: 🕊️\n\n• РАЗБАН — 669 ₽\n• РАЗМУТ — 369 ₽\n• ИММУНИТЕТ — 369 ₽\n\nПоможет, если на анархии кто-то перегнул палку.' + quickBtn('🛒 Посмотреть','scrollToId(\'other\')'),
+  other: () => 'В разделе «Прочее»: 🎖️\n\n• БОЕВОЙ ПРОПУСК — 799 ₽ (награды, косметика, иммунитет от анти-чита)<br>• РАЗБАН — 669 ₽<br>• РАЗМУТ — 369 ₽<br>• ИММУНИТЕТ — 369 ₽' + quickBtn('🛒 Открыть «Прочее»','scrollToId(\'other\')'),
+  operator: () => 'Связь с оператором — сейчас. 📞\n\nНаши операторы на связи в Telegram и VK:<br>✈️ @hoolstime<br>💬 vk.com/hoolstime\n\nНапиши — и тебе ответит живой человек!' + quickBtn('✈️ Оператор в Telegram','window.open(\'https://t.me/hoolstime\')'),
+  hello: () => 'Привет! 👋 Рад видеть тебя на HoolsTime.\n\nМогу рассказать про ранги, валюту ЛЁД, ключи, оплату или помочь зайти на сервер. Что интересует?',
+  thanks: () => 'Всегда пожалуйста! 😊 Если будут вопросы — я тут. Удачной игры на анархии HoolsTime!' + quickBtn('🔥 Играть на hoolstime.ru','window.open(\'https://t.me/hoolstime\')'),
+  bye: () => 'До встречи на сервере! Заходи на <b>hoolstime.ru</b> — там жарко. 🔥👋'
+};
+
+function answer(q){
+  // 1) Неизвестно → спросить: связать с оператором?
+  const found = Object.entries(HELP_INTENTS).find(([k,words]) => words.some(w => q.includes(w)));
+  if(!found){
+    addMsg('bot','Хм, я не совсем понял вопрос. 🤔<br><br>Могу помочь с покупкой, ценами, оплатой и заходом на сервер.<br><br><b>Могу связать тебя с оператором — желаешь?</b>' + quickBtn('✅ Да, свяжи с оператором','chatOperator()') + quickBtn('❌ Нет, я сам','chatNo()'));
+    chatStep = 'unknown';
+    return;
+  }
+  const [intent] = found;
+  addMsg('bot', HELP_ANSWERS[intent]());
+  chatStep = null;
+}
+
+function chatOperator(){
+  addMsg('user','Свяжите меня с оператором');
+  typing(()=>{
+    addMsg('bot','Конечно! Сейчас передам твой вопрос живому оператору. 📞\n\nНапиши в Telegram — там ответят быстрее всего:' + quickBtn('✈️ @hoolstime','window.open(\'https://t.me/hoolstime\')') + quickBtn('💬 Вконтакте','window.open(\'https://vk.com/hoolstime\')'));
+  });
+}
+function chatNo(){
+  addMsg('user','Нет, спасибо');
+  typing(()=> addMsg('bot','Хорошо 👍 Если что-то ещё понадобится — просто напиши мне.'));
+}
+</script>
+</body>
+</html>
