@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HoolsTime — Форум анархии</title>
-<meta name="description" content="Форум HoolsTime: обсуждения, гайды, торговля, кланы. Регистрация и ролевая система.">
+<meta name="description" content="Форум HoolsTime: обсуждения, гайды, торговля, кланы. Профили, друзья, блоги.">
 <style>
-:root{--bg:#0d0d14;--bg2:#12121c;--bg3:#171726;--card:#151524;--border:#2a2a3a;--border2:#3b3b50;--title:#ffffff;--body:#b8b8cc;--body50:#8a8aa0;--muted:#64647c;--gold:#f8c510;--gold2:#ffb400;--primary:#ffb400;--red:#ff3b5c;--red2:#df2b4a;--blue:#22d3ee;--blue2:#0ea5e9;--green:#3be08b;--ok:#3be08b;--radius:14px;--header-h:64px}
+:root{--bg:#0d0d14;--bg2:#12121c;--card:#151524;--border:#2a2a3a;--border2:#3b3b50;--title:#ffffff;--body:#b8b8cc;--body50:#8a8aa0;--muted:#64647c;--gold:#f8c510;--gold2:#ffb400;--red:#ff3b5c;--red2:#df2b4a;--blue:#22d3ee;--blue2:#0ea5e9;--green:#3be08b;--ok:#3be08b;--radius:14px;--header-h:64px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--body);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden;background-image:radial-gradient(900px 500px at 12% -5%,rgba(255,59,92,.08),transparent 65%),radial-gradient(900px 500px at 88% 0%,rgba(34,211,238,.08),transparent 65%);background-attachment:fixed}
@@ -15,45 +15,77 @@ a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit;outline:none}
 textarea{resize:vertical}
+
+/* ─── Header ─── */
 header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:rgba(13,13,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px}
 .hdr-left{display:flex;flex-direction:column;align-items:center;line-height:1;gap:4px}
-.hdr-left .logo-mini{font-size:22px;font-weight:900;letter-spacing:-.5px}
-.hdr-left .logo-mini .h1{background:linear-gradient(180deg,#ff6a4d,#ff2d55 60%,#b30f34);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-.hdr-left .logo-mini .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee 55%,#0b6bb8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-.hdr-left .hdr-ip{font-family:Consolas,monospace;font-size:11px;color:var(--blue);letter-spacing:.5px}
-.hdr-center{display:flex;align-items:center;gap:8px;justify-content:center}
-.hdr-ip-btn{font-family:Consolas,monospace;font-size:14px;color:var(--gold);background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);padding:8px 14px;border-radius:10px;cursor:pointer;transition:.2s;font-weight:600}
-.hdr-ip-btn:hover{background:rgba(255,180,0,.16)}
-.hdr-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;white-space:nowrap}
+.hdr-left .logo-mini{font-size:22px;font-weight:900}
+.hdr-left .logo-mini .h1{background:linear-gradient(180deg,#ff6a4d,#ff2d55 60%,#b30f34);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-left .logo-mini .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee 55%,#0b6bb8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-left .hdr-ip{font-family:Consolas,monospace;font-size:11px;color:var(--blue)}
+.hdr-right{display:flex;align-items:center;gap:10px;white-space:nowrap}
 .hdr-right a{font-size:13px;font-weight:500;color:var(--body50);transition:color .2s}
 .hdr-right a:hover{color:var(--gold)}
-.hdr-right .btn-accent{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414!important;font-weight:800;padding:8px 16px;border-radius:10px}
-.hdr-right .btn-outline{border:1px solid var(--border2);padding:8px 16px;border-radius:10px;color:var(--body)!important;font-weight:600}
-.hdr-right .btn-outline:hover{color:var(--gold)!important;border-color:var(--gold)}
-@media(max-width:820px){.hdr-right .hide-m{display:none}.hdr-center{gap:4px}}
-.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 28px) 24px 80px}
-.sec-head{text-align:center;margin-bottom:28px}
-.sec-head h2{font-size:30px;font-weight:900;color:var(--title);letter-spacing:-.5px}
-.sec-head .grad{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.sec-head p{color:var(--body50);font-size:14px;margin-top:6px}
-.glass{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:transform .18s,border-color .18s}
-.glass:hover{border-color:var(--gold)}
+.btn-hdr{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414!important;font-weight:800;padding:8px 16px;border-radius:10px}
+.btn-hdr-ghost{border:1px solid var(--border2);padding:8px 16px;border-radius:10px;color:var(--body)!important;font-weight:600}
+.btn-hdr-ghost:hover{border-color:var(--gold);color:var(--gold)!important}
+@media(max-width:820px){.hdr-right .hide-m{display:none}}
+
+/* ─── Page ─── */
+.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 28px) 24px 80px;min-height:100vh}
+
+/* ─── Auth Modal ─── */
+.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-ov.open{display:flex}
+.modal{width:460px;max-width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px}
+.modal h3{font-size:20px;font-weight:900;color:var(--title);margin-bottom:4px;text-align:center}
+.modal .sub{color:var(--body50);font-size:13px;margin-bottom:18px;text-align:center}
+.modal .m-close{float:right;background:none;border:none;color:var(--body50);font-size:22px;cursor:pointer}
+.modal .m-close:hover{color:var(--red)}
+.auth-tabs{display:flex;gap:8px;margin-bottom:20px;justify-content:center}
+.auth-tab{background:var(--card);border:1px solid var(--border);color:var(--body50);padding:10px 24px;border-radius:10px;font-size:14px;font-weight:700;transition:.15s}
+.auth-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border-color:transparent}
+.auth-tab:hover{border-color:var(--gold)}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
+.fld input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:12px 14px;font-size:14px;transition:border-color .2s}
+.fld input:focus{border-color:var(--gold)}
+.fld .hint{font-size:11px;color:var(--muted);margin-top:4px}
+.fld .chk{display:flex;align-items:center;gap:8px;margin-top:8px}
+.fld .chk input{width:auto}
+.fld .chk label{font-size:12px;color:var(--body50);margin:0}
+.pwd-row{position:relative}
+.pwd-row input{width:100%}
+.pwd-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--body50);font-size:12px;cursor:pointer;font-weight:600}
+.pwd-toggle:hover{color:var(--gold)}
+.match-ok{color:var(--ok)!important;font-size:12px;font-weight:600}
+.match-no{color:var(--red)!important;font-size:12px;font-weight:600}
 .btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:900;transition:.2s;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:center}
 .btn:hover{filter:brightness(1.08)}
 .btn:active{transform:scale(.98)}
-.btn-sm{padding:8px 14px;font-size:13px}
+.btn-sm{padding:8px 14px;font-size:12px}
 .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--body);font-weight:600}
 .btn-ghost:hover{background:rgba(255,255,255,.04)}
 .btn-danger{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff}
 .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+.btn-ok{background:linear-gradient(135deg,var(--green),#2bc87a);color:#0d0d14}
+.btn-full{width:100%;justify-content:center}
 
 /* ─── User bar ─── */
-.user-bar{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 20px;margin-bottom:24px;flex-wrap:wrap}
-.user-bar .ava{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#141414;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:0 0 36px}
+.user-bar{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 18px;margin-bottom:24px;flex-wrap:wrap}
+.user-bar .ava{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#141414;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex:0 0 40px;overflow:hidden;background-size:cover;background-position:center}
+.user-bar .ava img{width:100%;height:100%;object-fit:cover}
 .user-bar .info{font-size:13px;flex:1}
 .user-bar .info b{color:var(--title)}
 .user-bar .info .role{font-size:11px;color:var(--body50)}
-.user-bar a,.user-bar button{font-size:12px;font-weight:700}
+.user-bar .info .mood{font-size:16px;margin-left:6px}
+.role-tag{font-size:10px;padding:2px 10px;border-radius:10px;font-weight:800;text-transform:uppercase}
+.role-tag.guest{background:rgba(100,100,124,.15);color:var(--muted)}
+.role-tag.player{background:rgba(59,224,139,.12);color:var(--ok)}
+.role-tag.verified{background:rgba(34,211,238,.12);color:var(--blue)}
+.role-tag.helper{background:rgba(248,197,16,.12);color:var(--gold)}
+.role-tag.mod{background:rgba(168,85,247,.12);color:#a855f7}
+.role-tag.admin{background:rgba(255,59,92,.18);color:var(--red)}
 
 /* ─── Forum sections ─── */
 .forum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:28px}
@@ -71,99 +103,95 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);b
 .topic-item .ti-title .prefix{color:var(--gold);font-size:11px;font-weight:800}
 .topic-item .ti-meta{font-size:11px;color:var(--muted);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .topic-item .ti-meta .auth{color:var(--body)}
-.topic-item .ti-meta .pin{color:var(--blue);font-size:10px;font-weight:800}
-.role-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:800;text-transform:uppercase}
-.role-tag.guest{background:rgba(100,100,124,.15);color:var(--muted)}
-.role-tag.player{background:rgba(59,224,139,.12);color:var(--ok)}
-.role-tag.verified{background:rgba(34,211,238,.12);color:var(--blue)}
-.role-tag.helper{background:rgba(248,197,16,.12);color:var(--gold)}
-.role-tag.mod{background:rgba(168,85,247,.12);color:#a855f7}
-.role-tag.admin{background:rgba(255,59,92,.18);color:var(--red)}
-
-/* ─── Auth forms ─── */
-.auth-forms{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
-@media(max-width:700px){.auth-forms{grid-template-columns:1fr}}
-.auth-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
-.auth-card h3{font-size:20px;font-weight:900;color:var(--title);margin-bottom:4px}
-.auth-card .sub{font-size:13px;color:var(--body50);margin-bottom:16px}
-.fld{margin-bottom:14px}
-.fld label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
-.fld input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:12px 14px;font-size:14px;transition:border-color .2s}
-.fld input:focus{border-color:var(--gold)}
-.fld .hint{font-size:11px;color:var(--muted);margin-top:4px}
-.fld .chk{display:flex;align-items:center;gap:8px;margin-top:8px}
-.fld .chk input{width:auto}
-.fld .chk label{font-size:12px;color:var(--body50);margin:0}
-.pwd-row{position:relative}
-.pwd-row input{width:100%}
-.pwd-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--body50);font-size:12px;cursor:pointer;font-weight:600}
-.pwd-toggle:hover{color:var(--gold)}
-.match-ok{color:var(--ok)!important;font-size:12px;font-weight:600}
-.match-no{color:var(--red)!important;font-size:12px;font-weight:600}
-
-/* ─── Topic create form ─── */
 .topic-create{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:28px}
-.topic-create h3{font-size:18px;font-weight:800;color:var(--title);margin-bottom:12px}
 .tc-row{margin-bottom:12px}
 .tc-row label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
 .tc-row input,.tc-row select,.tc-row textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px 14px;font-size:14px;transition:border-color .2s}
 .tc-row input:focus,.tc-row select:focus,.tc-row textarea:focus{border-color:var(--gold)}
-.tc-row textarea{min-height:100px}
+.tc-row textarea{min-height:80px}
 
-/* ─── Tickets (support) ─── */
-.ticket{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
-.ticket .t-hdr{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.ticket .t-hdr b{font-size:14px;color:var(--title)}
-.ticket .t-hdr .status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:800}
-.ticket .t-hdr .status.open{background:rgba(59,224,139,.12);color:var(--ok)}
-.ticket .t-hdr .status.closed{background:rgba(100,100,124,.12);color:var(--muted)}
-.ticket .t-body{font-size:13px;color:var(--body50);margin-top:8px;line-height:1.5}
-.ticket .t-meta{font-size:11px;color:var(--muted);margin-top:6px}
+/* ─── Profile ─── */
+.profile-top{position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
+.profile-banner{height:220px;background:linear-gradient(135deg,#1a1a3e,#0d0d20);display:flex;align-items:flex-end;padding:20px;position:relative;background-size:cover;background-position:center}
+.profile-banner .p-ava{width:90px;height:90px;border-radius:50%;border:3px solid var(--gold);background:var(--gold);overflow:hidden;flex:0 0 90px;background-size:cover;background-position:center}
+.profile-banner .p-ava img{width:100%;height:100%;object-fit:cover}
+.profile-banner .p-info{margin-left:20px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.profile-banner .p-info .pn{font-size:26px;font-weight:900}
+.profile-banner .p-info .pr{font-size:13px;opacity:.85}
+.profile-banner .p-info .pmood{font-size:24px;margin-left:4px}
+.profile-banner .p-banner-overlay{position:absolute;bottom:0;left:0;right:0;z-index:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.profile-banner .p-banner-overlay>*{position:relative;z-index:1}
+.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.profile-body{display:grid;grid-template-columns:320px 1fr;gap:20px}
+@media(max-width:820px){.profile-body{grid-template-columns:1fr}}
+.profile-side{display:flex;flex-direction:column;gap:14px}
+.profile-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.profile-card h4{font-size:15px;font-weight:800;color:var(--title);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.profile-main{display:flex;flex-direction:column;gap:14px}
+.profile-main .profile-card{flex:1}
+.stat-line{font-size:13px;color:var(--body50);padding:6px 0;display:flex;justify-content:space-between;border-bottom:1px solid var(--border)}
+.stat-line:last-child{border:none}
+.stat-line b{color:var(--title)}
 
-/* ─── Notification ─── */
-.notif{position:fixed;top:74px;right:18px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:12px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:320px}
+/* ─── Mood / Notes / Achievements ─── */
+.mood-picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.mood-btn{font-size:24px;background:none;border:none;cursor:pointer;padding:4px;border-radius:8px;transition:.1s}
+.mood-btn.selected,.mood-btn:hover{background:rgba(248,197,16,.15)}
+.note-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px;font-size:13px;color:var(--body50)}
+.note-item .ni-time{font-size:11px;color:var(--muted);margin-top:4px}
+.ach-grid{display:flex;gap:8px;flex-wrap:wrap}
+.ach{border:1px solid var(--border2);border-radius:10px;padding:8px 12px;text-align:center;font-size:11px;background:var(--bg);flex:0 0 auto}
+.ach .ach-ic{font-size:20px;display:block}
+.ach .ach-lbl{color:var(--body50);margin-top:2px}
+.ach.unlocked{border-color:var(--gold);background:rgba(248,197,16,.06)}
+.ach.unlocked .ach-lbl{color:var(--gold)}
+
+/* ─── Friends ─── */
+.friend-card{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:6px}
+.friend-card .f-ava{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#141414;font-weight:900;font-size:13px;flex:0 0 34px;overflow:hidden;background-size:cover;background-position:center}
+.friend-card .f-info{flex:1;font-size:13px}
+.friend-card .f-info .fn{font-weight:700;color:var(--title)}
+.friend-card .f-info .ft{font-size:11px;color:var(--muted)}
+.friend-card .f-info .fmood{font-size:14px;margin-left:4px}
+.friend-card .f-actions{display:flex;gap:6px}
+.trust-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.trust-badge.acc{background:rgba(148,163,184,.15);color:#94a3b8}
+.trust-badge.bud{background:rgba(59,224,139,.12);color:var(--ok)}
+.trust-badge.frd{background:rgba(34,211,238,.12);color:var(--blue)}
+.trust-badge.cls{background:rgba(248,197,16,.15);color:var(--gold)}
+
+/* ─── Blog ─── */
+.blog-post{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.blog-post .bp-h{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.blog-post .bp-h h4{font-size:16px;font-weight:800;color:var(--title)}
+.blog-post .bp-h .bp-vis{font-size:11px;padding:2px 8px;border-radius:8px;font-weight:700}
+.blog-post .bp-h .bp-vis.public{background:rgba(59,224,139,.12);color:var(--ok)}
+.blog-post .bp-h .bp-vis.friends{background:rgba(34,211,238,.12);color:var(--blue)}
+.blog-post .bp-body{font-size:13px;color:var(--body50);line-height:1.6}
+.blog-post .bp-meta{font-size:11px;color:var(--muted);margin-top:8px}
+
+/* ─── Notifications ─── */
+.notif{position:fixed;top:74px;right:18px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:12px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:340px}
 .notif.err{border-left-color:var(--red)}
 .notif.gold{border-left-color:var(--gold)}
-@keyframes tin{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
 
-/* ─── Modal ─── */
-.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.modal-ov.open{display:flex}
-.modal{width:560px;max-width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px}
-.modal h3{font-size:20px;font-weight:900;color:var(--title)}
-.modal .sub{color:var(--body50);font-size:13px;margin-bottom:16px}
-.modal .m-close{float:right;background:none;border:none;color:var(--body50);font-size:22px;cursor:pointer}
-.modal .m-close:hover{color:var(--red)}
-
-/* ─── Footer ─── */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16px calc(30px + env(safe-area-inset-bottom,0px));text-align:center}
-.f-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.f-nav a{font-size:13px;color:var(--body50)}
-.f-nav a:hover{color:var(--gold)}
-.f-ip{border:1px dashed var(--border2);border-radius:10px;padding:14px;max-width:520px;margin:0 auto 14px;font-size:12px;color:var(--body50);line-height:1.9}
-.f-ip b{color:var(--body)}
-.f-ip .mono{font-family:Consolas,monospace;color:var(--blue)}
-.f-disc{font-size:12px;color:var(--muted);margin-top:10px}
-
-/* ─── AI Chat ─── */
+/* ─── Chat ─── */
 .chat-fab{position:fixed;bottom:24px;right:24px;z-index:1500;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--blue));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(255,59,92,.35);transition:transform .2s}
 .chat-fab:hover{transform:scale(1.08)}
 .chat-fab svg{width:30px;height:30px;stroke:#fff}
-.chat-badge{position:absolute;top:-2px;right:-2px;background:var(--gold);color:#141414;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
 .chat-window{position:fixed;bottom:96px;right:24px;z-index:1500;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:var(--bg2);border:1px solid var(--border);border-radius:18px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.6)}
 .chat-window.open{display:flex}
 .chat-head{padding:16px 18px;background:linear-gradient(135deg,var(--red),var(--blue));display:flex;align-items:center;gap:12px;color:#fff}
 .chat-head .ava{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
-.chat-head .ttl{font-weight:800;font-size:15px}
-.chat-head .stt{font-size:11px;opacity:.85}
 .chat-close{margin-left:auto;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.8}
 .chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
 .msg{max-width:80%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap}
 .msg.bot{background:var(--card);border:1px solid var(--border);color:var(--body);align-self:flex-start;border-bottom-left-radius:4px}
 .msg.user{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
-.msg .btn-tg{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#229ED9;color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none}
 .msg .quick{display:block;margin-top:6px;background:rgba(255,180,0,.08);border:1px solid var(--border);color:var(--title);padding:8px 12px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;width:100%}
 .msg .quick:hover{border-color:var(--gold)}
+.msg .btn-tg{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#229ED9;color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none}
 .typing{display:inline-flex;gap:4px;padding:12px 16px}
 .typing span{width:7px;height:7px;border-radius:50%;background:var(--body50);animation:blink 1.2s infinite}
 .typing span:nth-child(2){animation-delay:.2s}
@@ -174,6 +202,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16p
 .chat-input input:focus{border-color:var(--gold)}
 .chat-input button{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:10px;padding:0 18px;font-weight:900;font-size:15px;cursor:pointer}
 @media(max-width:480px){.chat-window{right:8px;bottom:84px;width:calc(100vw - 16px);height:calc(100vh - 120px)}.chat-fab{bottom:16px;right:16px}}
+
+/* ─── Footer ─── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16px calc(30px + env(safe-area-inset-bottom,0px));text-align:center;margin-top:40px}
+.f-nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.f-nav a{font-size:13px;color:var(--body50)}
+.f-nav a:hover{color:var(--gold)}
+.f-ip{border:1px dashed var(--border2);border-radius:10px;padding:14px;max-width:520px;margin:0 auto 14px;font-size:12px;color:var(--body50);line-height:1.9}
+.f-ip b{color:var(--body)}
+.f-ip .mono{font-family:Consolas,monospace;color:var(--blue)}
+.f-disc{font-size:12px;color:var(--muted);margin-top:10px}
+
+/* ─── Upload ─── */
+.upload-area{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.upload-area input[type=file]{display:none}
+.upload-btn{background:var(--card);border:1px dashed var(--border2);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--body50);cursor:pointer;text-align:center;min-width:100px}
+.upload-btn:hover{border-color:var(--gold);color:var(--title)}
+.img-preview{width:40px;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background-size:cover;background-position:center;flex:0 0 40px}
+.img-preview.banner{width:100%;height:60px}
 </style>
 </head>
 <body>
@@ -183,584 +229,648 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:22px 16p
     <div class="logo-mini"><span class="h1">HOOLS</span><span class="t">TIME</span></div>
     <span class="hdr-ip">hoolstime.ru</span>
   </div>
-  <div class="hdr-center">
-    <button class="hdr-ip-btn" onclick="copyIp(this)">hoolstime.ru ⧉</button>
-  </div>
-  <div class="hdr-right">
+  <div class="hdr-right" id="hdrRight">
     <a href="https://gusarovbllm.github.io/hoolstime/" class="hide-m">Магазин</a>
-    <a href="#" class="hide-m" onclick="scrollToId('forum')">Форум</a>
-    <span id="userBadgeHdr"></span>
-    <a href="#" class="btn-outline" onclick="showAuth()" id="authBtnHdr">Войти</a>
-    <a href="#" class="btn-accent" onclick="showRegister()" id="regBtnHdr">Регистрация</a>
+    <a href="#" class="btn-hdr-ghost" onclick="openAuthModal('login')" id="hdrLoginBtn">Войти</a>
+    <a href="#" class="btn-hdr" onclick="openAuthModal('register')" id="hdrRegBtn">Регистрация</a>
+    <span id="hdrLogged" style="display:none">
+      <span id="hdrUserName" style="font-size:13px;font-weight:600;color:var(--gold)"></span>
+      <a href="#" class="btn-hdr-ghost" onclick="showProfile()">Профиль</a>
+      <a href="#" class="btn-hdr-ghost" onclick="logoutUser()">Выйти</a>
+    </span>
   </div>
 </header>
 
-<div class="page">
-
-  <div class="sec-head"><h2>Форум <span class="grad">HoolsTime</span></h2><p>Общайся, делись опытом, торгуй и создавай кланы</p></div>
-
-  <!-- User bar -->
-  <div class="user-bar" id="userBar" style="display:none">
-    <div class="ava" id="userAva">?</div>
-    <div class="info">
-      <b id="userName">—</b><br>
-      <span class="role" id="userRole">Гость</span>
-    </div>
-    <span class="role-tag" id="userRoleTag" style="margin-right:auto"></span>
-    <button class="btn btn-sm btn-ghost" onclick="showCreateTicket()">✉️ Тикет</button>
-    <button class="btn btn-sm btn-ghost" onclick="showProfile()">👤 Профиль</button>
-    <button class="btn btn-sm btn-danger" onclick="logout()">Выйти</button>
+<div class="page" id="forumPage">
+  <div id="welcomeBlock" style="text-align:center;padding:40px 0 20px">
+    <h1 style="font-size:32px;font-weight:900;color:var(--title)">Форум <span style="background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">HoolsTime</span></h1>
+    <p style="color:var(--body50);font-size:14px;margin-top:6px">Общайся, делись опытом, торгуй и создавай кланы</p>
   </div>
 
-  <!-- Auth forms -->
-  <div class="auth-forms" id="authForms">
-    <!-- Login -->
-    <div class="auth-card">
-      <h3>Вход</h3>
-      <div class="sub">Введи логин или почту, затем пароль</div>
-      <div class="fld">
-        <label>Логин или электронная почта</label>
-        <input type="text" id="loginId" placeholder="ivan или ivan@mail.ru">
-      </div>
-      <div class="fld">
-        <label>Пароль</label>
-        <div class="pwd-row">
-          <input type="password" id="loginPwd" placeholder="••••••••">
-          <button class="pwd-toggle" onclick="togglePwd('loginPwd',this)">Показать</button>
-        </div>
-      </div>
-      <button class="btn" onclick="loginUser()" style="width:100%">Войти</button>
-      <div id="loginMsg" style="margin-top:10px;font-size:13px"></div>
-      <div style="margin-top:10px;font-size:12px;color:var(--body50);text-align:center">Ещё нет аккаунта? <a href="#" onclick="showRegister()" style="color:var(--gold)">Зарегистрироваться</a></div>
+  <div id="userBar" class="user-bar" style="display:none">
+    <div class="ava" id="userAvaDiv"><span id="userAvaLetter">?</span></div>
+    <div class="info">
+      <b id="userName">—</b><span class="mood" id="userMood"></span><br>
+      <span class="role" id="userRole">Гость</span>
+      <span class="role-tag" id="userRoleTag" style="margin-left:6px"></span>
     </div>
-    <!-- Register -->
-    <div class="auth-card">
-      <h3>Регистрация</h3>
-      <div class="sub">Создай аккаунт для доступа к форуму</div>
-      <div class="fld">
-        <label>Имя пользователя</label>
-        <input type="text" id="regLogin" placeholder="Твой ник на форуме" maxlength="24">
-        <div class="hint">Это имя будет отображаться в ваших сообщениях. После регистрации его нельзя изменить самостоятельно.</div>
-      </div>
-      <div class="fld">
-        <label>Электронная почта</label>
-        <input type="email" id="regEmail" placeholder="ivan@mail.ru">
-      </div>
-      <div class="fld">
-        <label>Пароль</label>
-        <div class="pwd-row">
-          <input type="password" id="regPwd" placeholder="••••••••">
-          <button class="pwd-toggle" onclick="togglePwd('regPwd',this)">Показать</button>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Подтверждение пароля</label>
-        <div class="pwd-row">
-          <input type="password" id="regPwd2" placeholder="••••••••" oninput="checkPwdMatch()">
-          <span id="pwdMatch" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:600"></span>
-        </div>
-      </div>
-      <div class="fld">
-        <div class="chk">
-          <input type="checkbox" id="regTerms">
-          <label for="regTerms">Я согласен(на) с условиями и политикой конфиденциальности.</label>
-        </div>
-      </div>
-      <button class="btn" onclick="registerUser()" style="width:100%">Зарегистрироваться</button>
-      <div id="regMsg" style="margin-top:10px;font-size:13px"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-ghost" onclick="showProfile()">👤 Профиль</button>
+      <button class="btn btn-sm btn-ghost" onclick="showCreateTicket()">✉️ Тикет</button>
+      <button class="btn btn-sm btn-danger" onclick="logoutUser()">Выйти</button>
     </div>
   </div>
 
   <!-- Forum sections -->
-  <section id="forum">
-    <div class="sec-head" style="margin-top:20px"><h2>Разделы <span class="grad">форума</span></h2></div>
+  <div id="forumView">
     <div class="forum-grid" id="forumGrid"></div>
-  </section>
-
-  <!-- Topic list (shown when section selected) -->
-  <div id="topicSection" style="display:none">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-      <h3 id="topicSectionTitle" style="font-size:22px;font-weight:900;color:var(--title)"></h3>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-sm btn-ghost" onclick="showTopicForm()">+ Новая тема</button>
-        <button class="btn btn-sm btn-ghost" onclick="hideTopicSection()">← Назад</button>
+    <div id="topicSection" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+        <h3 id="topicSectionTitle" style="font-size:22px;font-weight:900;color:var(--title)"></h3>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm btn-ghost" onclick="showTopicForm()">+ Новая тема</button>
+          <button class="btn btn-sm btn-ghost" onclick="hideTopicSection()">← Назад</button>
+        </div>
       </div>
+      <div id="topicList" class="topic-list"></div>
     </div>
-    <div id="topicList" class="topic-list"></div>
+    <div id="topicFormArea" style="display:none"><div class="topic-create"><div id="topicForm"></div></div></div>
   </div>
 
-  <!-- Topic create/answer -->
-  <div id="topicFormArea" style="display:none">
-    <div class="topic-create">
-      <h3>Новая тема</h3>
-      <div id="topicForm"></div>
-    </div>
-  </div>
+  <!-- Profile view -->
+  <div id="profileView" style="display:none"></div>
 
-  <!-- Ticket create -->
+  <!-- Ticket form -->
   <div id="ticketFormArea" style="display:none">
     <div class="topic-create">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <h3>✉️ Тикет в поддержку</h3>
-        <button class="btn btn-sm btn-ghost" onclick="hideTicketForm()">✕ Закрыть</button>
+        <button class="btn btn-sm btn-ghost" onclick="hideTicketForm()">✕</button>
       </div>
-      <div class="tc-row">
-        <label>Тема обращения</label>
-        <input type="text" id="ticketSubject" placeholder="Кратко опишите проблему">
-      </div>
-      <div class="tc-row">
-        <label>Сообщение</label>
-        <textarea id="ticketBody" placeholder="Опишите ситуацию подробно. Укажите ваш ник в игре, дату, приложите ссылки на скриншоты."></textarea>
-      </div>
-      <button class="btn" onclick="submitTicket()">Отправить тикет</button>
+      <div class="tc-row"><label>Тема</label><input id="ticketSubject" placeholder="Кратко опишите проблему"></div>
+      <div class="tc-row"><label>Сообщение</label><textarea id="ticketBody" placeholder="Опишите ситуацию. Укажите ник, дату, приложите ссылки на скриншоты."></textarea></div>
+      <button class="btn" onclick="submitTicket()">Отправить</button>
       <div id="ticketMsg" style="margin-top:8px;font-size:13px"></div>
     </div>
   </div>
 </div>
 
-<!-- Footer -->
-<footer>
-  <div class="f-nav">
-    <a href="https://gusarovbllm.github.io/hoolstime/">Магазин</a>
-    <a href="#">Форум</a>
-    <a href="#">Соглашение</a>
-    <a href="#">Политика конфиденциальности</a>
-  </div>
-  <div class="f-ip">
-    <b>HoolsTime</b> — анархия без границ · <span class="mono">hoolstime.ru</span><br>
-    Администрация: <span class="mono">support@hoolstime.ru</span>
-  </div>
-  <div class="f-disc">© 2026 HoolsTime. Все права защищены. Не связаны с Mojang AB.</div>
-</footer>
-
-<!-- AI Chat -->
-<button class="chat-fab" onclick="toggleChat()">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <span class="chat-badge" id="chatBadge" style="display:none">●</span>
-</button>
-<div class="chat-window" id="chatWin">
-  <div class="chat-head">
-    <div class="ava">🧠</div>
-    <div><div class="ttl">ИИ-помощник HoolsTime</div><div class="stt">онлайн · отвечает мгновенно</div></div>
-    <button class="chat-close" onclick="toggleChat()">✕</button>
-  </div>
-  <div class="chat-body" id="chatBody"></div>
-  <div class="chat-input">
-    <input type="text" id="chatIn" placeholder="Спроси меня что-нибудь…" autocomplete="off">
-    <button onclick="sendChat()">➤</button>
+<!-- Auth Modal -->
+<div class="modal-ov" id="authModal">
+  <div class="modal">
+    <button class="m-close" onclick="closeAuthModal()">✕</button>
+    <h3 id="authTitle">Вход в аккаунт</h3>
+    <div class="sub" id="authSub">Войдите или зарегистрируйтесь, чтобы получить доступ к форуму</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-au="login" onclick="switchAuthTab('login')">Вход</button>
+      <button class="auth-tab" data-au="register" onclick="switchAuthTab('register')">Регистрация</button>
+    </div>
+    <!-- Login form -->
+    <div id="authLoginForm">
+      <div class="fld"><label>Логин или электронная почта</label><input type="text" id="loginId" placeholder="ivan или ivan@mail.ru"></div>
+      <div class="fld"><label>Пароль</label><div class="pwd-row"><input type="password" id="loginPwd" placeholder="••••••••"><button class="pwd-toggle" onclick="togglePwd('loginPwd',this)">Показать</button></div></div>
+      <div class="fld"><div class="chk"><input type="checkbox" id="login2fa"><label for="login2fa">Двухфакторная аутентификация (2FA)</label></div></div>
+      <div id="login2faField" style="display:none" class="fld"><label>Код из приложения</label><input type="text" id="login2faCode" placeholder="123456" maxlength="6"></div>
+      <button class="btn btn-full" onclick="loginUser()">Войти</button>
+      <div id="loginMsg" style="margin-top:10px;font-size:13px;text-align:center"></div>
+    </div>
+    <!-- Register form -->
+    <div id="authRegisterForm" style="display:none">
+      <div class="fld"><label>Имя пользователя</label><input type="text" id="regLogin" placeholder="Твой ник на форуме" maxlength="24">
+        <div class="hint">Это имя будет отображаться в сообщениях. После регистрации нельзя изменить.</div></div>
+      <div class="fld"><label>Электронная почта</label><input type="email" id="regEmail" placeholder="ivan@mail.ru"></div>
+      <div class="fld"><label>Пароль (мин 6 символов)</label><div class="pwd-row"><input type="password" id="regPwd" placeholder="••••••••"><button class="pwd-toggle" onclick="togglePwd('regPwd',this)">Показать</button></div></div>
+      <div class="fld"><label>Подтверждение пароля</label><div class="pwd-row"><input type="password" id="regPwd2" placeholder="••••••••" oninput="checkPwdMatch()"><span id="pwdMatch" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:600"></span></div></div>
+      <div class="fld"><div class="chk"><input type="checkbox" id="regTerms"><label for="regTerms">Я согласен(на) с условиями и политикой конфиденциальности.</label></div></div>
+      <div class="fld"><div class="chk"><input type="checkbox" id="reg2fa"><label for="reg2fa">Включить 2FA для защиты аккаунта</label></div></div>
+      <button class="btn btn-full" onclick="registerUser()">Зарегистрироваться</button>
+      <div id="regMsg" style="margin-top:10px;font-size:13px;text-align:center"></div>
+    </div>
   </div>
 </div>
 
+<footer>
+  <div class="f-nav">
+    <a href="https://gusarovbllm.github.io/hoolstime/">Магазин</a><a href="#">Форум</a>
+    <a href="#">Соглашение</a><a href="#">Политика конфиденциальности</a>
+  </div>
+  <div class="f-ip"><b>HoolsTime</b> · <span class="mono">hoolstime.ru</span> · support@hoolstime.ru</div>
+  <div class="f-disc">© 2026 HoolsTime. Не связаны с Mojang AB.</div>
+</footer>
+
+<button class="chat-fab" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chat-window" id="chatWin">
+  <div class="chat-head"><div class="ava">🧠</div><div><div style="font-weight:800;font-size:15px">ИИ-помощник</div><div style="font-size:11px;opacity:.85">онлайн</div></div><button class="chat-close" onclick="toggleChat()">✕</button></div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input"><input type="text" id="chatIn" placeholder="Спроси что-нибудь…" autocomplete="off"><button onclick="sendChat()">➤</button></div>
+</div>
+
 <script>
-// ═══════════════ Данные ═══════════════
-const SECTIONS = [
-  {id:'discuss', ic:'💬', name:'Обсуждения', desc:'Свободное общение, вопросы по игре.'},
-  {id:'guides', ic:'📘', name:'Гайды и туториалы', desc:'Советы по выживанию, крафту, защите баз.'},
-  {id:'trade', ic:'💰', name:'Торговля', desc:'Обмен ресурсами, услугами.'},
-  {id:'clans', ic:'⚔️', name:'Кланы', desc:'Создание и набор участников.'}
-];
+// ═══════════════ DATA ═══════════════
+const SECTIONS=[
+  {id:'discuss',ic:'💬',name:'Обсуждения',desc:'Свободное общение, вопросы по игре.'},
+  {id:'guides',ic:'📘',name:'Гайды и туториалы',desc:'Советы по выживанию, крафту, защите баз.'},
+  {id:'trade',ic:'💰',name:'Торговля',desc:'Обмен ресурсами, услугами.'},
+  {id:'clans',ic:'⚔️',name:'Кланы',desc:'Создание и набор участников.'}];
+const ROLES=['guest','player','verified','helper','moderator','admin'];
+const ROLES_RU={guest:'Гость',player:'Игрок',verified:'Проверенный',helper:'Хелпер',moderator:'Модератор',admin:'Администратор'};
+const ROLE_TAG={guest:'guest',player:'player',verified:'verified',helper:'helper',moderator:'mod',admin:'admin'};
+const TRUST_LEVELS=[{id:'acquaintance',name:'Знакомый',badge:'acc'},{id:'buddy',name:'Приятель',badge:'bud'},{id:'friend',name:'Друг',badge:'frd'},{id:'close',name:'Близкий',badge:'cls'}];
+const ACHIEVEMENTS=[{id:'first_post',name:'Первый пост',ic:'🌟',desc:'Создал первую тему'},{id:'helper',name:'Помощник',ic:'🤝',desc:'Ответил на 10 вопросов'},{id:'veteran',name:'Старожил',ic:'🏆',desc:'30 дней на форуме'},{id:'social',name:'Дружелюбный',ic:'👥',desc:'Добавил 5 друзей'},{id:'blogger',name:'Блогер',ic:'✍️',desc:'Написал 5 постов в блог'}];
+const MOODS=['😊','😎','🔥','🥶','😈','💀','❤️','🤔','😴','🎉','🤯','👻','😢','🥰','😤','🙏'];
 
-const ROLES = ['guest','player','verified','helper','moderator','admin'];
+let currentUser=null, currentSection=null;
 
-const ROLES_RU = {guest:'Гость',player:'Игрок',verified:'Проверенный',helper:'Хелпер',moderator:'Модератор',admin:'Администратор'};
-
-const ROLE_TAG_CLASS = {guest:'guest',player:'player',verified:'verified',helper:'helper',moderator:'mod',admin:'admin'};
-
-const ADMIN_PASS = 'admin123'; // simple admin pass for demo — change in production
-
-// ═══════════════ State ═══════════════
-let currentUser = null;
-let currentSection = null;
-
-function loadState(){
-  const u = localStorage.getItem('ht_forum_user');
-  if(u) currentUser = JSON.parse(u);
-  const s = localStorage.getItem('ht_forum_section');
-  if(s) currentSection = s;
-}
-
-function saveUser(){
-  if(currentUser) localStorage.setItem('ht_forum_user', JSON.stringify(currentUser));
-  else localStorage.removeItem('ht_forum_user');
-}
-
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function $(id){return document.getElementById(id)}
+function notif(t,type){const d=document.createElement('div');d.className='notif'+(type?' '+type:'');d.textContent=t;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200)}
+function nowISO(){return new Date().toISOString()}
+function today(){return new Date().toISOString().slice(0,10)}
 
-function notif(text, type){
-  const d=document.createElement('div'); d.className='notif'+(type?' '+type:''); d.textContent=text;
-  document.body.appendChild(d);
-  setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200);
-}
+// ═══════════════ AUTH MODAL ═══════════════
+function openAuthModal(tab){$('authModal').classList.add('open');switchAuthTab(tab||'login')}
+function closeAuthModal(){$('authModal').classList.remove('open')}
+function switchAuthTab(t){
+  document.querySelectorAll('.auth-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.auth-tab[data-au="'+t+'"]').classList.add('active');
+  if(t==='login'){$('authLoginForm').style.display='block';$('authRegisterForm').style.display='none';$('authTitle').textContent='Вход';$('authSub').textContent='Войдите в свой аккаунт'}
+  else{$('authLoginForm').style.display='none';$('authRegisterForm').style.display='block';$('authTitle').textContent='Регистрация';$('authSub').textContent='Создайте аккаунт для доступа к форуму'}}
+$('authModal').addEventListener('click',e=>{if(e.target===$('authModal'))closeAuthModal()});
 
-function copyIp(btn){
-  const t='hoolstime.ru';
-  navigator.clipboard.writeText(t).then(()=>{
-    const old=btn.textContent;btn.textContent='✓ Скопировано';setTimeout(()=>btn.textContent=old,1600);
-  }).catch(()=>{});
-}
+function togglePwd(fid,b){const f=$(fid);if(f.type==='password'){f.type='text';b.textContent='Скрыть'}else{f.type='password';b.textContent='Показать'}}
+function checkPwdMatch(){const p1=$('regPwd').value,p2=$('regPwd2').value;const el=$('pwdMatch');if(!p2){el.textContent='';return}el.textContent=p1===p2?'✓ Успешно':'✗ Не совпадает';el.className=p1===p2?'match-ok':'match-no'}
 
-function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+// 2FA
+$('reg2fa').addEventListener('change',function(){if(this.checked)notif('2FA будет активирована после регистрации. Сохраните код из приложения.','gold')});
+$('login2fa').addEventListener('change',function(){$('login2faField').style.display=this.checked?'block':'none'});
 
-function togglePwd(fieldId, btn){
-  const f=$(fieldId);
-  if(f.type==='password'){f.type='text';btn.textContent='Скрыть'}else{f.type='password';btn.textContent='Показать'}
-}
-
-function checkPwdMatch(){
-  const p1=$('regPwd').value, p2=$('regPwd2').value;
-  const el=$('pwdMatch');
-  if(!p2){el.textContent='';return}
-  el.textContent = p1===p2 ? '✓ Успешно' : '✗ Не совпадает';
-  el.className = p1===p2 ? 'match-ok' : 'match-no';
-}
-
-// ═══════════════ Auth ═══════════════
-function showAuth(){$('authForms').scrollIntoView({behavior:'smooth'});$('loginId').focus()}
-function showRegister(){$('authForms').scrollIntoView({behavior:'smooth'});$('regLogin').focus()}
-
+// ─── REGISTER ───
 function registerUser(){
-  const login = $('regLogin').value.trim();
-  const email = $('regEmail').value.trim();
-  const pwd = $('regPwd').value;
-  const pwd2 = $('regPwd2').value;
-  const terms = $('regTerms').checked;
-  const msg = $('regMsg');
-
-  if(!login || login.length<3){msg.textContent='Логин должен быть минимум 3 символа';msg.style.color='var(--red)';return}
-  if(!email || !email.includes('@')){msg.textContent='Введите корректный email';msg.style.color='var(--red)';return}
-  if(!pwd || pwd.length<6){msg.textContent='Пароль минимум 6 символов';msg.style.color='var(--red)';return}
+  const login=$('regLogin').value.trim();const email=$('regEmail').value.trim();
+  const pwd=$('regPwd').value;const pwd2=$('regPwd2').value;const terms=$('regTerms').checked;const msg=$('regMsg');
+  if(!login||login.length<3){msg.textContent='Логин минимум 3 символа';msg.style.color='var(--red)';return}
+  if(!email||!email.includes('@')){msg.textContent='Введите корректный email';msg.style.color='var(--red)';return}
+  if(!pwd||pwd.length<6){msg.textContent='Пароль минимум 6 символов';msg.style.color='var(--red)';return}
   if(pwd!==pwd2){msg.textContent='Пароли не совпадают';msg.style.color='var(--red)';return}
-  if(!terms){msg.textContent='Примите условия и политику конфиденциальности';msg.style.color='var(--red)';return}
-
-  const users = JSON.parse(localStorage.getItem('ht_users')||'[]');
-  if(users.find(u=>u.login===login)){msg.textContent='Этот логин уже занят';msg.style.color='var(--red)';return}
-  if(users.find(u=>u.email===email)){msg.textContent='Эта почта уже используется';msg.style.color='var(--red)';return}
-
-  const user = {login, email, pwd, role:'player', regDate:new Date().toISOString(), playHours:0};
-  users.push(user);
-  localStorage.setItem('ht_users', JSON.stringify(users));
-
-  // Log registration
-  const logs = JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
-  logs.push({type:'register', user:login, email, date:new Date().toISOString(), pwd});
-  localStorage.setItem('ht_admin_logs', JSON.stringify(logs));
-
-  currentUser = {login, role:'player', email};
-  saveUser();
-  msg.textContent='Регистрация успешна! Добро пожаловать на форум.';
-  msg.style.color='var(--ok)';
-  updateUI();
-  notif('Аккаунт создан! Добро пожаловать, '+login,'gold');
-  setTimeout(()=>showRegisterSection(),300);
+  if(!terms){msg.textContent='Примите условия';msg.style.color='var(--red)';return}
+  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
+  if(users.find(u=>u.login===login)){msg.textContent='Логин уже занят';return}
+  if(users.find(u=>u.email===email)){msg.textContent='Почта уже используется';return}
+  const user={login,email,pwd,role:'player',regDate:nowISO(),playHours:0,2fa:$('reg2fa').checked,mood:'😊',bio:'',notes:[],achievements:[],friends:[],blog:[],avatar:'',banner:'',theme:'dark',blockOrder:'bio,lasttopics',lastSeen:nowISO()};
+  users.push(user);localStorage.setItem('ht_users',JSON.stringify(users));
+  const logs=JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
+  logs.push({date:nowISO(),who:login,act:'Регистрация',details:'email: '+email+(user['2fa']?' +2FA':'')});localStorage.setItem('ht_admin_logs',JSON.stringify(logs));
+  currentUser={login,role:'player',email,2fa:user['2fa']};saveUser();closeAuthModal();
+  msg.textContent='';updateUI();notif('Добро пожаловать, '+login+'!','gold');
 }
 
 function loginUser(){
-  const id = $('loginId').value.trim();
-  const pwd = $('loginPwd').value;
-  const msg = $('loginMsg');
-  if(!id || !pwd){msg.textContent='Заполните все поля';msg.style.color='var(--red)';return}
-
-  const users = JSON.parse(localStorage.getItem('ht_users')||'[]');
-  // Try by login
-  let user = users.find(u=>u.login===id);
-  // Try by email
-  if(!user) user = users.find(u=>u.email===id);
-  if(!user || user.pwd!==pwd){msg.textContent='Неверный логин/почта или пароль';msg.style.color='var(--red)';return}
-
-  currentUser = {login:user.login, role:user.role, email:user.email};
-  saveUser();
-  msg.textContent='Вход выполнен! Привет, '+user.login;
-  msg.style.color='var(--ok)';
-  updateUI();
-  notif('С возвращением, '+user.login+'!','gold');
-  setTimeout(()=>showRegisterSection(),300);
+  const id=$('loginId').value.trim();const pwd=$('loginPwd').value;const msg=$('loginMsg');
+  if(!id||!pwd){msg.textContent='Заполните поля';msg.style.color='var(--red)';return}
+  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
+  let user=users.find(u=>u.login===id)||users.find(u=>u.email===id);
+  if(!user||user.pwd!==pwd){msg.textContent='Неверные данные';msg.style.color='var(--red)';return}
+  if($('login2fa').checked){
+    const code=$('login2faCode').value.trim();
+    if(code!=='123456'&&code!==user['2fa_code']){msg.textContent='Неверный код 2FA';msg.style.color='var(--red)';return}
+  }
+  currentUser={login:user.login,role:user.role,email:user.email,2fa:user['2fa']};saveUser();closeAuthModal();
+  msg.textContent='';updateUI();notif('С возвращением, '+user.login+'!','gold');
 }
 
-function logout(){
-  currentUser=null;
-  saveUser();
-  updateUI();
-  notif('Вы вышли из аккаунта');
+function logoutUser(){currentUser=null;saveUser();$('forumView').style.display='block';$('profileView').style.display='none';$('hdrLogged').style.display='none';$('hdrLoginBtn').style.display='';$('hdrRegBtn').style.display='';$('userBar').style.display='none';notif('Вы вышли')}
+function saveUser(){if(currentUser)localStorage.setItem('ht_forum_user',JSON.stringify(currentUser));else localStorage.removeItem('ht_forum_user')}
+
+// ═══════════════ UI UPDATE ═══════════════
+function updateUI(){
+  if(currentUser){
+    const u=getUserData(currentUser.login);
+    $('hdrLogged').style.display='inline';$('hdrUserName').textContent=currentUser.login;
+    $('hdrLoginBtn').style.display='none';$('hdrRegBtn').style.display='none';
+    $('userBar').style.display='flex';
+    const ava=$('userAvaDiv');if(u&&u.avatar){ava.style.backgroundImage='url('+u.avatar+')';ava.innerHTML=''}else{ava.style.backgroundImage='';ava.innerHTML=currentUser.login.charAt(0).toUpperCase()}
+    $('userName').textContent=currentUser.login;
+    $('userMood').textContent=(u&&u.mood)||'';
+    $('userRole').textContent=ROLES_RU[currentUser.role]||'Игрок';
+    const tag=$('userRoleTag');tag.textContent=ROLES_RU[currentUser.role]||'';tag.className='role-tag '+(ROLE_TAG[currentUser.role]||'player');
+  } else {
+    $('hdrLogged').style.display='none';$('hdrLoginBtn').style.display='';$('hdrRegBtn').style.display='';$('userBar').style.display='none';
+  }
 }
 
-// ═══════════════ Roles & Permissions ═══════════════
-function canCreateTopics(user){
-  if(!user) return false;
-  const roleIdx = ROLES.indexOf(user.role);
-  return roleIdx >= ROLES.indexOf('player');
+function getUserData(login){
+  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
+  return users.find(u=>u.login===login);
 }
 
-function canTrade(user){
-  if(!user) return false;
-  return ROLES.indexOf(user.role) >= ROLES.indexOf('verified');
+function saveUserData(login,data){
+  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
+  const idx=users.findIndex(u=>u.login===login);if(idx<0)return;
+  Object.assign(users[idx],data);localStorage.setItem('ht_users',JSON.stringify(users));
 }
 
-function canModerate(user){
-  if(!user) return false;
-  return ROLES.indexOf(user.role) >= ROLES.indexOf('moderator');
-}
-
-function isAdmin(user){
-  if(!user) return false;
-  return user.role === 'admin';
-}
-
-// ═══════════════ Forum Rendering ═══════════════
+// ═══════════════ FORUM ─── SECTIONS & TOPICS ═══════════════
 function renderSections(){
-  const g = $('forumGrid'); g.innerHTML='';
+  const g=$('forumGrid');g.innerHTML='';
   SECTIONS.forEach(s=>{
-    const topics = getTopics(s.id);
-    const el=document.createElement('div');
-    el.className='forum-sect';
-    el.onclick=()=>openSection(s.id);
-    el.innerHTML=`
-      <div class="sect-ic">${s.ic}</div>
-      <h3>${s.name}</h3>
-      <p>${s.desc}</p>
-      <div class="sect-stat"><b>${topics.length}</b> тем</div>`;
+    const topics=getTopics(s.id);
+    const el=document.createElement('div');el.className='forum-sect';el.onclick=()=>openSection(s.id);
+    el.innerHTML=`<div class="sect-ic">${s.ic}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="sect-stat"><b>${topics.length}</b> тем</div>`;
     g.appendChild(el);
   });
 }
-
-function getTopics(sectionId){
-  const all = JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
-  return all.filter(t=>t.section===sectionId).sort((a,b)=>new Date(b.date)-new Date(a.date));
-}
-
+function getTopics(sectionId){const all=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');return all.filter(t=>t.section===sectionId).sort((a,b)=>new Date(b.date)-new Date(a.date))}
 function openSection(id){
-  currentSection=id;
-  localStorage.setItem('ht_forum_section', id);
-  const s=SECTIONS.find(x=>x.id===id);
-  $('topicSectionTitle').textContent = s.ic+' '+s.name;
-  $('topicSection').style.display='block';
-  renderTopics(id);
+  currentSection=id;const s=SECTIONS.find(x=>x.id===id);
+  $('topicSectionTitle').textContent=s.ic+' '+s.name;$('topicSection').style.display='block';renderTopics(id);
   $('topicSection').scrollIntoView({behavior:'smooth'});
 }
-
-function hideTopicSection(){$('topicSection').style.display='none';currentSection=null;localStorage.removeItem('ht_forum_section');$('topicFormArea').style.display='none'}
-
-function renderTopics(sectionId){
-  const l=$('topicList'); l.innerHTML='';
-  const topics=getTopics(sectionId);
-  if(!topics.length){l.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">В этом разделе пока нет тем. Создайте первую!</div>';return}
+function hideTopicSection(){$('topicSection').style.display='none';currentSection=null;$('topicFormArea').style.display='none'}
+function renderTopics(sId){
+  const l=$('topicList');l.innerHTML='';const topics=getTopics(sId);
+  if(!topics.length){l.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">В разделе пока нет тем</div>';return}
   topics.forEach(t=>{
-    const d=document.createElement('div'); d.className='topic-item';
-    const prefix = t.prefix ? '<span class="prefix">['+t.prefix+']</span> ' : '';
-    d.innerHTML=`
-      <div>
-        <div class="ti-title">${prefix}${esc(t.title)}</div>
-        <div class="ti-meta">
-          <span class="auth">${esc(t.author)}</span>
-          <span class="role-tag ${ROLE_TAG_CLASS[t.authorRole]||'guest'}">${ROLES_RU[t.authorRole]||'Гость'}</span>
-          <span>${new Date(t.date).toLocaleDateString('ru-RU')}</span>
-          <span>💬 ${t.replies||0}</span>
+    const d=document.createElement('div');d.className='topic-item';
+    const p=t.prefix?'<span class="prefix">['+t.prefix+']</span> ':'';
+    d.innerHTML=`<div><div class="ti-title">${p}${esc(t.title)}</div><div class="ti-meta"><span class="auth">${esc(t.author)}</span><span>${new Date(t.date).toLocaleDateString('ru-RU')}</span><span>💬 ${t.replies||0}</span></div></div>`;l.appendChild(d);
+  });
+}
+function showTopicForm(){
+  if(!currentUser){notif('Войдите сначала','err');return}
+  if(!currentSection)return;
+  $('topicFormArea').style.display='block';const area=$('topicForm');
+  area.innerHTML=`
+    <div class="tc-row"><label>Заголовок</label><input id="tfTitle" placeholder="Заголовок темы"></div>
+    <div class="tc-row"><label>Содержание</label><textarea id="tfBody" placeholder="Ваше сообщение..."></textarea></div>
+    <div style="display:flex;gap:8px"><button class="btn" onclick="submitTopic()">📌 Создать</button><button class="btn btn-ghost" onclick="hideTopicForm()">Отмена</button></div>
+    <div id="topicSubmitMsg" style="margin-top:8px;font-size:13px"></div>`;
+  $('topicFormArea').scrollIntoView({behavior:'smooth'});
+}
+function hideTopicForm(){$('topicFormArea').style.display='none'}
+function submitTopic(){
+  const title=($('tfTitle')?.value||'').trim();const body=($('tfBody')?.value||'').trim();const msg=$('topicSubmitMsg');
+  if(!title){msg.textContent='Нужен заголовок';msg.style.color='var(--red)';return}
+  if(!body){msg.textContent='Добавьте содержание';msg.style.color='var(--red)';return}
+  const topics=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
+  topics.push({id:'HTF-'+Date.now(),section:currentSection,title,body,author:currentUser.login,date:nowISO(),replies:0});
+  localStorage.setItem('ht_forum_topics',JSON.stringify(topics));
+  checkAchievement('first_post');msg.textContent='Тема создана!';msg.style.color='var(--ok)';
+  hideTopicForm();renderTopics(currentSection);notif('Тема создана','gold');
+}
+
+// ═══════════════ TICKETS ═══════════════
+function showCreateTicket(){if(!currentUser){notif('Войдите','err');return}$('ticketFormArea').style.display='block';$('ticketFormArea').scrollIntoView({behavior:'smooth'})}
+function hideTicketForm(){$('ticketFormArea').style.display='none'}
+function submitTicket(){
+  const subj=$('ticketSubject').value.trim();const body=$('ticketBody').value.trim();
+  if(!subj||!body){$('ticketMsg').textContent='Заполните поля';$('ticketMsg').style.color='var(--red)';return}
+  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
+  tickets.push({id:'HTT-'+Date.now(),subject:subj,body,author:currentUser.login,date:nowISO(),status:'open',answer:''});
+  localStorage.setItem('ht_tickets',JSON.stringify(tickets));
+  $('ticketMsg').textContent='Тикет отправлен!';$('ticketMsg').style.color='var(--ok)';
+  $('ticketSubject').value='';$('ticketBody').value='';notif('Тикет отправлен','gold');
+}
+
+// ═══════════════ PROFILE ═══════════════
+function showProfile(viewLogin){
+  const login=viewLogin||(currentUser?currentUser.login:'');
+  if(!login){notif('Войдите','err');return}
+  const u=getUserData(login);if(!u){notif('Пользователь не найден','err');return}
+  const isOwn=currentUser&&currentUser.login===login;
+  $('forumView').style.display='none';$('profileView').style.display='block';
+  const pv=$('profileView');
+  const mood=u.mood||'😊';
+  const avaStyle=u.avatar?'style="background-image:url('+u.avatar+');background-size:cover"':'';
+  const bannerStyle=u.banner?'style="background-image:url('+u.banner+');background-size:cover;background-position:center"':'';
+  const themeBg=u.theme==='light'?'#e8ecf4':u.theme==='neon'?'#0a0a20':'';
+  let friendsHtml='',friendsCount=0;
+  if(u.friends&&u.friends.length){
+    friendsCount=u.friends.length;
+    u.friends.forEach(f=>{
+      const fu=getUserData(f.login);
+      const trust=TRUST_LEVELS.find(t=>t.id===f.trust)||TRUST_LEVELS[0];
+      friendsHtml+=`<div class="friend-card"><div class="f-ava" style="${fu&&fu.avatar?'background-image:url('+fu.avatar+');background-size:cover':''}">${fu?fu.login.charAt(0).toUpperCase():'?'}</div>
+        <div class="f-info"><div class="fn">${esc(f.login)}<span class="fmood">${(fu&&fu.mood)||''}</span></div><div class="ft"><span class="trust-badge ${trust.badge}">${trust.name}</span></div></div>
+        ${isOwn?`<div class="f-actions"><select class="trust-select" onchange="changeTrust('${esc(f.login)}',this.value)" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:4px;font-size:12px">${TRUST_LEVELS.map(t=>'<option value="'+t.id+'"'+(f.trust===t.id?' selected':'')+'>'+t.name+'</option>').join('')}</select><button class="btn btn-sm btn-ghost" style="font-size:11px;padding:4px 8px" onclick="removeFriend(\''+esc(f.login)+'\')">✕</button></div>`:''}
+        </div>`;
+    });
+  }
+  let blogHtml='';
+  if(u.blog&&u.blog.length){
+    u.blog.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p=>{
+      if(!isOwn&&p.visibility==='private')return;
+      if(!isOwn&&p.visibility==='friends'&&!isFriend(currentUser?currentUser.login:'',login))return;
+      const visClass=p.visibility==='public'?'public':p.visibility==='friends'?'friends':'';
+      const visLabel=p.visibility==='public'?'Всем':p.visibility==='friends'?'Друзьям':'Приватно';
+      blogHtml+=`<div class="blog-post"><div class="bp-h"><h4>${esc(p.title)}</h4><span class="bp-vis ${visClass}">${visLabel}</span></div><div class="bp-body">${esc(p.body)}</div><div class="bp-meta">${new Date(p.date).toLocaleDateString('ru-RU')}</div></div>`;
+    });
+  }
+
+  let notesHtml='';
+  if(u.notes){
+    const now=Date.now();
+    u.notes.filter(n=>now-new Date(n.date)<86400000).forEach(n=>{
+      notesHtml+=`<div class="note-item">${esc(n.text)}<div class="ni-time">~${Math.floor((86400000-(now-new Date(n.date)))/3600000)}ч</div></div>`;
+    });
+  }
+
+  let achHtml='';
+  ACHIEVEMENTS.forEach(a=>{
+    const unlocked=u.achievements&&u.achievements.includes(a.id);
+    achHtml+=`<div class="ach ${unlocked?'unlocked':''}"><span class="ach-ic">${a.ic}</span><span class="ach-lbl">${a.name}</span></div>`;
+  });
+
+  pv.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+      <h2 style="font-size:24px;font-weight:900;color:var(--title)">${isOwn?'Мой профиль':'Профиль '+esc(login)}</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${!isOwn?`<button class="btn btn-sm" onclick="sayHello('${esc(login)}')">👋 Поздороваться</button>
+        <button class="btn btn-sm btn-blue" onclick="offerHelp('${esc(login)}')">🆘 Предложить помощь</button>
+        ${isFriend(currentUser?currentUser.login:'',login)?'':'<button class="btn btn-sm btn-ghost" onclick="sendFriendRequest(\''+esc(login)+'\')">➕ В друзья</button>'}`:'<button class="btn btn-sm btn-ghost" onclick="closeProfile()">← Назад</button>'}
+      </div>
+    </div>
+    <div class="profile-top">
+      <div class="profile-banner"${bannerStyle}>
+        <div class="p-banner-overlay">
+          <div style="display:flex;align-items:flex-end">
+            <div class="p-ava"${avaStyle}>${u.avatar?'':login.charAt(0).toUpperCase()}</div>
+            <div class="p-info"><div class="pn">${esc(login)} <span class="pmood">${mood}</span></div><div class="pr">${ROLES_RU[u.role]||'Игрок'}</div></div>
+          </div>
         </div>
       </div>
-      <div class="ti-meta">${t.pinned?'<span class="pin">📌 Закреплено</span>':''}</div>`;
-    l.appendChild(d);
+    </div>
+    <div class="profile-body">
+      <div class="profile-side">
+        <div class="profile-card">
+          <h4>📊 Статистика</h4>
+          <div class="stat-line">Роль<b>${ROLES_RU[u.role]||'Игрок'}</b></div>
+          <div class="stat-line">Регистрация<b>${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</b></div>
+          <div class="stat-line">Часы на сервере<b>${u.playHours||0}</b></div>
+          <div class="stat-line">Друзей<b>${friendsCount}</b></div>
+        </div>
+        <div class="profile-card" id="moodCard">
+          <h4>😊 Настроение</h4>
+          ${isOwn?`<div class="mood-picker">${MOODS.map(m=>'<button class="mood-btn'+(u.mood===m?' selected':'')+'" onclick="setMood(\''+m+'\')">'+m+'</button>').join('')}</div>`:`<div style="font-size:48px;text-align:center">${mood}</div>`}
+        </div>
+        <div class="profile-card">
+          <h4>💭 Заметки (24ч)</h4>
+          ${notesHtml||'<div style="color:var(--muted);font-size:12px">Нет активных заметок</div>'}
+          ${isOwn?`<div style="display:flex;gap:6px;margin-top:8px"><input id="noteInput" placeholder="Что на душе?" style="flex:1;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px 10px;font-size:13px"><button class="btn btn-sm" onclick="addNote()">+</button></div>`:''}
+        </div>
+        <div class="profile-card">
+          <h4>🏆 Достижения</h4>
+          <div class="ach-grid">${achHtml}</div>
+        </div>
+        <div class="profile-card">
+          <h4>👥 Друзья</h4>
+          ${friendsHtml||'<div style="color:var(--muted);font-size:12px">Нет друзей</div>'}
+          <div id="friendRequests" style="margin-top:8px"></div>
+        </div>
+        ${isOwn?`
+        <div class="profile-card">
+          <h4>⚙️ Настройки профиля</h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="font-size:12px;color:var(--body50)">Аватар</label>
+            <div class="upload-area">
+              <label class="upload-btn">📷 Загрузить<input type="file" accept="image/*" onchange="uploadAvatar(this)"></label>
+              <div class="img-preview" id="avatarPreview" style="${u.avatar?'background-image:url('+u.avatar+');background-size:cover':''}"></div>
+              ${u.avatar?'<button class="btn btn-sm btn-ghost" onclick="removeAvatar()">✕</button>':''}
+            </div>
+            <label style="font-size:12px;color:var(--body50);margin-top:4px">Баннер</label>
+            <div class="upload-area">
+              <label class="upload-btn">🖼️ Загрузить<input type="file" accept="image/*" onchange="uploadBanner(this)"></label>
+              <div class="img-preview banner" id="bannerPreview" style="${u.banner?'background-image:url('+u.banner+');background-size:cover':''}"></div>
+              ${u.banner?'<button class="btn btn-sm btn-ghost" onclick="removeBanner()">✕</button>':''}
+            </div>
+            <label style="font-size:12px;color:var(--body50);margin-top:4px">Тема профиля</label>
+            <select onchange="setTheme(this.value)" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px">
+              <option value="dark" ${u.theme==='dark'?'selected':''}>Тёмная</option>
+              <option value="light" ${u.theme==='light'?'selected':''}>Светлая</option>
+              <option value="neon" ${u.theme==='neon'?'selected':''}>Неоновая</option>
+            </select>
+            <label style="font-size:12px;color:var(--body50);margin-top:4px">О себе</label>
+            <textarea id="bioInput" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px;min-height:50px">${esc(u.bio||'')}</textarea>
+            <button class="btn btn-sm" onclick="saveBio()">Сохранить</button>
+          </div>
+        </div>
+        <div class="profile-card">
+          <h4>📝 Личный блог</h4>
+          <div class="tc-row"><label>Заголовок</label><input id="blogTitle" placeholder="Заголовок поста"></div>
+          <div class="tc-row"><label>Содержание</label><textarea id="blogBody" placeholder="Текст поста..." style="min-height:60px"></textarea></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <select id="blogVis" style="background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:8px;font-size:13px">
+              <option value="public">Видно всем</option>
+              <option value="friends">Только друзьям</option>
+              <option value="private">Только мне</option>
+            </select>
+            <button class="btn btn-sm" onclick="publishBlog()">✍️ Опубликовать</button>
+          </div>
+          <div id="blogMsg" style="font-size:12px;margin-top:6px"></div>
+        </div>
+        `:''}
+      </div>
+      <div class="profile-main">
+        ${u.bio?`<div class="profile-card"><h4>📋 О себе</h4><p style="font-size:13px;color:var(--body50);line-height:1.6">${esc(u.bio)}</p></div>`:''}
+        <div class="profile-card"><h4>📰 Последние записи блога</h4>${blogHtml||'<div style="color:var(--muted);font-size:12px">Нет записей</div>'}</div>
+        <div class="profile-card"><h4>📌 Последние темы</h4>${renderUserTopics(login)||'<div style="color:var(--muted);font-size:12px">Нет тем</div>'}</div>
+      </div>
+    </div>`;
+  renderFriendRequests();
+}
+
+function renderUserTopics(login){
+  const all=JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
+  const topics=all.filter(t=>t.author===login).slice(0,5);
+  if(!topics.length)return '';
+  return topics.map(t=>`<div class="topic-item" style="margin-bottom:6px"><div><div class="ti-title">${esc(t.title)}</div><div class="ti-meta">${new Date(t.date).toLocaleDateString('ru-RU')} · 💬 ${t.replies||0}</div></div></div>`).join('');
+}
+
+function closeProfile(){$('forumView').style.display='block';$('profileView').style.display='none'}
+
+// ═══════════════ PROFILE ACTIONS ═══════════════
+function setMood(m){
+  if(!currentUser)return;
+  saveUserData(currentUser.login,{mood});
+  const u=getUserData(currentUser.login);
+  $('userMood').textContent=m;
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('selected',b.textContent===m));
+}
+
+function addNote(){
+  if(!currentUser)return;
+  const text=$('noteInput').value.trim();if(!text)return;
+  const u=getUserData(currentUser.login);
+  const notes=u.notes||[];
+  notes.push({text,date:nowISO()});
+  saveUserData(currentUser.login,{notes});
+  $('noteInput').value='';showProfile(currentUser.login);
+}
+
+function saveBio(){
+  if(!currentUser)return;
+  const bio=$('bioInput').value;
+  saveUserData(currentUser.login,{bio});
+  notif('Сохранено','gold');
+}
+
+// Upload Avatar/Banner
+function uploadAvatar(inp){
+  if(!currentUser||!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=function(e){
+    saveUserData(currentUser.login,{avatar:e.target.result});
+    const u=getUserData(currentUser.login);
+    $('avatarPreview').style.backgroundImage='url('+u.avatar+')';
+    showProfile(currentUser.login);
+    notif('Аватар обновлён','gold');
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+function removeAvatar(){if(!currentUser)return;saveUserData(currentUser.login,{avatar:''});showProfile(currentUser.login)}
+function uploadBanner(inp){
+  if(!currentUser||!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=function(e){
+    saveUserData(currentUser.login,{banner:e.target.result});
+    showProfile(currentUser.login);
+    notif('Баннер обновлён','gold');
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+function removeBanner(){if(!currentUser)return;saveUserData(currentUser.login,{banner:''});showProfile(currentUser.login)}
+
+function setTheme(t){if(!currentUser)return;saveUserData(currentUser.login,{theme:t});notif('Тема сохранена','gold')}
+
+// Blog
+function publishBlog(){
+  if(!currentUser)return;
+  const title=$('blogTitle').value.trim();const body=$('blogBody').value.trim();
+  if(!title||!body){$('blogMsg').textContent='Заполните все поля';$('blogMsg').style.color='var(--red)';return}
+  const u=getUserData(currentUser.login);
+  const blog=u.blog||[];
+  blog.push({title,body,visibility:$('blogVis').value,date:nowISO()});
+  saveUserData(currentUser.login,{blog});
+  $('blogTitle').value='';$('blogBody').value='';
+  $('blogMsg').textContent='Пост опубликован!';$('blogMsg').style.color='var(--ok)';
+  checkAchievement('blogger');
+  showProfile(currentUser.login);notif('Пост опубликован','gold');
+}
+
+// ═══════════════ ACHIEVEMENTS ═══════════════
+function checkAchievement(id){
+  if(!currentUser)return;
+  const u=getUserData(currentUser.login);
+  const ach=u.achievements||[];
+  if(ach.includes(id))return;
+  ach.push(id);saveUserData(currentUser.login,{achievements:ach});
+  const a=ACHIEVEMENTS.find(x=>x.id===id);
+  if(a)notif('🏆 Достижение получено: '+a.name+'!','gold');
+}
+
+// ═══════════════ FRIENDS ═══════════════
+function sendFriendRequest(login){
+  if(!currentUser){notif('Войдите','err');return}
+  const u=getUserData(currentUser.login);
+  const friends=u.friends||[];
+  if(friends.find(f=>f.login===login)){notif('Уже в друзьях');return}
+  const requests=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
+  if(requests.find(r=>r.from===currentUser.login&&r.to===login)){notif('Запрос уже отправлен');return}
+  requests.push({from:currentUser.login,to:login,date:nowISO()});
+  localStorage.setItem('ht_friend_requests',JSON.stringify(requests));
+  notif('Запрос в друзья отправлен','gold');
+}
+
+function renderFriendRequests(){
+  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
+  const incoming=reqs.filter(r=>r.to===currentUser.login);
+  const el=$('friendRequests');el.innerHTML='';
+  if(!incoming.length)return;
+  el.innerHTML='<div style="font-size:12px;color:var(--gold);margin-bottom:6px">📨 Запросы:</div>';
+  incoming.forEach(r=>{
+    el.innerHTML+=`<div class="friend-card" style="padding:6px 10px;margin:4px 0"><div class="f-info"><div class="fn">${esc(r.from)}</div></div>
+      <div class="f-actions"><button class="btn btn-sm" style="padding:4px 10px;font-size:11px" onclick="acceptRequest('${esc(r.from)}')">✔</button>
+      <button class="btn btn-sm btn-ghost" style="padding:4px 8px;font-size:11px" onclick="declineRequest('${esc(r.from)}')">✕</button></div></div>`;
   });
 }
 
-function showTopicForm(){
-  if(!currentUser){notif('Сначала войдите или зарегистрируйтесь','err');showAuth();return}
-  if(!canCreateTopics(currentUser)){notif('Ваша роль не может создавать темы','err');return}
-  if(!currentSection){notif('Выберите раздел сначала','err');return}
-  $('topicFormArea').style.display='block';
-  renderTopicForm();
-  $('topicFormArea').scrollIntoView({behavior:'smooth'});
+function acceptRequest(from){
+  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
+  localStorage.setItem('ht_friend_requests',JSON.stringify(reqs.filter(r=>!(r.from===from&&r.to===currentUser.login))));
+  const u=getUserData(currentUser.login);
+  const friends=u.friends||[];
+  if(!friends.find(f=>f.login===from))friends.push({login:from,trust:'acquaintance'});
+  saveUserData(currentUser.login,{friends});
+  const f2=getUserData(from);
+  const f2friends=f2.friends||[];
+  if(!f2friends.find(f=>f.login===currentUser.login))f2friends.push({login:currentUser.login,trust:'acquaintance'});
+  saveUserData(from,{friends:f2friends});
+  checkAchievement('social');
+  notif(from+' теперь в друзьях!','gold');
+  showProfile(currentUser.login);
 }
 
-function renderTopicForm(){
-  const s=SECTIONS.find(x=>x.id===currentSection);
-  const area=$('topicForm');
-  // Template selection
-  let extra='', templateFields='';
-  if(s.id==='discuss'){
-    templateFields=`<div class="tc-row"><label>Содержание</label><textarea id="tfBody" placeholder="Ваше сообщение..."></textarea></div>`;
-  }
-  if(s.id==='guides'){
-    templateFields=`<div class="tc-row"><label>Версия/гайд</label><input id="tfVersion" placeholder="1.16.5"><div class="tc-row"><label>Содержание</label><textarea id="tfBody" placeholder="Подробно опишите гайд..."></textarea></div></div>`;
-  }
-  if(s.id==='trade'){
-    if(!canTrade(currentUser)){area.innerHTML='<p style="color:var(--red)">Торговля доступна только Проверенным и выше.</p>';return}
-    templateFields=`
-      <div class="tc-row"><label>Тип</label><select id="tfTradeType"><option>Продаю</option><option>Покупаю</option><option>Обмениваю</option></select></div>
-      <div class="tc-row"><label>Товар/услуга</label><input id="tfItem" placeholder="Алмазы, сет, ресурсы..."></div>
-      <div class="tc-row"><label>Цена (ЛЁД / предметы)</label><input id="tfPrice" placeholder="Договорная / 100 ЛЬДА"></div>
-      <div class="tc-row"><label>Описание</label><textarea id="tfBody" placeholder="Подробности сделки..."></textarea></div>`;
-  }
-  if(s.id==='clans'){
-    templateFields=`
-      <div class="tc-row"><label>Действие</label><select id="tfClanAction"><option>Создаю клан</option><option>Ищу клан</option><option>Набор участников</option></select></div>
-      <div class="tc-row"><label>Название клана</label><input id="tfClanName" placeholder="Название клана"></div>
-      <div class="tc-row"><label>Требования /Описание</label><textarea id="tfBody" placeholder="Опишите ваш клан или что ищете..."></textarea></div>`;
-  }
-
-  area.innerHTML = templateFields + `
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <button class="btn" onclick="submitTopic()">📌 Создать тему</button>
-      <button class="btn btn-ghost" onclick="hideTopicForm()">Отмена</button>
-    </div>
-    <div id="topicSubmitMsg" style="margin-top:8px;font-size:13px"></div>`;
+function declineRequest(from){
+  const reqs=JSON.parse(localStorage.getItem('ht_friend_requests')||'[]');
+  localStorage.setItem('ht_friend_requests',JSON.stringify(reqs.filter(r=>!(r.from===from&&r.to===currentUser.login))));
+  renderFriendRequests();
 }
 
-function hideTopicForm(){$('topicFormArea').style.display='none'}
-
-function submitTopic(){
-  const s=SECTIONS.find(x=>x.id===currentSection);
-  const msg=$('topicSubmitMsg');
-  let title='', prefix='', body='';
-
-  if(s.id==='discuss'){
-    // Ask for title
-    title = prompt('Заголовок темы:') || 'Без названия';
-    body = $('tfBody')?.value||'';
-  }
-  if(s.id==='guides'){
-    title = prompt('Заголовок гайда:') || 'Гайд';
-    prefix = 'Гайд';
-    body = $('tfBody')?.value||'';
-  }
-  if(s.id==='trade'){
-    if(!canTrade(currentUser)){notif('Торговля для Проверенных+','err');return}
-    const type = $('tfTradeType')?.value||'Продаю';
-    const item = $('tfItem')?.value||'';
-    const price = $('tfPrice')?.value||'';
-    title = type+' '+item;
-    prefix = 'Торговля';
-    body = 'Товар: '+item+'\nЦена: '+price+'\n'+( $('tfBody')?.value||'');
-    if(!item){msg.textContent='Укажите товар';msg.style.color='var(--red)';return}
-  }
-  if(s.id==='clans'){
-    const action = $('tfClanAction')?.value||'Набор';
-    const cname = $('tfClanName')?.value||'';
-    title = action+(cname?': '+cname:'');
-    prefix = 'Клан';
-    body = $('tfBody')?.value||'';
-    if(!cname){msg.textContent='Укажите название клана';msg.style.color='var(--red)';return}
-  }
-
-  if(!title){msg.textContent='Нужен заголовок';msg.style.color='var(--red)';return}
-  if(!body){msg.textContent='Добавьте содержание';msg.style.color='var(--red)';return}
-
-  const topics = JSON.parse(localStorage.getItem('ht_forum_topics')||'[]');
-  const topic = {
-    id:'HTF-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),
-    section: currentSection,
-    title: title.trim(),
-    prefix,
-    body,
-    author: currentUser.login,
-    authorRole: currentUser.role,
-    date: new Date().toISOString(),
-    replies: 0,
-    pinned: false
-  };
-  topics.push(topic);
-  localStorage.setItem('ht_forum_topics', JSON.stringify(topics));
-  msg.textContent='Тема создана!';
-  msg.style.color='var(--ok)';
-  hideTopicForm();
-  renderTopics(currentSection);
-  notif('Тема создана: '+title,'gold');
+function changeTrust(login,level){
+  if(!currentUser)return;
+  const u=getUserData(currentUser.login);
+  const friends=u.friends||[];
+  const f=friends.find(x=>x.login===login);if(!f)return;
+  f.trust=level;saveUserData(currentUser.login,{friends});
+  showProfile(currentUser.login);notif('Уровень доверия изменён','gold');
 }
 
-// ═══════════════ Tickets ═══════════════
-function showCreateTicket(){
-  if(!currentUser){notif('Войдите сначала','err');return}
-  $('ticketFormArea').style.display='block';
-  $('ticketFormArea').scrollIntoView({behavior:'smooth'});
-}
-function hideTicketForm(){$('ticketFormArea').style.display='none'}
-
-function submitTicket(){
-  const subj=$('ticketSubject').value.trim();
-  const body=$('ticketBody').value.trim();
-  if(!subj||!body){$('ticketMsg').textContent='Заполните все поля';$('ticketMsg').style.color='var(--red)';return}
-  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const ticket={id:'HTT-'+Date.now()+'-'+Math.random().toString(36).slice(2,6), subject:subj, body, author:currentUser.login, authorEmail:currentUser.email||'', date:new Date().toISOString(), status:'open', answer:''};
-  tickets.push(ticket);
-  localStorage.setItem('ht_tickets', JSON.stringify(tickets));
-  $('ticketMsg').textContent='Тикет отправлен! Мы ответим в ближайшее время.';
-  $('ticketMsg').style.color='var(--ok)';
-  $('ticketSubject').value='';$('ticketBody').value='';
-  notif('Тикет #'+ticket.id+' создан','gold');
-  // Notify admin
-  const adminNotifs=JSON.parse(localStorage.getItem('ht_admin_notifs')||'[]');
-  adminNotifs.push({type:'ticket', ticketId:ticket.id, user:currentUser.login, date:new Date().toISOString()});
-  localStorage.setItem('ht_admin_notifs', JSON.stringify(adminNotifs));
-}
-
-// ═══════════════ UI update ═══════════════
-function updateUI(){
-  const ub=$('userBar');
-  if(currentUser){
-    ub.style.display='flex';
-    $('userAva').textContent=currentUser.login.charAt(0).toUpperCase();
-    $('userName').textContent=currentUser.login;
-    $('userRole').textContent=ROLES_RU[currentUser.role]||'Игрок';
-    const tag=$('userRoleTag');
-    tag.textContent=ROLES_RU[currentUser.role]||'';
-    tag.className='role-tag '+(ROLE_TAG_CLASS[currentUser.role]||'player');
-    $('authBtnHdr').style.display='none';
-    $('regBtnHdr').style.display='none';
-    $('userBadgeHdr').innerHTML='<span style="font-size:13px;font-weight:600;color:var(--gold)">'+esc(currentUser.login)+'</span>';
-    if(isAdmin(currentUser)){
-      $('userBadgeHdr').innerHTML+=' &nbsp;<a href="/hoolstime/admin.html" class="btn btn-sm" style="text-decoration:none;color:#141414;padding:4px 10px;font-size:11px">⚙️ Админ</a>';
-    }
-  } else {
-    ub.style.display='none';
-    $('authBtnHdr').style.display='';
-    $('regBtnHdr').style.display='';
-    $('userBadgeHdr').innerHTML='';
+function removeFriend(login){
+  if(!currentUser)return;
+  const u=getUserData(currentUser.login);
+  const friends=(u.friends||[]).filter(f=>f.login!==login);
+  saveUserData(currentUser.login,{friends});
+  // Also remove from their list
+  const f2=getUserData(login);
+  if(f2){
+    const f2friends=(f2.friends||[]).filter(f=>f.login!==currentUser.login);
+    saveUserData(login,{friends:f2friends});
   }
+  showProfile(currentUser.login);notif(login+' удалён из друзей');
 }
 
-function showRegisterSection(){
-  $('authForms').style.display='none';
+function isFriend(login1,login2){
+  const u=getUserData(login1);
+  return u&&u.friends&&u.friends.find(f=>f.login===login2);
 }
 
-// ═══════════════ AI Chat ═══════════════
-const chatBody=$('chatBody'), chatIn=$('chatIn');
-let chatOpen=false;
+// ═══════════════ QUICK ACTIONS ═══════════════
+function sayHello(login){
+  if(!currentUser){notif('Войдите','err');return}
+  const notices=JSON.parse(localStorage.getItem('ht_hellos')||'[]');
+  notices.push({from:currentUser.login,to:login,date:nowISO()});
+  localStorage.setItem('ht_hellos',JSON.stringify(notices));
+  notif('👋 Приветствие отправлено '+login,'gold');
+}
+
+function offerHelp(login){
+  if(!currentUser){notif('Войдите','err');return}
+  saveUserData(currentUser.login,{helpOffer:true});
+  notif('🆘 Маркер помощи опубликован. '+login+' увидит его в профиле.','gold');
+}
+
+// ═══════════════ CHAT ═══════════════
+const chatBody=$('chatBody'),chatIn=$('chatIn');let chatOpen=false;
 function toggleChat(){
-  chatOpen=!chatOpen;
-  $('chatWin').classList.toggle('open',chatOpen);
-  $('chatBadge').style.display='none';
-  if(chatOpen&&!chatBody.children.length) addMsg('bot','Привет! 👋 Я на форуме HoolsTime.\n\nМогу помочь:\n• 📖 Как зарегистрироваться\n• 👑 Роли и доступ к разделам\n• 💬 Создание тем\n• ✉️ Тикеты поддержки\n• 🛒 Перейти в магазин\n\nЧто тебя интересует?');
+  chatOpen=!chatOpen;$('chatWin').classList.toggle('open',chatOpen);
+  if(chatOpen&&!chatBody.children.length)addMsg('bot','Привет! 👋 Я помощник форума.\n\n• 📝 Регистрация/Вход\n• 👑 Роли и доступ\n• 💬 Создание тем\n• 👤 Профили и друзья\n• ✉️ Тикеты');
   setTimeout(()=>chatIn.focus(),50);
 }
 function addMsg(r,h){const d=document.createElement('div');d.className='msg '+r;d.innerHTML=h;chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight}
-function typing(cb){const d=document.createElement('div');d.className='msg bot typing';d.innerHTML='<span></span><span></span><span></span>';chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight;setTimeout(()=>{d.remove();cb()},700+Math.random()*500)}
-function sendChat(){
-  const t=chatIn.value.trim();if(!t)return;chatIn.value='';addMsg('user',esc(t));
-  typing(()=>answer(t.toLowerCase()));
-}
+function typing(cb){const d=document.createElement('div');d.className='msg bot typing';d.innerHTML='<span></span><span></span><span></span>';chatBody.appendChild(d);setTimeout(()=>{d.remove();cb()},700+Math.random()*500)}
+function sendChat(){const t=chatIn.value.trim();if(!t)return;chatIn.value='';addMsg('user',esc(t));typing(()=>answer(t.toLowerCase()))}
 chatIn.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
-
 function answer(q){
-  if(q.includes('регистр')||q.includes('создать акк')||q.includes('зарегистрир')){addMsg('bot','📝 Регистрация простая:\n• Введи логин (мин 3 символа)\n• Электронную почту\n• Пароль (мин 6 символов)\n• Подтверди пароль\n• Прими условия\n\nПосле регистрации получишь роль <b>Игрок</b> — сможешь создавать темы и отвечать.'+quickBtn('📝 Регистрация','showRegister()'))}
-  else if(q.includes('рол')||q.includes('доступ')||q.includes('проверен')||q.includes('модер')||q.includes('хелп')||q.includes('админ')){addMsg('bot','👑 Роли на форуме:\n\n• <b>Гость</b> — только чтение\n• <b>Игрок</b> — создание тем, комментарии (после регистрации)\n• <b>Проверенный</b> — доступ к торговле (+10ч игры или решение админа)\n• <b>Хелпер</b> — помощь новичкам\n• <b>Модератор</b> — следит за порядком\n• <b>Администратор</b> — полный доступ')}
-  else if(q.includes('тему')||q.includes('создать тем')||q.includes('новую')){addMsg('bot','📌 Чтобы создать тему:\n1️⃣ Войди в аккаунт (роль Игрок+)\n2️⃣ Выбери раздел форума\n3️⃣ Нажми «+ Новая тема»\n4️⃣ Заполни форму\n\nДоступные разделы: Обсуждения, Гайды, Торговля, Кланы.')}
-  else if(q.includes('тикет')||q.includes('поддержк')||q.includes('проблем')||q.includes('жалоб')){addMsg('bot','✉️ Тикет в поддержку — это обращение к администрации. Нажми «✉️ Тикет» в панели пользователя, опиши проблему — мы ответим.'+quickBtn('✉️ Создать тикет','showCreateTicket()'))}
-  else if(q.includes('магазин')||q.includes('купить')||q.includes('привилег')||q.includes('донат')){addMsg('bot','🛒 Магазин HoolsTime тут: <a href="https://gusarovbllm.github.io/hoolstime/">Открыть магазин</a>\n\nПривилегии, ЛЁД, ключи от кейсов, разбан.'+quickBtn('🛒 Перейти в магазин','window.open(\'https://gusarovbllm.github.io/hoolstime/\')'))}
-  else if(q.includes('привет')||q.includes('здравствуй')||q.includes('ку')){addMsg('bot','Привет! 👋 Добро пожаловать на форум HoolsTime. Чем могу помочь?')}
-  else {addMsg('bot','Хм, не совсем понял вопрос. 🤔\n\nМогу помочь с регистрацией, ролями, созданием тем и тикетами.\n\n<b>Могу связать с оператором — желаете?</b>'+quickBtn('✅ Да, свяжи','chatOperator()')+quickBtn('❌ Нет','chatNo()'))}
+  if(q.includes('регистр')||q.includes('создать акк'))addMsg('bot','📝 В окне регистрации: логин (3+ символов), email, пароль (6+), подтверждение, согласие с условиями. Можно включить 2FA.'+quickBtn('📝 Регистрация','openAuthModal(\'register\')'))
+  else if(q.includes('рол')||q.includes('доступ'))addMsg('bot','👑 Роли: Гость (чтение), Игрок (темы), Проверенный (торговля), Хелпер, Модератор, Админ.')
+  else if(q.includes('профиль')||q.includes('аватар')||q.includes('баннер'))addMsg('bot','👤 В профиле можно: загрузить аватар и баннер (любые картинки), поставить настроение, писать заметки (24ч), настраивать тему, вести блог, получать достижения.')
+  else if(q.includes('друз')||q.includes('запрос'))addMsg('bot','👥 Добавляй друзей через их профиль. Уровни доверия: Знакомый → Приятель → Друг → Близкий. Каждый уровень открывает доступ к личным записям.')
+  else if(q.includes('тикет')||q.includes('проблем'))addMsg('bot','✉️ Создай тикет — опиши проблему. Администрация ответит.')
+  else if(q.includes('блог'))addMsg('bot','✍️ Публикуй посты в блог. Настрой видимость: всем, только друзьям или только себе.')
+  else addMsg('bot','Не понял вопрос. 🤔 Могу помочь с регистрацией, входом, профилем, друзьями.'+quickBtn('✅ Да, свяжи с оператором','window.open(\'https://t.me/hoolstime\')'))
 }
-
 function quickBtn(l,a){return '<button class="quick" onclick="'+a+'">'+l+'</button>'}
-function chatOperator(){addMsg('user','Свяжите с оператором');typing(()=>{addMsg('bot','Конечно! Напиши в Telegram:'+quickBtn('✈️ @hoolstime','window.open(\'https://t.me/hoolstime\')'))})}
-function chatNo(){addMsg('user','Нет, спасибо');typing(()=>addMsg('bot','Хорошо 👍 Если что — пиши.'))}
 
-// ═══════════════ Init ═══════════════
-loadState();
-if(currentSection){openSection(currentSection)}
-renderSections();
-updateUI();
-toggleChat();toggleChat(); // preload chat greeting but closed
-$('chatWin').classList.remove('open');
+// ═══════════════ INIT ═══════════════
+function loadState(){
+  const u=localStorage.getItem('ht_forum_user');
+  if(u)currentUser=JSON.parse(u);
+  const s=localStorage.getItem('ht_forum_section');
+  if(s)currentSection=s;
+}
+loadState();renderSections();updateUI();
+if(currentSection)openSection(currentSection);
 </script>
 </body>
 </html>
