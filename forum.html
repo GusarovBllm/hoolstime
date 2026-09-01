@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -398,11 +398,11 @@ function registerUser(){
   const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
   if(users.find(u=>u.login===login)){msg.textContent='Логин уже занят';return}
   if(users.find(u=>u.email===email)){msg.textContent='Почта уже используется';return}
-  const user={login,email,pwd,role:'player',regDate:nowISO(),playHours:0,2fa:$('reg2fa').checked,mood:'😊',bio:'',notes:[],achievements:[],friends:[],blog:[],avatar:'',banner:'',theme:'dark',blockOrder:'bio,lasttopics',lastSeen:nowISO()};
+  const user={login,email,pwd,role:'player',regDate:nowISO(),playHours:0,"2fa":$('reg2fa').checked,mood:'😊',bio:'',notes:[],achievements:[],friends:[],blog:[],avatar:'',banner:'',theme:'dark',blockOrder:'bio,lasttopics',lastSeen:nowISO()};
   users.push(user);localStorage.setItem('ht_users',JSON.stringify(users));
   const logs=JSON.parse(localStorage.getItem('ht_admin_logs')||'[]');
-  logs.push({date:nowISO(),who:login,act:'Регистрация',details:'email: '+email+(user['2fa']?' +2FA':'')});localStorage.setItem('ht_admin_logs',JSON.stringify(logs));
-  currentUser={login,role:'player',email,2fa:user['2fa']};saveUser();closeAuthModal();
+  logs.push({date:nowISO(),who:login,act:'Регистрация',details:'email: '+email+(user["2fa"]?' +2FA':'')});localStorage.setItem('ht_admin_logs',JSON.stringify(logs));
+  currentUser={login,role:'player',email,"2fa":user["2fa"]};saveUser();closeAuthModal();
   msg.textContent='';updateUI();notif('Добро пожаловать, '+login+'!','gold');
 }
 
@@ -416,7 +416,7 @@ function loginUser(){
     const code=$('login2faCode').value.trim();
     if(code!=='123456'&&code!==user['2fa_code']){msg.textContent='Неверный код 2FA';msg.style.color='var(--red)';return}
   }
-  currentUser={login:user.login,role:user.role,email:user.email,2fa:user['2fa']};saveUser();closeAuthModal();
+  currentUser={login:user.login,role:user.role,email:user.email,"2fa":user["2fa"]};saveUser();closeAuthModal();
   msg.textContent='';updateUI();notif('С возвращением, '+user.login+'!','gold');
 }
 
