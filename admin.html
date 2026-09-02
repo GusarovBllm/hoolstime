@@ -6,126 +6,115 @@
 <title>HoolsTime — Админ-панель</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
-:root{--bg:#0d0d14;--bg2:#12121c;--card:#151524;--border:#2a2a3a;--border2:#3b3b50;--title:#ffffff;--body:#b8b8cc;--body50:#8a8aa0;--muted:#64647c;--gold:#f8c510;--gold2:#ffb400;--red:#ff3b5c;--red2:#df2b4a;--blue:#22d3ee;--blue2:#0ea5e9;--green:#3be08b;--radius:14px;--header-h:64px}
+:root{--bg:#0a0b10;--bg2:#0f1017;--card:#151724;--card2:#1a1c2e;--border:#262840;--border2:#32345a;--title:#e8ecf4;--body:#b0b4cc;--body50:#7a7ea0;--muted:#54587a;--accent:#4a7cff;--accent2:#6c8cff;--gold:#f0b429;--red:#ef4444;--green:#22c55e;--blue:#3b82f6;--radius:10px;--header-h:56px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--body);font-family:"Segoe UI",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-::selection{background:var(--gold);color:#1a1a1a}
+::selection{background:var(--accent);color:#141414}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit;outline:none}
 textarea{resize:vertical}
-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:rgba(13,13,20,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.hdr-logo{font-size:20px;font-weight:900}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:rgba(10,11,16,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.hdr-logo{font-size:18px;font-weight:900}
 .hdr-logo .h1{background:linear-gradient(180deg,#ff6a4d,#ff2d55);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hdr-logo .t{background:linear-gradient(180deg,#7fe3ff,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hdr-logo .adm{color:var(--gold);font-size:12px;vertical-align:super}
-.hdr-right{display:flex;align-items:center;gap:12px;font-size:13px}
-.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 24px) 20px 60px}
+.hdr-logo .adm{color:var(--accent);font-size:11px;vertical-align:super}
+.hdr-right{display:flex;align-items:center;gap:10px;font-size:12px}
+.page{max-width:1264px;margin:0 auto;padding:calc(var(--header-h) + 20px) 16px 40px}
 
-/* ─── Login ─── */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-card{width:400px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:34px}
-.login-card h1{font-size:24px;font-weight:900;color:var(--title);margin-bottom:4px;text-align:center}
-.login-card .sub{font-size:13px;color:var(--body50);margin-bottom:20px;text-align:center}
-.login-card .fld{margin-bottom:14px}
-.login-card label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
-.login-card input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:12px 14px;font-size:14px}
-.login-card input:focus{border-color:var(--gold)}
-.login-card .btn{width:100%}
+.login-card{width:400px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:30px}
+.login-card h1{font-size:22px;font-weight:900;color:var(--title);margin-bottom:4px;text-align:center}
+.login-card .sub{font-size:13px;color:var(--body50);margin-bottom:18px;text-align:center}
+.login-card .fld{margin-bottom:12px}
+.login-card label{display:block;font-size:12px;font-weight:700;color:var(--body);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.login-card input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:10px 12px;font-size:14px}
+.login-card input:focus{border-color:var(--accent)}
 
-.btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:900;transition:.2s;cursor:pointer}
-.btn:hover{filter:brightness(1.08)}
-.btn:active{transform:scale(.98)}
-.btn-sm{padding:7px 12px;font-size:12px}
+.btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:6px;padding:10px 18px;font-size:13px;font-weight:800;transition:.2s;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.btn:active{transform:scale(.97)}
+.btn-sm{padding:6px 12px;font-size:11px}
 .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--body);font-weight:600}
 .btn-ghost:hover{background:rgba(255,255,255,.04)}
-.btn-danger{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff}
+.btn-danger{background:linear-gradient(135deg,var(--red),#dc2626);color:#fff}
 .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
 .btn-ok{background:linear-gradient(135deg,var(--green),#2bc87a);color:#0d0d14}
+.btn-full{width:100%}
 
-/* ─── Layout ─── */
-.dash{display:grid;grid-template-columns:220px 1fr;gap:20px}
-.sidebar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;height:fit-content;position:sticky;top:84px}
-.sidebar button{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;color:var(--body50);padding:11px 14px;border-radius:10px;font-size:14px;font-weight:600;text-align:left;transition:.15s}
-.sidebar button:hover{background:rgba(255,255,255,.04);color:var(--title)}
-.sidebar button.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414}
-.sidebar .sb-logo{font-size:18px;font-weight:900;padding:6px 14px 16px}
+.dash{display:grid;grid-template-columns:200px 1fr;gap:16px}
+.sidebar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px;height:fit-content;position:sticky;top:76px}
+.sidebar button{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;color:var(--body50);padding:9px 12px;border-radius:6px;font-size:13px;font-weight:600;text-align:left;transition:.15s}
+.sidebar button:hover{background:var(--card2);color:var(--title)}
+.sidebar button.active{background:var(--accent);color:#fff}
+.sidebar .sb-logo{font-size:16px;font-weight:900;padding:4px 12px 14px}
 .main{min-width:0}
-.main h1{font-size:24px;font-weight:900;color:var(--title);margin-bottom:4px}
-.main .sub{font-size:13px;color:var(--body50);margin-bottom:20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.card h3{font-size:16px;font-weight:800;color:var(--title);margin-bottom:14px}
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:20px}
-.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
-.stat .num{font-size:28px;font-weight:900;color:var(--title)}
-.stat .lbl{font-size:12px;color:var(--body50);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.main h1{font-size:22px;font-weight:900;color:var(--title);margin-bottom:4px}
+.main .sub{font-size:13px;color:var(--body50);margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+.card h3{font-size:15px;font-weight:800;color:var(--title);margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.stat .num{font-size:24px;font-weight:900;color:var(--title)}
+.stat .lbl{font-size:11px;color:var(--body50);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:10px;border-bottom:1px solid rgba(42,42,58,.5);vertical-align:middle}
+td{padding:10px;border-bottom:1px solid rgba(38,40,64,.5);vertical-align:middle}
 tr:hover td{background:rgba(255,255,255,.02)}
-.search{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.search input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px 14px;font-size:14px;flex:1}
-.search input:focus{border-color:var(--gold)}
-.search select{background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px;font-size:13px}
+.search{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.search input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:10px 12px;font-size:13px}
+.search input:focus{border-color:var(--accent)}
+.search select{background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:9px;font-size:13px}
 .search select option{background:var(--bg2)}
-.search .btn{white-space:nowrap}
-.role-select{background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:6px 8px;font-size:13px}
-.role-select option{background:var(--bg2)}
-.role-select:focus{border-color:var(--gold)}
-.badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:800}
-.badge.open{background:rgba(59,224,139,.15);color:var(--ok)}
-.badge.closed{background:rgba(100,100,124,.15);color:var(--muted)}
-.badge.pending{background:rgba(248,197,16,.15);color:var(--gold)}
-.badge.done{background:rgba(34,211,238,.15);color:var(--blue)}
-.badge.hot{background:rgba(255,59,92,.18);color:var(--red)}
-.log-line{font-size:12px;padding:8px 4px;border-bottom:1px solid rgba(42,42,58,.3);font-family:Consolas,monospace}
+.role-select{background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:5px 8px;font-size:12px}
+.role-select:focus{border-color:var(--accent)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:800}
+.badge.open{background:rgba(34,197,94,.12);color:var(--green)}
+.badge.closed{background:rgba(84,88,122,.12);color:var(--muted)}
+.badge.pending{background:rgba(240,180,41,.12);color:var(--gold)}
+.badge.done{background:rgba(59,130,246,.12);color:var(--blue)}
+.log-line{font-size:12px;padding:6px 4px;border-bottom:1px solid rgba(38,40,64,.3);font-family:Consolas,monospace}
 .log-line .dt{color:var(--muted)}
-.log-line .act{color:var(--gold)}
+.log-line .act{color:var(--accent)}
 .log-line .who{color:var(--blue)}
-.ticket-block{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px}
-.ticket-block .t-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
-.ticket-block .t-h b{color:var(--title);font-size:14px}
-.ticket-block .t-m{font-size:13px;color:var(--body50);margin:8px 0;line-height:1.5}
-.ticket-block .t-a{font-size:12px;color:var(--muted)}
-.ticket-block textarea{width:100%;background:var(--card);border:1px solid var(--border2);color:var(--title);border-radius:8px;padding:10px;font-size:13px;margin-top:8px}
-.ticket-block textarea:focus{border-color:var(--gold)}
-.ticket-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.modal-ov.open{display:flex}
-.modal{width:520px;max-width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px}
-.modal h3{font-size:20px;font-weight:900;color:var(--title);margin-bottom:8px}
-.modal .sub{color:var(--body50);font-size:13px;margin-bottom:16px}
-.modal .m-close{float:right;background:none;border:none;color:var(--body50);font-size:22px;cursor:pointer}
-.modal .m-close:hover{color:var(--red)}
-.modal .fld{margin-bottom:14px}
-.modal .fld label{display:block;font-size:13px;font-weight:700;color:var(--body);margin-bottom:4px}
-.modal .fld input,.modal .fld select,.modal .fld textarea{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:10px;padding:11px 14px;font-size:14px}
-.modal .fld input:focus,.modal .fld select:focus,.modal .fld textarea:focus{border-color:var(--gold)}
-.notif{position:fixed;top:74px;right:18px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:12px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:340px}
+.ticket-block{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:8px}
+.ticket-block .t-h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.ticket-block .t-h b{color:var(--title);font-size:13px}
+.ticket-block .t-m{font-size:12px;color:var(--body50);margin:6px 0;line-height:1.5}
+.ticket-block .t-a{font-size:11px;color:var(--muted)}
+.ticket-block textarea{width:100%;background:var(--card);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:8px;font-size:12px;margin-top:6px}
+.ticket-block textarea:focus{border-color:var(--accent)}
+.ticket-actions{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.notif{position:fixed;top:64px;right:16px;z-index:3000;background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--green);color:var(--body);padding:10px 14px;border-radius:6px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .25s ease;max-width:340px}
 .notif.err{border-left-color:var(--red)}
 .notif.gold{border-left-color:var(--gold)}
-@keyframes tin{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
-.empty{text-align:center;color:var(--muted);padding:40px;font-size:14px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tabs button{background:var(--card);border:1px solid var(--border);color:var(--body50);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:700}
-.tabs button.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141414}
-@media(max-width:820px){.dash{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:6px}.sidebar button{width:auto;white-space:nowrap}.sidebar .sb-logo{display:none}}
+@keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.empty{text-align:center;color:var(--muted);padding:30px;font-size:13px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{background:var(--card);border:1px solid var(--border);color:var(--body50);padding:7px 14px;border-radius:6px;font-size:12px;font-weight:700}
+.tabs button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.avatar{width:32px;height:32px;border-radius:50%;overflow:hidden;flex:0 0 32px;background-size:cover;background-position:center;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-size:12px;font-weight:700}
+.avatar-sm{width:24px;height:24px;font-size:10px;flex:0 0 24px}
+.role-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+.role-tag.player{background:rgba(148,163,184,.12);color:#94a3b8}
+.role-tag.verified{background:rgba(34,197,94,.12);color:var(--green)}
+.role-tag.helper{background:rgba(240,180,41,.12);color:var(--gold)}
+.role-tag.mod{background:rgba(59,130,246,.12);color:var(--blue)}
+.role-tag.admin{background:rgba(239,68,68,.15);color:var(--red)}
+@media(max-width:820px){.dash{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:4px}.sidebar button{width:auto;white-space:nowrap}.sidebar .sb-logo{display:none}}
 </style>
 </head>
 <body>
 
 <div id="loginScreen" class="login-wrap">
   <div class="login-card">
-    <div class="hdr-logo" style="text-align:center;font-size:26px;margin-bottom:8px"><span class="h1">HOOLS</span><span class="t">TIME</span><span class="adm">ADMIN</span></div>
-    <h1>Вход в админ-панель</h1>
+    <div class="hdr-logo" style="text-align:center;font-size:24px;margin-bottom:6px"><span class="h1">HOOLS</span><span class="t">TIME</span><span class="adm">ADMIN</span></div>
+    <h1>Вход</h1>
     <div class="sub">Доступ только для администраторов</div>
-    <div class="fld">
-      <label>Пароль администратора</label>
-      <input type="password" id="admPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()">
-    </div>
-    <button class="btn" onclick="adminLogin()">Войти</button>
-    <div id="loginErr" style="margin-top:10px;font-size:13px;text-align:center"></div>
+    <div class="fld"><label>Пароль</label><input type="password" id="admPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+    <button class="btn btn-full" onclick="adminLogin()">Войти</button>
+    <div id="loginErr" style="margin-top:8px;font-size:13px;text-align:center"></div>
   </div>
 </div>
 
@@ -133,39 +122,29 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <header>
   <div class="hdr-logo"><span class="h1">HOOLS</span><span class="t">TIME</span><span class="adm">ADMIN</span></div>
   <div class="hdr-right">
-    <span id="admUserLabel" style="color:var(--body50)">admin</span>
-    <a href="/hoolstime/index.html" class="btn btn-ghost btn-sm">→ Сайт</a>
+    <a href="https://gusarovbllm.github.io/hoolstime/forum.html" class="btn btn-ghost btn-sm">→ Форум</a>
     <button class="btn btn-danger btn-sm" onclick="logout()">Выйти</button>
   </div>
 </header>
 
 <div class="page">
-  <!-- Stats -->
   <div class="stats">
-    <div class="stat"><div class="num" id="stUsers">0</div><div class="lbl">Игроков</div></div>
+    <div class="stat"><div class="num" id="stUsers">0</div><div class="lbl">Пользователей</div></div>
     <div class="stat"><div class="num" id="stTopics">0</div><div class="lbl">Тем</div></div>
     <div class="stat"><div class="num" id="stTickets">0</div><div class="lbl">Тикетов</div></div>
-    <div class="stat"><div class="num" id="stRegs">0</div><div class="lbl">Регистраций</div></div>
-    <div class="stat"><div class="num" id="stReports">0</div><div class="lbl">Репортов</div></div>
-    <div class="stat"><div class="num" id="stOrders">0</div><div class="lbl">Заказов</div></div>
+    <div class="stat"><div class="num" id="stLogs">0</div><div class="lbl">Действий</div></div>
   </div>
-
   <div class="dash">
     <div class="sidebar">
       <div class="sb-logo">⚙️ Панель</div>
-      <button class="active" data-tab="players" onclick="switchTab('players')">👥 Игроки и роли</button>
+      <button class="active" data-tab="players" onclick="switchTab('players')">👥 Пользователи</button>
       <button data-tab="tickets" onclick="switchTab('tickets')">✉️ Тикеты</button>
-      <button data-tab="moderation" onclick="switchTab('moderation')">🛡️ Модерация жалоб</button>
-      <button data-tab="reports" onclick="switchTab('reports')">📊 Репорты ИИ</button>
-      <button data-tab="orders" onclick="switchTab('orders')">🛒 Заказы</button>
       <button data-tab="logs" onclick="switchTab('logs')">📜 Логи</button>
     </div>
-
     <div class="main">
-      <!-- Players -->
       <div id="tab-players">
-        <h1>Игроки и роли</h1>
-        <div class="sub">Смена роли одним кликом. История изменений — в логах.</div>
+        <h1>Пользователи</h1>
+        <div class="sub">Выдача ролей. Нажми на роль в списке — выбери новую.</div>
         <div class="search">
           <input type="text" id="playerSearch" placeholder="Поиск по нику или почте…" oninput="renderPlayers()">
           <select id="roleFilter" onchange="renderPlayers()">
@@ -180,52 +159,25 @@ tr:hover td{background:rgba(255,255,255,.02)}
         </div>
         <div class="card">
           <div class="table-wrap"><table>
-            <thead><tr><th>Ник</th><th>Почта</th><th>Роль</th><th>Дата регистрации</th><th>Часы</th><th>Действие</th></tr></thead>
+            <thead><tr><th>Аватар</th><th>Ник</th><th>Почта</th><th>Роль</th><th>Дата</th><th>Действие</th></tr></thead>
             <tbody id="playersBody"></tbody>
           </table></div>
         </div>
       </div>
-
-      <!-- Tickets -->
       <div id="tab-tickets" style="display:none">
-        <h1>Ответы поддержке</h1>
-        <div class="sub">Обращения игроков. Ответьте и закройте тикет.</div>
+        <h1>Тикеты</h1>
+        <div class="sub">Обращения пользователей</div>
         <div class="tabs">
           <button class="active" data-ft="open" onclick="filterTickets('open')">Открытые</button>
           <button data-ft="closed" onclick="filterTickets('closed')">Закрытые</button>
         </div>
         <div id="ticketsList"></div>
       </div>
-
-      <!-- Moderation -->
-      <div id="tab-moderation" style="display:none">
-        <h1>Модерация жалоб</h1>
-        <div class="sub">Созданные игроками жалобы: принять или отклонить с комментарием.</div>
-        <div id="moderationList"></div>
-      </div>
-
-      <!-- Reports -->
-      <div id="tab-reports" style="display:none">
-        <h1>Репорты в ИИ-помощнике</h1>
-        <div class="sub">Моменты, когда игроки обращались за помощью в чат-ИИ.</div>
-        <div id="reportsList"></div>
-      </div>
-
-      <!-- Orders -->
-      <div id="tab-orders" style="display:none">
-        <h1>Заказы магазина</h1>
-        <div class="sub">Все покупки через сайт (из локального хранилища).</div>
-        <div id="ordersList"></div>
-      </div>
-
-      <!-- Logs -->
       <div id="tab-logs" style="display:none">
-        <h1>Логи действий</h1>
-        <div class="sub">Регистрации, входы, смена ролей, модерация, тикеты.</div>
-        <div class="search">
-          <input type="text" id="logSearch" placeholder="Поиск по логам…" oninput="renderLogs()">
-        </div>
-        <div class="card" id="logsList" style="max-height:600px;overflow-y:auto"></div>
+        <h1>Логи</h1>
+        <div class="sub">Все действия: регистрации, смена ролей</div>
+        <div class="search"><input type="text" id="logSearch" placeholder="Поиск по логам…" oninput="renderLogs()"></div>
+        <div class="card" id="logsList" style="max-height:500px;overflow-y:auto"></div>
       </div>
     </div>
   </div>
@@ -233,85 +185,67 @@ tr:hover td{background:rgba(255,255,255,.02)}
 </div>
 
 <script>
-// ═══════════════ Admin auth ═══════════════
-const ADMIN_PASS = 'admin123'; // смени в проде
+const ADMIN_PASS = 'admin123';
+const ROLES_RU = {guest:'Гость',player:'Игрок',verified:'Проверенный',helper:'Хелпер',moderator:'Модератор',admin:'Администратор'};
+const ROLE_CLASS = {guest:'guest',player:'player',verified:'verified',helper:'helper',moderator:'mod',admin:'admin'};
 
 function $(id){return document.getElementById(id)}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function notif(text,type){const d=document.createElement('div');d.className='notif'+(type?' '+type:'');d.textContent=text;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200)}
-function now(){return new Date().toISOString()}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function notif(t,type){const d=document.createElement('div');d.className='notif'+(type?' '+type:'');d.textContent=t;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.remove(),300)},3200)}
+function nowISO(){return new Date().toISOString()}
+function getUser(l){return JSON.parse(localStorage.getItem('ht_users')||'[]').find(x=>x.login===l)}
+function getUsers(){return JSON.parse(localStorage.getItem('ht_users')||'[]')}
+function saveUsers(u){localStorage.setItem('ht_users',JSON.stringify(u))}
+function getTopics(){return JSON.parse(localStorage.getItem('ht_topics')||'[]')}
+function getTickets(){return JSON.parse(localStorage.getItem('ht_tickets')||'[]')}
+function getLogs(){return JSON.parse(localStorage.getItem('ht_logs')||'[]')}
+function saveLogs(l){localStorage.setItem('ht_logs',JSON.stringify(l))}
 
 function adminLogin(){
   const pwd=$('admPwd').value;
   if(pwd===ADMIN_PASS){
-    sessionStorage.setItem('ht_admin', '1');
+    sessionStorage.setItem('ht_admin','1');
     $('loginScreen').style.display='none';
     $('adminApp').style.display='block';
     logAction('system','Вход в админ-панель');
     renderAll();
-  } else {
-    $('loginErr').textContent='Неверный пароль';
-    $('loginErr').style.color='var(--red)';
-  }
+  } else {$('loginErr').textContent='Неверный пароль';$('loginErr').style.color='var(--red)'}
 }
 function logout(){sessionStorage.removeItem('ht_admin');$('loginScreen').style.display='flex';$('adminApp').style.display='none'}
-function isAuthed(){return sessionStorage.getItem('ht_admin')==='1'}
+function logAction(who,act,details){const l=getLogs();l.push({date:nowISO(),who,act,details:details||''});saveLogs(l)}
 
-function logAction(who, act, details){
-  const logs=JSON.parse(localStorage.getItem('ht_logs')||'[]');
-  logs.push({date:now(), who, act, details:details||''});
-  localStorage.setItem('ht_logs', JSON.stringify(logs));
-}
-
-// ═══════════════ Tabs ═══════════════
 function switchTab(tab){
-  document.querySelectorAll('.sidebar button').forEach(b=>b.classList.remove('active'));
-  document.querySelector('.sidebar button[data-tab="'+tab+'"]').classList.add('active');
-  ['players','tickets','moderation','reports','orders','logs'].forEach(t=>{
-    $('tab-'+t).style.display = t===tab ? 'block' : 'none';
-  });
+  document.querySelectorAll('.sidebar button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  ['players','tickets','logs'].forEach(t=>$(t='tab-'+t).style.display=t===tab?'block':'none');
   if(tab==='players')renderPlayers();
   if(tab==='tickets')renderTickets();
-  if(tab==='moderation')renderModeration();
-  if(tab==='reports')renderReports();
-  if(tab==='orders')renderOrders();
   if(tab==='logs')renderLogs();
 }
 
-// ═══════════════ Stats ═══════════════
-function renderStats(){
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  const topics=JSON.parse(localStorage.getItem('ht_topics')||'[]');
-  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const logs=JSON.parse(localStorage.getItem('ht_logs')||'[]');
-  const reports=JSON.parse(localStorage.getItem('ht_reports')||'[]');
-  const orders=JSON.parse(localStorage.getItem('ht_orders')||'[]');
-  $('stUsers').textContent=users.length;
-  $('stTopics').textContent=topics.length;
-  $('stTickets').textContent=tickets.length;
-  $('stRegs').textContent=logs.filter(l=>l.act==='Регистрация'||l.act==='register').length;
-  $('stReports').textContent=reports.length;
-  $('stOrders').textContent=orders.length;
+function renderAll(){
+  const u=getUsers();const t=getTopics();const tk=getTickets();const l=getLogs();
+  $('stUsers').textContent=u.length;$('stTopics').textContent=t.length;
+  $('stTickets').textContent=tk.length;$('stLogs').textContent=l.length;
+  renderPlayers();renderTickets();renderLogs();
 }
 
-// ═══════════════ Players ═══════════════
 function renderPlayers(){
-  const t=$('playersBody'); const q=($('playerSearch').value||'').toLowerCase();
+  const q=($('playerSearch').value||'').toLowerCase();
   const rf=$('roleFilter').value;
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  const filtered=users.filter(u=>{
-    const matchQ=(u.login.toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q));
-    const matchR=!rf||u.role===rf;
-    return matchQ&&matchR;
+  const users=getUsers().filter(u=>{
+    const mq=(u.login.toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q));
+    const mr=!rf||u.role===rf;
+    return mq&&mr;
   });
-  if(!filtered.length){t.innerHTML='<tr><td colspan="6"><div class="empty">Нет пользователей</div></td></tr>';return}
-  t.innerHTML=filtered.map(u=>`
+  const tb=$('playersBody');
+  if(!users.length){tb.innerHTML='<tr><td colspan="6"><div class="empty">Нет пользователей</div></td></tr>';return}
+  tb.innerHTML=users.map(u=>`
     <tr>
+      <td><div class="avatar avatar-sm" style="${u.avatar?'background-image:url('+u.avatar+')':''}">${u.avatar?'':u.login.charAt(0).toUpperCase()}</div></td>
       <td><b style="color:var(--title)">${esc(u.login)}</b></td>
-      <td>${esc(u.email||'—')}</td>
-      <td><span class="badge" style="background:rgba(248,197,16,.08);color:var(--gold)">${esc(u.role||'player')}</span></td>
-      <td style="font-size:12px;color:var(--body50)">${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</td>
-      <td>${u.playHours||0}</td>
+      <td style="font-size:12px;color:var(--body50)">${esc(u.email||'—')}</td>
+      <td><span class="role-tag ${u.role||'player'}">${ROLES_RU[u.role]||'Игрок'}</span></td>
+      <td style="font-size:11px;color:var(--body50)">${u.regDate?new Date(u.regDate).toLocaleDateString('ru-RU'):'—'}</td>
       <td>
         <select class="role-select" onchange="changeRole('${esc(u.login)}',this.value)">
           <option value="player" ${u.role==='player'?'selected':''}>Игрок</option>
@@ -324,159 +258,58 @@ function renderPlayers(){
     </tr>`).join('');
 }
 
-function changeRole(login, newRole){
-  const users=JSON.parse(localStorage.getItem('ht_users')||'[]');
-  const u=users.find(x=>x.login===login);
-  if(!u)return;
-  const oldRole=u.role||'player';
-  u.role=newRole;
-  u.roleChangeHistory = u.roleChangeHistory||[];
-  u.roleChangeHistory.push({from:oldRole,to:newRole,date:now(),by:'admin'});
-  localStorage.setItem('ht_users', JSON.stringify(users));
-  logAction('admin','Смена роли', login+': '+oldRole+' → '+newRole);
-  renderPlayers();
-  renderStats();
-  notif('Роль '+login+': '+oldRole+' → '+newRole,'gold');
+function changeRole(login,newRole){
+  const users=getUsers();const u=users.find(x=>x.login===login);
+  if(!u)return;const oldRole=u.role||'player';u.role=newRole;
+  saveUsers(users);
+  logAction('admin','Смена роли',login+': '+oldRole+' → '+newRole);
+  renderPlayers();notif('Роль '+login+' → '+ROLES_RU[newRole],'gold');
+  renderAll();
 }
 
-// ═══════════════ Tickets ═══════════════
+// Tickets
 let ticketFilter='open';
-function filterTickets(f){ticketFilter=f;document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));document.querySelector('.tabs button[data-ft="'+f+'"]').classList.add('active');renderTickets()}
-
+function filterTickets(f){ticketFilter=f;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.ft===f));renderTickets()}
 function renderTickets(){
-  const l=$('ticketsList'); l.innerHTML='';
-  const all=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const list=all.filter(t=>t.status===(ticketFilter==='open'?'open':'closed')).sort((a,b)=>new Date(b.date)-new Date(a.date));
-  if(!list.length){l.innerHTML='<div class="empty">Нет таких тикетов</div>';return}
-  list.forEach(t=>{
+  const l=$('ticketsList');l.innerHTML='';
+  const all=getTickets().filter(t=>t.status===(ticketFilter==='open'?'open':'closed')).sort((a,b)=>new Date(b.date)-new Date(a.date));
+  if(!all.length){l.innerHTML='<div class="empty">Нет таких тикетов</div>';return}
+  all.forEach(t=>{
     const d=document.createElement('div');d.className='ticket-block';
-    d.innerHTML=`
-      <div class="t-h">
-        <b>#${t.id} — ${esc(t.subject)}</b>
-        <span class="badge ${t.status==='open'?'open':'closed'}">${t.status==='open'?'ОТКРЫТ':'ЗАКРЫТ'}</span>
-      </div>
+    d.innerHTML=`<div class="t-h"><b>#${t.id} — ${esc(t.subject)}</b><span class="badge ${t.status}">${t.status==='open'?'ОТКРЫТ':'ЗАКРЫТ'}</span></div>
       <div class="t-m">${esc(t.body)}</div>
-      <div class="t-a">От: <b style="color:var(--blue)">${esc(t.author)}</b> ${t.authorEmail?'('+esc(t.authorEmail)+')':''} · ${new Date(t.date).toLocaleString('ru-RU')}</div>
+      <div class="t-a">От: <b style="color:var(--accent)">${esc(t.author)}</b> · ${new Date(t.date).toLocaleString('ru-RU')}</div>
       ${t.answer?'<div class="t-a" style="color:var(--gold)">Ответ: '+esc(t.answer)+'</div>':''}
       ${t.status==='open'?`
-        <textarea id="ans-${t.id}" placeholder="Ваш ответ игроку…">${t.answer||''}</textarea>
+        <textarea id="ans-${t.id}" placeholder="Ваш ответ…">${t.answer||''}</textarea>
         <div class="ticket-actions">
           <button class="btn btn-sm btn-blue" onclick="answerTicket('${t.id}')">✉️ Ответить</button>
-          <button class="btn btn-sm btn-danger" onclick="closeTicket('${t.id}')">Закрыть тикет</button>
+          <button class="btn btn-sm btn-danger" onclick="closeTicket('${t.id}')">Закрыть</button>
         </div>`:''}`;
     l.appendChild(d);
   });
 }
-
 function answerTicket(id){
-  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const t=tickets.find(x=>x.id===id); if(!t)return;
-  const ans=$('ans-'+id).value.trim();
-  if(!ans){notif('Напишите ответ сначала','err');return}
-  t.answer=ans;
-  localStorage.setItem('ht_tickets', JSON.stringify(tickets));
-  logAction('admin','Ответ в тикете', id+' → '+t.author);
-  notif('Ответ отправлен игроку '+t.author,'gold');
-  renderTickets();
+  const tickets=getTickets();const t=tickets.find(x=>x.id===id);if(!t)return;
+  const ans=$('ans-'+id).value.trim();if(!ans){notif('Напишите ответ','err');return}
+  t.answer=ans;localStorage.setItem('ht_tickets',JSON.stringify(tickets));
+  logAction('admin','Ответ в тикете',id+' → '+t.author);notif('Ответ отправлен','gold');renderTickets();
 }
-
 function closeTicket(id){
-  const tickets=JSON.parse(localStorage.getItem('ht_tickets')||'[]');
-  const t=tickets.find(x=>x.id===id); if(!t)return;
-  t.status='closed'; t.closedDate=now();
-  localStorage.setItem('ht_tickets', JSON.stringify(tickets));
-  logAction('admin','Тикет закрыт', id+' → '+t.author);
-  notif('Тикет #'+id+' закрыт','gold');
-  renderTickets();
+  const tickets=getTickets();const t=tickets.find(x=>x.id===id);if(!t)return;
+  t.status='closed';t.closedDate=nowISO();localStorage.setItem('ht_tickets',JSON.stringify(tickets));
+  logAction('admin','Тикет закрыт',id+' → '+t.author);notif('Тикет закрыт','gold');renderTickets();
 }
 
-// ═══════════════ Moderation ═══════════════
-function renderModeration(){
-  const l=$('moderationList'); l.innerHTML='';
-  const reports=JSON.parse(localStorage.getItem('ht_moderation')||'[]');
-  if(!reports.length){l.innerHTML='<div class="empty">Жалоб пока нет</div>';return}
-  reports.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(r=>{
-    const d=document.createElement('div');d.className='ticket-block';
-    d.innerHTML=`
-      <div class="t-h">
-        <b>${esc(r.title)}</b>
-        <span class="badge ${r.status==='pending'?'pending':r.status==='done'?'done':'closed'}">${r.status==='pending'?'ОЖИДАЕТ':r.status==='done'?'ПРИНЯТА':'ОТКЛОНЕНА'}</span>
-      </div>
-      <div class="t-m">${esc(r.body||'')}</div>
-      <div class="t-a">От: <b style="color:var(--blue)">${esc(r.author)}</b> · ${new Date(r.date).toLocaleString('ru-RU')}</div>
-      ${r.status==='pending'?`
-        <textarea id="modc-${r.id}" placeholder="Комментарий решения…"></textarea>
-        <div class="ticket-actions">
-          <button class="btn btn-sm btn-ok" onclick="moderate('${r.id}','done')">✔ Принять</button>
-          <button class="btn btn-sm btn-danger" onclick="moderate('${r.id}','rejected')">✖ Отклонить</button>
-        </div>`:r.comment?`<div class="t-a" style="color:var(--gold)">Комментарий: ${esc(r.comment)}</div>`:''}`;
-    l.appendChild(d);
-  });
-}
-
-function moderate(id, status){
-  const reports=JSON.parse(localStorage.getItem('ht_moderation')||'[]');
-  const r=reports.find(x=>x.id===id); if(!r)return;
-  r.status=status;
-  r.comment=$('modc-'+id)?$('modc-'+id).value.trim():'';
-  localStorage.setItem('ht_moderation', JSON.stringify(reports));
-  logAction('admin','Модерация жалобы', r.title+' → '+(status==='done'?'принята':'отклонена')+( r.comment?' («'+r.comment+'»)':''));
-  notif('Жалоба «'+r.title+'» '+(status==='done'?'принята':'отклонена'),'gold');
-  renderModeration();
-}
-
-// ═══════════════ Reports from AI ═══════════════
-function renderReports(){
-  const l=$('reportsList'); l.innerHTML='';
-  const reports=JSON.parse(localStorage.getItem('ht_reports')||'[]');
-  if(!reports.length){l.innerHTML='<div class="empty">Репортов в ИИ-помощнике пока нет</div>';return}
-  reports.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(r=>{
-    const d=document.createElement('div');d.className='ticket-block';
-    d.innerHTML=`<div class="t-h"><b>Репорт от ${esc(r.user||r.author||'—')}</b><span class="badge hot">РЕПОРТ</span></div>
-      <div class="t-m">${esc(r.body||r.text||'')}</div>
-      <div class="t-a">${new Date(r.date).toLocaleString('ru-RU')}</div>`;
-    l.appendChild(d);
-  });
-}
-
-// ═══════════════ Orders ═══════════════
-function renderOrders(){
-  const l=$('ordersList'); l.innerHTML='';
-  const orders=JSON.parse(localStorage.getItem('ht_orders')||'[]');
-  if(!orders.length){l.innerHTML='<div class="empty">Заказов пока нет</div>';return}
-  orders.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(o=>{
-    const d=document.createElement('div');d.className='ticket-block';
-    d.innerHTML=`
-      <div class="t-h"><b>${esc(o.id)}</b><span class="badge done">${esc(o.pay||'—')}</span></div>
-      <div class="t-m">Товар: <b style="color:var(--gold)">${esc(o.item)}</b> · Сумма: ${o.price} ₽</div>
-      <div class="t-a">Ник: <b style="color:var(--blue)">${esc(o.nick)}</b> · Сервер: ${esc(o.server||'—')} · ${new Date(o.date).toLocaleString('ru-RU')}</div>`;
-    l.appendChild(d);
-  });
-}
-
-// ═══════════════ Logs ═══════════════
+// Logs
 function renderLogs(){
-  const l=$('logsList'); const q=($('logSearch').value||'').toLowerCase();
-  const logs=(JSON.parse(localStorage.getItem('ht_logs')||'[]')).filter(x=>!q||(x.act||'').toLowerCase().includes(q)||(x.who||'').toLowerCase().includes(q)||(x.details||'').toLowerCase().includes(q));
+  const l=$('logsList');const q=($('logSearch').value||'').toLowerCase();
+  const logs=getLogs().filter(x=>!q||(x.act||'').toLowerCase().includes(q)||(x.who||'').toLowerCase().includes(q)||(x.details||'').toLowerCase().includes(q));
   if(!logs.length){l.innerHTML='<div class="empty">Логов нет</div>';return}
-  logs.slice().reverse().forEach(x=>{
-    const d=document.createElement('div');d.className='log-line';
-    d.innerHTML=`<span class="dt">${new Date(x.date).toLocaleString('ru-RU')}</span> · <span class="who">${esc(x.who)}</span> → <span class="act">${esc(x.act)}</span> ${x.details?'— '+esc(x.details):''}`;
-    l.appendChild(d);
-  });
+  l.innerHTML=logs.slice().reverse().map(x=>'<div class="log-line"><span class="dt">'+new Date(x.date).toLocaleString('ru-RU')+'</span> · <span class="who">'+esc(x.who)+'</span> → <span class="act">'+esc(x.act)+'</span>'+(x.details?' — '+esc(x.details):'')+'</div>').join('');
 }
 
-// ═══════════════ Recover password (from logs) ═══════════════
-// The logs contain registration passwords — admin can see them and help recover.
-
-// ═══════════════ Init ═══════════════
-function renderAll(){renderStats();renderPlayers();renderTickets();renderModeration();renderReports();renderOrders();renderLogs();}
-
-if(isAuthed()){
-  $('loginScreen').style.display='none';
-  $('adminApp').style.display='block';
-  renderAll();
-}
+if(sessionStorage.getItem('ht_admin')==='1'){$('loginScreen').style.display='none';$('adminApp').style.display='block';renderAll()}
 </script>
 </body>
 </html>
