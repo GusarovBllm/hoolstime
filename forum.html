@@ -322,10 +322,112 @@ function renderTopics(sId){
   if(!t.length){l.innerHTML='<div style="text-align:center;padding:40px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);color:var(--muted)">В разделе пока нет тем</div>';return}
   t.forEach(tp=>{
     const d=document.createElement('div');d.className='topic-row';
+    if(tp.closed) d.style.opacity='0.7';
     const p=tp.template?'<span class="prefix">['+tp.template+']</span> ':'';
-    d.innerHTML=`<div><div class="tr-title">${p}${esc(tp.title)}</div><div class="tr-meta"><span class="auth">${esc(tp.author)}</span> <span class="role-tag ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span> · ${new Date(tp.date).toLocaleDateString('ru-RU')}</div></div><div class="tr-right">💬 ${tp.replies||0}</div>`;
+    const lock = tp.closed ? ' 🔒' : '';
+    d.innerHTML=`<div><div class="tr-title">${p}${esc(tp.title)}${lock}</div><div class="tr-meta"><span class="auth">${esc(tp.author)}</span> <span class="role-tag ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span> · ${new Date(tp.date).toLocaleDateString('ru-RU')}</div></div><div class="tr-right">💬 ${tp.replies||0}</div>`;
+    d.onclick = () => openTopic(tp.id);
     l.appendChild(d);
   });
+}
+
+// ─── Topic detail view ───
+let currentTopicId = null;
+
+function openTopic(id){
+  const topics = getTopics();
+  const tp = topics.find(x => x.id === id);
+  if(!tp) return;
+  currentTopicId = id;
+  $('topicView').style.display='none';
+  $('topicFormArea').style.display='none';
+  
+  const replies = JSON.parse(localStorage.getItem('ht_replies')||'[]').filter(r => r.topicId === id);
+  let repliesHtml = '';
+  replies.forEach(r => {
+    const u = getUsers().find(x => x.login === r.author);
+    const ava = u && u.avatar ? `style="background-image:url(${u.avatar})"` : '';
+    repliesHtml += `
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="avatar" ${ava}>${u ? u.login.charAt(0).toUpperCase() : '?'}</div>
+          <div><div style="font-weight:700;color:var(--title);font-size:14px">${esc(r.author)} <span class="role-tag ${r.authorRole||'player'}">${ROLES_RU[r.authorRole]||'Игрок'}</span></div>
+          <div style="font-size:11px;color:var(--body50)">${new Date(r.date).toLocaleString('ru-RU')}</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--body);line-height:1.6;white-space:pre-wrap">${esc(r.body)}</div>
+      </div>`;
+  });
+
+  const canReply = !tp.closed && curUser;
+  const canClose = curUser && (curUser.role === 'admin' || curUser.role === 'moderator' || curUser.role === 'helper');
+  const isAuthor = curUser && curUser.login === tp.author;
+
+  $('forumCategories').innerHTML = `
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+        <h2 style="font-size:20px;font-weight:900;color:var(--title)">${tp.closed?'🔒 ':''}${esc(tp.title)}</h2>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-sm btn-ghost" onclick="backFromTopic()">← Назад</button>
+          ${canClose?'<button class="btn btn-sm btn-danger" onclick="toggleCloseTopic(\''+tp.id+'\')">'+(tp.closed?'🔓 Открыть тему':'🔒 Закрыть тему')+'</button>':''}
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="avatar">${tp.author.charAt(0).toUpperCase()}</div>
+          <div><div style="font-weight:700;color:var(--title);font-size:14px">${esc(tp.author)} <span class="role-tag ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span></div>
+          <div style="font-size:11px;color:var(--body50)">${new Date(tp.date).toLocaleString('ru-RU')}</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--body);line-height:1.6;white-space:pre-wrap">${esc(tp.body)}</div>
+      </div>
+      ${tp.closed?'<div style="text-align:center;padding:12px;background:rgba(239,68,68,.08);border:1px solid var(--red);border-radius:var(--radius);margin-bottom:16px;color:var(--red);font-size:13px;font-weight:700">🔒 Тема закрыта администратором. Ответы невозможны.</div>':''}
+      ${repliesHtml}
+      ${canReply?`
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:16px">
+          <h4 style="font-size:14px;font-weight:800;color:var(--title);margin-bottom:10px">✏️ Ответить</h4>
+          <textarea id="replyBody" style="width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--title);border-radius:6px;padding:10px;font-size:13px;min-height:60px;font-family:inherit" placeholder="Ваш ответ..."></textarea>
+          <button class="btn btn-sm" style="margin-top:8px" onclick="submitReply('${tp.id}')">Отправить</button>
+          <div id="replyMsg" style="margin-top:6px;font-size:13px"></div>
+        </div>
+      `:''}
+    </div>`;
+  $('forumCategories').style.display = 'block';
+}
+
+function backFromTopic(){
+  $('forumCategories').style.display='none';
+  $('topicView').style.display='block';
+  renderTopics(curSection);
+  currentTopicId = null;
+}
+
+function submitReply(id){
+  const body = $('replyBody')?.value?.trim();
+  if(!body){$('replyMsg').textContent='Напишите ответ';$('replyMsg').style.color='var(--red)';return}
+  const replies = JSON.parse(localStorage.getItem('ht_replies')||'[]');
+  replies.push({topicId:id, author:curUser.login, authorRole:curUser.role, body, date:nowISO()});
+  localStorage.setItem('ht_replies',JSON.stringify(replies));
+  // Update reply count
+  const topics = getTopics();
+  const tp = topics.find(x => x.id === id);
+  if(tp) tp.replies = (tp.replies||0) + 1;
+  saveTopics(topics);
+  $('replyBody').value='';
+  openTopic(id);
+  notif('Ответ отправлен','gold');
+  updateStats();
+}
+
+function toggleCloseTopic(id){
+  const topics = getTopics();
+  const tp = topics.find(x => x.id === id);
+  if(!tp) return;
+  if(!curUser || (curUser.role !== 'admin' && curUser.role !== 'moderator' && curUser.role !== 'helper')) {
+    notif('Нет прав','err');return;
+  }
+  tp.closed = !tp.closed;
+  saveTopics(topics);
+  openTopic(id);
+  notif(tp.closed ? 'Тема закрыта' : 'Тема открыта','gold');
 }
 
 function showTopicForm(){
@@ -346,7 +448,7 @@ function submitTopic(){
   if(!title){msg.textContent='Нужен заголовок';msg.style.color='var(--red)';return}
   if(!body){msg.textContent='Добавьте содержание';msg.style.color='var(--red)';return}
   const topics=getTopics();
-  topics.push({id:'HT-'+Date.now(),section:curSection,title,body,author:curUser.login,authorRole:curUser.role,date:nowISO(),replies:0});
+  topics.push({id:'HT-'+Date.now(),section:curSection,title,body,author:curUser.login,authorRole:curUser.role,date:nowISO(),replies:0,closed:false});
   saveTopics(topics);
   msg.textContent='Тема создана!';msg.style.color='var(--green)';
   hideTopicForm();renderTopics(curSection);notif('Тема создана','gold');updateStats();
