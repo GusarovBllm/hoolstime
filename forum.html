@@ -360,7 +360,9 @@ function openTopic(id){
 
   const canReply = !tp.closed && curUser;
   const canClose = curUser && (curUser.role === 'admin' || curUser.role === 'moderator' || curUser.role === 'helper');
+  const canDelete = curUser && curUser.role === 'admin';
   const isAuthor = curUser && curUser.login === tp.author;
+  const u = getUsers().find(x => x.login === tp.author);
 
   $('forumCategories').innerHTML = `
     <div style="margin-bottom:16px">
@@ -369,11 +371,12 @@ function openTopic(id){
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <button class="btn btn-sm btn-ghost" onclick="backFromTopic()">← Назад</button>
           ${canClose?'<button class="btn btn-sm btn-danger" onclick="toggleCloseTopic(\''+tp.id+'\')">'+(tp.closed?'🔓 Открыть тему':'🔒 Закрыть тему')+'</button>':''}
+          ${canDelete?'<button class="btn btn-sm btn-danger" onclick="deleteTopic(\''+tp.id+'\')" style="background:var(--red)">🗑️ Удалить тему</button>':''}
         </div>
       </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-          <div class="avatar">${tp.author.charAt(0).toUpperCase()}</div>
+          <div class="avatar" style="${u && u.avatar ? 'background-image:url('+u.avatar+')' : ''}">${u && u.avatar ? '' : tp.author.charAt(0).toUpperCase()}</div>
           <div><div style="font-weight:700;color:var(--title);font-size:14px">${esc(tp.author)} <span class="role-tag ${tp.authorRole||'player'}">${ROLES_RU[tp.authorRole]||'Игрок'}</span></div>
           <div style="font-size:11px;color:var(--body50)">${new Date(tp.date).toLocaleString('ru-RU')}</div></div>
         </div>
@@ -430,6 +433,21 @@ function toggleCloseTopic(id){
   notif(tp.closed ? 'Тема закрыта' : 'Тема открыта','gold');
 }
 
+function deleteTopic(id){
+  if(!curUser || curUser.role !== 'admin'){notif('Нет прав','err');return}
+  if(!confirm('Удалить тему навсегда?')) return;
+  let topics = getTopics();
+  topics = topics.filter(x => x.id !== id);
+  saveTopics(topics);
+  // Also delete replies
+  let replies = JSON.parse(localStorage.getItem('ht_replies')||'[]');
+  replies = replies.filter(r => r.topicId !== id);
+  localStorage.setItem('ht_replies',JSON.stringify(replies));
+  backFromTopic();
+  notif('Тема удалена','gold');
+  updateStats();
+}
+
 function showTopicForm(){
   if(!curUser){notif('Войдите сначала','err');return}
   if(!curSection)return;
@@ -479,9 +497,6 @@ function showProfile(login){
               <h1 style="font-size:22px;font-weight:900;color:var(--title);margin-bottom:4px">${esc(targetLogin)} ${isOwn?'<button class="btn btn-sm btn-ghost" onclick="closeProfile()" style="float:right">← Назад</button>':''}</h1>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px">
                 <span class="role-tag ${roleClass}">${ROLES_RU[roleClass]||'Игрок'}</span>
-                ${roleClass === 'admin' ? '<span class="role-tag" style="background:rgba(239,68,68,.15);color:var(--red)">АДМИНИСТРАТОР</span>' : ''}
-                ${roleClass === 'moderator' ? '<span class="role-tag" style="background:rgba(59,130,246,.12);color:var(--blue)">МОДЕРАТОР</span>' : ''}
-                ${roleClass === 'helper' ? '<span class="role-tag" style="background:rgba(240,180,41,.12);color:var(--gold)">ХЕЛПЕР</span>' : ''}
               </div>
               <div style="font-size:12px;color:var(--body50)">${u.bio ? esc(u.bio) : 'Нет информации'}</div>
             </div>
