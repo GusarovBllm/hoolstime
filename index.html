@@ -525,16 +525,16 @@ const RANKS = [
 ];
 
 const CURRENCY = [
-  {id:201, amount:'150 000', price:13199, promo:true,  thumb:'🧊'},
-  {id:202, amount:'100 000', price:10199, promo:true,  thumb:'🧊'},
-  {id:203, amount:'50 000',  price:5999,  promo:true,  thumb:'🧊'},
-  {id:204, amount:'20 000',  price:2999,  promo:false, thumb:'🧊'},
-  {id:205, amount:'10 000',  price:1799,  promo:false, thumb:'🧊'},
-  {id:206, amount:'5 000',   price:1079,  promo:false, thumb:'🧊'},
-  {id:207, amount:'2 000',   price:539,   promo:false, thumb:'🧊'},
-  {id:208, amount:'1 000',   price:299,   promo:false, thumb:'🧊'},
-  {id:209, amount:'500',     price:179,   promo:false, thumb:'🧊'},
-  {id:210, amount:'100',     price:49,    promo:false, thumb:'🧊'}
+{id:201, amount:'150 000', price:13199, promo:true,  thumb:'assets/currency-platinum.jpg'},
+  {id:202, amount:'100 000', price:10199, promo:true,  thumb:'assets/currency-platinum.jpg'},
+  {id:203, amount:'50 000',  price:5999,  promo:true,  thumb:'assets/currency-platinum.jpg'},
+  {id:204, amount:'20 000',  price:2999,  promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:205, amount:'10 000',  price:1799,  promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:206, amount:'5 000',   price:1079,  promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:207, amount:'2 000',   price:539,   promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:208, amount:'1 000',   price:299,   promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:209, amount:'500',     price:179,   promo:false, thumb:'assets/currency-platinum.jpg'},
+  {id:210, amount:'100',     price:49,    promo:false, thumb:'assets/currency-platinum.jpg'}
 ];
 
 // Ключи: тип → [обычные, легендарные, уникальные] → пачки [3,5,10,20,30]
@@ -543,7 +543,7 @@ const KEY_TYPES = {
     rare:{name:'Обычные', price:[189,269,469,719,869], promo:[0,0,0,0,2], color:'#94a3b8'},
     legend:{name:'Легендарные', price:[549,849,1549,2699,3499], promo:[0,0,0,0,2], color:'#ffb400'},
     unique:{name:'Уникальные', price:[469,599,1069,1739,2399], promo:[0,0,0,0,2], color:'#ff2d55'}},
-  credit: {name:'ПЛАТИНЫ', ic:'🧊',
+  credit: {name:'ПЛАТИНЫ', ic:'assets/currency-platinum.jpg',
     rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
     legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
     unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}},
@@ -613,7 +613,7 @@ function renderCurrency(){
     const el = document.createElement('div');
     el.className='card';
     el.innerHTML = `
-      <div class="thumb" style="${thumbBg('#22d3ee')}"><span style="font-size:46px">${c.thumb}</span>${c.promo?'<span class="badge">★ ВЫГОДА</span>':''}</div>
+      <div class="thumb" style="${thumbBg('#22d3ee')}">${c.thumb.startsWith('assets/')?'<img src="'+c.thumb+'" alt="Платины" style="width:60px;height:60px;object-fit:contain;image-rendering:pixelated">':'<span style="font-size:46px">'+c.thumb+'</span>'}${c.promo?'<span class="badge">★ ВЫГОДА</span>':''}</div>
       <div class="body">
         <h3>${c.amount} ПЛАТИНЫ</h3>
         <div class="price">${c.price.toLocaleString('ru-RU')} ₽</div>
@@ -646,7 +646,7 @@ function renderKeys(){
       const id = currentKeyTab+'_'+rk+'_'+n;
       const el=document.createElement('div'); el.className='card';
       el.innerHTML = `
-        <div class="thumb" style="${thumbBg(r.color)}"><span style="font-size:38px">${type.ic}</span>${r.promo[i]===2?'<span class="badge">★ ВЫГОДА</span>':''}</div>
+        <div class="thumb" style="${thumbBg(r.color)}">${type.ic.startsWith('assets/')?'<img src="'+type.ic+'" alt="Платины" style="width:46px;height:46px;object-fit:contain;image-rendering:pixelated">':'<span style="font-size:38px">'+type.ic+'</span>'}${r.promo[i]===2?'<span class="badge">★ ВЫГОДА</span>':''}</div>
         <div class="body">
           <h3>${n} ключ.</h3>
           <div class="price">${r.price[i].toLocaleString('ru-RU')} ₽</div>
@@ -764,7 +764,7 @@ function toggleChat(){
   chatOpen = !chatOpen;
   $('chatWin').classList.toggle('open', chatOpen);
   $('chatBadge').style.display = 'none';
-  if(chatOpen && !chatBody.children.length) addMsg('bot','Привет! 👋 Я ИИ-помощник HoolsTime.\n\nУмею отвечать про:<br>• 👑 привилегии и цены<br>• 🧊 игровую валюту ПЛАТИНЫ<br>• 🎁 ключи и кейсы<br>• 💳 оплату и получение заказа<br>• 🎮 как зайти на сервер<br><br>Что тебя интересует?');
+  if(chatOpen && !chatBody.children.length) addMsg('bot','Привет! 👋 Я ИИ-помощник HoolsTime.\n\nУмею отвечать про:<br>• 👑 привилегии и цены<br>• 💎 игровую валюту ПЛАТИНЫ<br>• 🎁 ключи и кейсы<br>• 💳 оплату и получение заказа<br>• 🎮 как зайти на сервер<br><br>Что тебя интересует?');
   setTimeout(()=>chatIn.focus(), 50);
 }
 
