@@ -788,57 +788,38 @@ function quickBtn(label, action){
   return '<button class="quick" onclick="'+action+'">'+label+'</button>';
 }
 
+const CHAT_API = 'https://api.hoolstime.online/api/chat';
+let chatHistory = [];
+
 function sendChat(){
   const text = chatIn.value.trim();
   if(!text) return;
   chatIn.value = '';
   addMsg('user', esc(text));
-  typing(()=> answer(text.toLowerCase()));
+  chatHistory.push({role:'user', content:text});
+  typing(()=> askGiga());
 }
 
-chatIn.addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
-
-const HELP_INTENTS = {
-  priv: ['привилег','ранг','статус','донат','купить прив','паладин','аристократ','гидр','цен','сколько стоит','price','ранги'],
-  cur:  ['валюта','платин','арес','монет','деньг','баланс','валют'],
-  keys: ['ключ','кейс','лутбокс','открыт','сундук','сундук'],
-  howto:['как зайти','зайти на сервер','ip','адрес','версия','портал','скачать','лаунчер','подключит','войти','заход'],
-  pay:  ['оплат','карт','сбп','юmoney','ю мани','перевод','qr','способ','платёж','платеж','оплачивать'],
-  grant:['получ','выда','после оплат','когда','как получ','выдадут','придёт'],
-  unban:['разбан','размут','бан','мут','иммунитет','наказан'],
-  other:['пропуск','боевой','батлпасс'],
-  operator:['оператор','человек','поддержк','админ','свяж','живой','операт'],
-  hello:['привет','здравствуй','салют','ку','добрый','хай','хелло'],
-  thanks:['спасибо','благодар','спс','круто','топ','класс'],
-  bye:  ['пока','до свидания','удачи','до встречи']
-};
-
-const HELP_ANSWERS = {
-  priv: () => 'У нас есть привилегии для анархии: 💎\n\n• ⚜️ BARON — 49 ₽\n• 🐉 DRAGONBORN — 99 ₽\n• 💎 DELUXE — 149 ₽\n• 🛡️ PALADIN — 299 ₽\n• 🏆 LEGENDA — 399 ₽\n• 🌩️ RAGNAROK — 699 ₽\n• 👑 IMPERATOR — 999 ₽\n• 🤪 CRAZY — 2 499 ₽\n\nКаждый статус даёт команды и возможности. Купить можно прямо в магазине ниже.' + quickBtn('👑 Показать привилегии','scrollToId(\'privileges\')'),
-  cur: () => 'Игровая валюта сервера — 🧊 <b>ПЛАТИНЫ</b>.\n\nПакеты:<br>• 100 ПЛАТИНЫ — 49 ₽<br>• 500 ПЛАТИНЫ — 179 ₽<br>• 1 000 — 299 ₽<br>• 5 000 — 1 079 ₽<br>• 50 000 — 5 999 ₽ (выгода!)\n\nВалюта зачисляется на выбранный режим анархии.' + quickBtn('🧊 Купить ПЛАТИНЫ','scrollToId(\'currency\')'),
-  keys: () => 'Ключи нужны, чтобы открывать кейсы на любом из режимов. 🎁\n\nТипы кейсов: ДОНАТ, ПЛАТИНЫ, НАБОРЫ, ПРЕДМЕТЫ, КОСМЕТИКА.<br>Редкость: обычные, легендарные, уникальные.<br>Пачки: 3 / 5 / 10 / 20 / 30 ключей.\n\nНапример, 3 обычных донат-ключа — 189 ₽, а 30 — 869 ₽ (выгоднее!).' + quickBtn('🎁 Открыть ключи','scrollToId(\'keys\')'),
-  howto: () => 'Как зайти на анархию HoolsTime: 🎮\n\n1️⃣ Скачай Minecraft 1.16.5 (TLauncher или наш лаунчер UHools).<br>2️⃣ Выбери версию 1.16.5.\n3️⃣ «Сетевая игра» → «Добавить сервер».\n4️⃣ Введи адрес <b style="color:var(--blue)">hoolstime.ru</b> и заходи!\n\nИ никаких правил — полная анархия. 🔥' + quickBtn('📋 Инструкция','scrollToId(\'howto\')'),
-  pay: () => 'Принимаем: 💳 Карты РФ (Visa / Mastercard / МИР), 📲 СБП по QR, 🪙 ЮMoney и ✈️ Telegram.\n\nОплата безопасная — после нажатия «Купить» ты выберешь способ и получишь ссылку на оплату.' + quickBtn('🛒 Перейти в магазин','scrollToId(\'privileges\')'),
-  grant: () => 'После оплаты заказ поступит к нам автоматически. 📦\n\nОбычно привилегия выдаётся <b>в течение 5–15 минут</b>.\nЕсли заходишь на сервер — просто напиши нам в Telegram, выдадим мгновенно.' + quickBtn('✈️ Написать в Telegram','window.open(\'https://t.me/hoolstime\')'),
-  unban: () => 'У нас есть в разделе «Прочее»: 🕊️\n\n• РАЗБАН — 669 ₽\n• РАЗМУТ — 369 ₽\n• ИММУНИТЕТ — 369 ₽\n\nПоможет, если на анархии кто-то перегнул палку.' + quickBtn('🛒 Посмотреть','scrollToId(\'other\')'),
-  other: () => 'В разделе «Прочее»: 🎖️\n\n• БОЕВОЙ ПРОПУСК — 799 ₽ (награды, косметика, иммунитет от анти-чита)<br>• РАЗБАН — 669 ₽<br>• РАЗМУТ — 369 ₽<br>• ИММУНИТЕТ — 369 ₽' + quickBtn('🛒 Открыть «Прочее»','scrollToId(\'other\')'),
-  operator: () => 'Связь с оператором — сейчас. 📞\n\nНаши операторы на связи в Telegram и VK:<br>✈️ @hoolstime<br>💬 vk.com/hoolstime\n\nНапиши — и тебе ответит живой человек!' + quickBtn('✈️ Оператор в Telegram','window.open(\'https://t.me/hoolstime\')'),
-  hello: () => 'Привет! 👋 Рад видеть тебя на HoolsTime.\n\nМогу рассказать про ранги, валюту ПЛАТИНЫ, ключи, оплату или помочь зайти на сервер. Что интересует?',
-  thanks: () => 'Всегда пожалуйста! 😊 Если будут вопросы — я тут. Удачной игры на анархии HoolsTime!' + quickBtn('🔥 Играть на hoolstime.ru','window.open(\'https://t.me/hoolstime\')'),
-  bye: () => 'До встречи на сервере! Заходи на <b>hoolstime.ru</b> — там жарко. 🔥👋'
-};
-
-function answer(q){
-  // 1) Неизвестно → спросить: связать с оператором?
-  const found = Object.entries(HELP_INTENTS).find(([k,words]) => words.some(w => q.includes(w)));
-  if(!found){
-    addMsg('bot','Хм, я не совсем понял вопрос. 🤔<br><br>Могу помочь с покупкой, ценами, оплатой и заходом на сервер.<br><br><b>Могу связать тебя с оператором — желаешь?</b>' + quickBtn('✅ Да, свяжи с оператором','chatOperator()') + quickBtn('❌ Нет, я сам','chatNo()'));
-    chatStep = 'unknown';
-    return;
+async function askGiga(){
+  try{
+    const resp = await fetch(CHAT_API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({messages: chatHistory.slice(-10)})
+    });
+    const data = await resp.json();
+    if(data && data.reply){
+      addMsg('bot', esc(data.reply).replace(/\n/g,'<br>'));
+      chatHistory.push({role:'assistant', content:data.reply});
+      chatStep = null;
+    } else {
+      addMsg('bot','Хм, не получилось получить ответ. 🤔<br><br>Напиши нам в Telegram — поможем сразу:' + quickBtn('✈️ @hoolstime','window.open(\'https://t.me/hoolstime\')'));
+      chatStep = null;
+    }
+  }catch(e){
+    addMsg('bot','Похоже, помощник сейчас недоступен. 😔<br><br>Напиши нам в Telegram — ответим быстро:' + quickBtn('✈️ @hoolstime','window.open(\'https://t.me/hoolstime\')'));
+    chatStep = null;
   }
-  const [intent] = found;
-  addMsg('bot', HELP_ANSWERS[intent]());
-  chatStep = null;
 }
 
 function chatOperator(){
