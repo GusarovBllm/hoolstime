@@ -586,9 +586,9 @@ function renderPrivileges(){
   RANKS.forEach(r=>{
     const el = document.createElement('div');
     el.className='card';
-    el.innerHTML = `
+el.innerHTML = `
       <div class="thumb" style="${thumbBg(r.color)}">
-        <span style="font-size:40px">${r.ic}</span>
+        <img src="assets/rank-${r.name.toLowerCase()}.jpg" alt="${r.name}" style="width:80px;height:80px;object-fit:contain;image-rendering:pixelated">
         ${r.hot?'<span class="badge hot">★ TOP</span>':''}
       </div>
       <div class="body">
