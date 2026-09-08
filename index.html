@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HoolsTime — магазин привилегий анархии</title>
-<meta name="description" content="HoolsTime.ru — анархия без границ. Донат-магазин: привилегии, Лёд, ключи от кейсов, разбан. Оплата картой, СБП.">
+<meta name="description" content="HoolsTime.ru — анархия без границ. Донат-магазин: привилегии, Платины, ключи от кейсов, разбан. Оплата картой, СБП.">
 <style>
 :root{
   --bg:#0d0d14; --bg2:#12121c; --bg3:#171726; --card:#151524;
@@ -353,7 +353,7 @@ footer{
   <!-- ───────── Валюта ───────── -->
   <section id="currency">
     <div class="sec-head">
-      <h2>Игровая валюта — <span class="grad">ЛЁД</span></h2>
+      <h2>Игровая валюта — <span class="grad">ПЛАТИНЫ</span></h2>
       <p>Вы получаете игровую валюту на выбранный режим анархии</p>
     </div>
     <div class="grid grid-cap" id="currencyGrid"></div>
@@ -542,7 +542,7 @@ const KEY_TYPES = {
     rare:{name:'Обычные', price:[189,269,469,719,869], promo:[0,0,0,0,2], color:'#94a3b8'},
     legend:{name:'Легендарные', price:[549,849,1549,2699,3499], promo:[0,0,0,0,2], color:'#ffb400'},
     unique:{name:'Уникальные', price:[469,599,1069,1739,2399], promo:[0,0,0,0,2], color:'#ff2d55'}},
-  credit: {name:'ЛЁД', ic:'🧊',
+  credit: {name:'ПЛАТИНЫ', ic:'🧊',
     rare:{name:'Обычные', price:[179,239,419,669,779], promo:[0,0,0,0,2], color:'#94a3b8'},
     legend:{name:'Легендарные', price:[449,699,1299,2299,2999], promo:[0,0,0,0,2], color:'#ffb400'},
     unique:{name:'Уникальные', price:[299,459,849,1499,1899], promo:[0,0,0,0,2], color:'#ff2d55'}},
@@ -614,7 +614,7 @@ function renderCurrency(){
     el.innerHTML = `
       <div class="thumb" style="${thumbBg('#22d3ee')}"><span style="font-size:46px">${c.thumb}</span>${c.promo?'<span class="badge">★ ВЫГОДА</span>':''}</div>
       <div class="body">
-        <h3>${c.amount} ЛЬДА</h3>
+        <h3>${c.amount} ПЛАТИНЫ</h3>
         <div class="price">${c.price.toLocaleString('ru-RU')} ₽</div>
         <div class="desc">Игровая валюта на выбранный режим</div>
         <button class="buy" onclick="openBuy({type:'cur', id:${c.id}})">Купить</button>
@@ -679,7 +679,7 @@ let currentItem=null;
 
 function resolveItem(item){
   if(item.type==='rank'){const r=RANKS.find(x=>x.id===item.id);return {name:r.name, price:r.price, server:r.server, ic:r.ic, color:r.color}}
-  if(item.type==='cur'){const c=CURRENCY.find(x=>x.id===item.id);return {name:c.amount+' ЛЬДА', price:c.price, server:true, ic:c.thumb, color:'#22d3ee'}}
+  if(item.type==='cur'){const c=CURRENCY.find(x=>x.id===item.id);return {name:c.amount+' ПЛАТИНЫ', price:c.price, server:true, ic:c.thumb, color:'#22d3ee'}}
   if(item.type==='key'){
     const [tk,rk,n]=item.key.split('_');
     const t=KEY_TYPES[tk], r=t[rk];
@@ -763,7 +763,7 @@ function toggleChat(){
   chatOpen = !chatOpen;
   $('chatWin').classList.toggle('open', chatOpen);
   $('chatBadge').style.display = 'none';
-  if(chatOpen && !chatBody.children.length) addMsg('bot','Привет! 👋 Я ИИ-помощник HoolsTime.\n\nУмею отвечать про:<br>• 👑 привилегии и цены<br>• 🧊 игровую валюту ЛЁД<br>• 🎁 ключи и кейсы<br>• 💳 оплату и получение заказа<br>• 🎮 как зайти на сервер<br><br>Что тебя интересует?');
+  if(chatOpen && !chatBody.children.length) addMsg('bot','Привет! 👋 Я ИИ-помощник HoolsTime.\n\nУмею отвечать про:<br>• 👑 привилегии и цены<br>• 🧊 игровую валюту ПЛАТИНЫ<br>• 🎁 ключи и кейсы<br>• 💳 оплату и получение заказа<br>• 🎮 как зайти на сервер<br><br>Что тебя интересует?');
   setTimeout(()=>chatIn.focus(), 50);
 }
 
@@ -800,7 +800,7 @@ chatIn.addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
 
 const HELP_INTENTS = {
   priv: ['привилег','ранг','статус','донат','купить прив','паладин','аристократ','гидр','цен','сколько стоит','price','ранги'],
-  cur:  ['валюта','лёд','лед','арес','монет','деньг','баланс','валют'],
+  cur:  ['валюта','платин','арес','монет','деньг','баланс','валют'],
   keys: ['ключ','кейс','лутбокс','открыт','сундук','сундук'],
   howto:['как зайти','зайти на сервер','ip','адрес','версия','портал','скачать','лаунчер','подключит','войти','заход'],
   pay:  ['оплат','карт','сбп','юmoney','ю мани','перевод','qr','способ','платёж','платеж','оплачивать'],
@@ -815,15 +815,15 @@ const HELP_INTENTS = {
 
 const HELP_ANSWERS = {
   priv: () => 'У нас есть привилегии для анархии: 💎\n\n• ⚜️ BARON — 49 ₽\n• 🐉 DRAGONBORN — 99 ₽\n• 💎 DELUXE — 149 ₽\n• 🛡️ PALADIN — 299 ₽\n• 🏆 LEGENDA — 399 ₽\n• 🌩️ RAGNAROK — 699 ₽\n• 👑 IMPERATOR — 999 ₽\n• 🤪 CRAZY — 2 499 ₽\n\nКаждый статус даёт команды и возможности. Купить можно прямо в магазине ниже.' + quickBtn('👑 Показать привилегии','scrollToId(\'privileges\')'),
-  cur: () => 'Игровая валюта сервера — 🧊 <b>ЛЁД</b>.\n\nПакеты:<br>• 100 ЛЬДА — 49 ₽<br>• 500 ЛЬДА — 179 ₽<br>• 1 000 — 299 ₽<br>• 5 000 — 1 079 ₽<br>• 50 000 — 5 999 ₽ (выгода!)\n\nВалюта зачисляется на выбранный режим анархии.' + quickBtn('🧊 Купить ЛЁД','scrollToId(\'currency\')'),
-  keys: () => 'Ключи нужны, чтобы открывать кейсы на любом из режимов. 🎁\n\nТипы кейсов: ДОНАТ, ЛЁД, НАБОРЫ, ПРЕДМЕТЫ, КОСМЕТИКА.<br>Редкость: обычные, легендарные, уникальные.<br>Пачки: 3 / 5 / 10 / 20 / 30 ключей.\n\nНапример, 3 обычных донат-ключа — 189 ₽, а 30 — 869 ₽ (выгоднее!).' + quickBtn('🎁 Открыть ключи','scrollToId(\'keys\')'),
+  cur: () => 'Игровая валюта сервера — 🧊 <b>ПЛАТИНЫ</b>.\n\nПакеты:<br>• 100 ПЛАТИНЫ — 49 ₽<br>• 500 ПЛАТИНЫ — 179 ₽<br>• 1 000 — 299 ₽<br>• 5 000 — 1 079 ₽<br>• 50 000 — 5 999 ₽ (выгода!)\n\nВалюта зачисляется на выбранный режим анархии.' + quickBtn('🧊 Купить ПЛАТИНЫ','scrollToId(\'currency\')'),
+  keys: () => 'Ключи нужны, чтобы открывать кейсы на любом из режимов. 🎁\n\nТипы кейсов: ДОНАТ, ПЛАТИНЫ, НАБОРЫ, ПРЕДМЕТЫ, КОСМЕТИКА.<br>Редкость: обычные, легендарные, уникальные.<br>Пачки: 3 / 5 / 10 / 20 / 30 ключей.\n\nНапример, 3 обычных донат-ключа — 189 ₽, а 30 — 869 ₽ (выгоднее!).' + quickBtn('🎁 Открыть ключи','scrollToId(\'keys\')'),
   howto: () => 'Как зайти на анархию HoolsTime: 🎮\n\n1️⃣ Скачай Minecraft 1.16.5 (TLauncher или наш лаунчер UHools).<br>2️⃣ Выбери версию 1.16.5.\n3️⃣ «Сетевая игра» → «Добавить сервер».\n4️⃣ Введи адрес <b style="color:var(--blue)">hoolstime.ru</b> и заходи!\n\nИ никаких правил — полная анархия. 🔥' + quickBtn('📋 Инструкция','scrollToId(\'howto\')'),
   pay: () => 'Принимаем: 💳 Карты РФ (Visa / Mastercard / МИР), 📲 СБП по QR, 🪙 ЮMoney и ✈️ Telegram.\n\nОплата безопасная — после нажатия «Купить» ты выберешь способ и получишь ссылку на оплату.' + quickBtn('🛒 Перейти в магазин','scrollToId(\'privileges\')'),
   grant: () => 'После оплаты заказ поступит к нам автоматически. 📦\n\nОбычно привилегия выдаётся <b>в течение 5–15 минут</b>.\nЕсли заходишь на сервер — просто напиши нам в Telegram, выдадим мгновенно.' + quickBtn('✈️ Написать в Telegram','window.open(\'https://t.me/hoolstime\')'),
   unban: () => 'У нас есть в разделе «Прочее»: 🕊️\n\n• РАЗБАН — 669 ₽\n• РАЗМУТ — 369 ₽\n• ИММУНИТЕТ — 369 ₽\n\nПоможет, если на анархии кто-то перегнул палку.' + quickBtn('🛒 Посмотреть','scrollToId(\'other\')'),
   other: () => 'В разделе «Прочее»: 🎖️\n\n• БОЕВОЙ ПРОПУСК — 799 ₽ (награды, косметика, иммунитет от анти-чита)<br>• РАЗБАН — 669 ₽<br>• РАЗМУТ — 369 ₽<br>• ИММУНИТЕТ — 369 ₽' + quickBtn('🛒 Открыть «Прочее»','scrollToId(\'other\')'),
   operator: () => 'Связь с оператором — сейчас. 📞\n\nНаши операторы на связи в Telegram и VK:<br>✈️ @hoolstime<br>💬 vk.com/hoolstime\n\nНапиши — и тебе ответит живой человек!' + quickBtn('✈️ Оператор в Telegram','window.open(\'https://t.me/hoolstime\')'),
-  hello: () => 'Привет! 👋 Рад видеть тебя на HoolsTime.\n\nМогу рассказать про ранги, валюту ЛЁД, ключи, оплату или помочь зайти на сервер. Что интересует?',
+  hello: () => 'Привет! 👋 Рад видеть тебя на HoolsTime.\n\nМогу рассказать про ранги, валюту ПЛАТИНЫ, ключи, оплату или помочь зайти на сервер. Что интересует?',
   thanks: () => 'Всегда пожалуйста! 😊 Если будут вопросы — я тут. Удачной игры на анархии HoolsTime!' + quickBtn('🔥 Играть на hoolstime.ru','window.open(\'https://t.me/hoolstime\')'),
   bye: () => 'До встречи на сервере! Заходи на <b>hoolstime.ru</b> — там жарко. 🔥👋'
 };
