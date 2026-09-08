@@ -713,10 +713,11 @@ function submitOrder(){
   const it=currentItem; if(!it)return;
   const server=$('buyServer').value;
   const id='HT-'+(Date.now().toString(36)).toUpperCase()+'-'+(Math.random().toString(36).slice(2,6)).toUpperCase();
-  const order={id, nick, server, item:it.name, price:it.price, pay:selectedPay, date:new Date().toISOString()};
+const order={id, nick, server, item:it.name, price:it.price, pay:selectedPay, date:new Date().toISOString()};
   const orders=JSON.parse(localStorage.getItem('ht_orders')||'[]');
   orders.push(order); localStorage.setItem('ht_orders', JSON.stringify(orders));
   localStorage.setItem('ht_nick', nick);
+  try{ fetch('https://api.hoolstime.online/api/orders', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(order)}).catch(()=>{}); }catch(e){}
 
   closeBuy();
   $('payId').textContent=id;
@@ -750,11 +751,20 @@ $('payOv').addEventListener('click',e=>{if(e.target===$('payOv'))closePay()});
 $('buyNick').addEventListener('keydown',e=>{if(e.key==='Enter')submitOrder()});
 
 // ═══════════════ Init ═══════════════
-renderPrivileges();
-renderCurrency();
-renderKeyTabs();
-renderKeys();
-renderOther();
+async function loadShopData(){
+  try{
+    const r = await fetch('https://api.hoolstime.online/api/data/shop');
+    if(r.ok){ const d = await r.json();
+      if(d.ranks && d.ranks.length){ Object.assign(RANKS, d.ranks); RANKS.length = 0; d.ranks.forEach(v => RANKS.push(v)); }
+      if(d.currency && d.currency.length){ CURRENCY.length = 0; d.currency.forEach(v => CURRENCY.push(v)); }
+      if(d.keyTypes){ Object.assign(KEY_TYPES, d.keyTypes); }
+      if(d.keyPacks && d.keyPacks.length){ KEY_PACKS.length = 0; d.keyPacks.forEach(v => KEY_PACKS.push(v)); }
+      if(d.other && d.other.length){ OTHER.length = 0; d.other.forEach(v => OTHER.push(v)); }
+    }
+  }catch(e){ console.log('shop api fallback'); }
+  renderPrivileges(); renderCurrency(); renderKeyTabs(); renderKeys(); renderOther();
+}
+loadShopData();
 
 // ═══════════════ AI Chat ─ Умный помощник ═══════════════
 const chatBody = $('chatBody'), chatIn = $('chatIn');
